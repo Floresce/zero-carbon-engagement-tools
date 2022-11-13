@@ -3,5 +3,5 @@
 
 ### This is for Leo's branch
 
-Bootstrap is used:
+Bootstrap libraries and icons are used:
 https://getbootstrap.com/
