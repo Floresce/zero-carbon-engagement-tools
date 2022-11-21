@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Like and Dislikes Indicator</title>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/main.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <style>
+            .row {
+                margin-top: 15px;
+                margin-bottom: 15px;
+	            margin-left: 0px;
+	            margin-right: 0px
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="row">
+            <h3>Popover</h3>
+            <button type="button" class="btn btn-success" data-toggle="popover" data-trigger="focus" data-placement="left" data-content="Button liked">Like</button>
+            <button type="button" class="btn btn-danger" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="Button DISliked">Dislike</button>
+        </div>
+        <div class="row">
+            <button type="button" id="myButton" class="btn btn-success" data-loading-text="Loading...">Like</button>
+        </div>
+
+        <script>
+            $(document).ready(function(){
+                $('[data-toggle="popover"]').popover();
+            });
+
+            $('#myButton').on('click', function () {
+                var $btn = $(this).button('loading')
+                // business logic...
+                $btn.button('reset')
+            })
+        </script>
+    </body>
+</html>
