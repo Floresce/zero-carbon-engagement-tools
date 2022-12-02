@@ -16,6 +16,17 @@
 
 ## Synopsis
 
+## Features
+* Pre-built pages
+* Pre-styled components
+* Custom PDF Generation
+* Energy saving tips selection
+* Filtered tips
+* Front-end
+    * Bootstrap x.x.x
+* Back-end
+    * Microsoft SQL
+
 ## Installation
 ```
 git clone https://github.com/cyber-mary/zero-carbon-engagement-tools/
