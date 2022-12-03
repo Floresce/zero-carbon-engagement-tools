@@ -31,10 +31,12 @@ The energy savings tips webpage will allow for customers to view personalized ti
 * Custom PDF Generation
 * Energy saving tips selection
 * Filtered tips
+* IDE
+    * Microsoft Visual Studio Code (https://code.visualstudio.com/)
 * Front-end
     * Bootstrap x.x.x
 * Back-end
-    * MySQL
+    * Microsoft SQL Server (https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
 * [SMUD's Style Guide](https://smud.invisionapp.com/console/share/GQFWV69JMDX/358962325/play)
 
 
