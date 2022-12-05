@@ -67,4 +67,16 @@ $ http-server
 <img src="img/ER_Mapping.png">
 
 ## Preview
-<img src="img/preview.png">
+<p align="center">
+    When visiting  <a href="https://www.smud.org/en/Rebates-and-Savings-Tips/Energy-Savings-Tips">SMUD's Energy Savings Tips</a> webpage, this will be the future redesign.
+</p>
+
+![Search Preview](img/search_preview.png)
+
+
+<p align="center">
+    Format and layout of what the tips will look like when results are shown.
+</p>
+
+![Tip Layout](img/tips_layout.png)
+
