@@ -13,8 +13,7 @@
 * [Synopsis](#synopsis)
 * [Features]($features)
 * [Installation](#installation)
-* [Deployment](#deployment)
-* [Testing](#testing)
+* [Deployment & Test](#deployment--testing)
 * [Timeline](#timeline)
 * [Database Diagram](#database-diagram)
 * [Preview](#preview)
@@ -40,13 +39,26 @@ The energy savings tips webpage will allow for customers to view personalized ti
 * [SMUD's Style Guide](https://smud.invisionapp.com/console/share/GQFWV69JMDX/358962325/play)
 
 
-## Installation
-```
-git clone https://github.com/cyber-mary/zero-carbon-engagement-tools/
-```
-## Deployment
+## Deployment & Testing
+### Requirements
+* Git
+* Node.js
+* Windows:
+    * Use `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted` to allow Windows to run scripts in system
+    * Allow Node.js through Firewall
 
-## Testing
+### Steps
+1. Clone this repo: `git clone https://github.com/cyber-mary/zero-carbon-engagement-tools.git`
+2. Navigate into local repo: `cd zero-carbon-engagement-tools`
+3. Install `http-server` using `npm`: `npm install --global http-server`
+4. Run `http-server` in local repo: `http-server`
+5. Open http://localhost:8080 on a browser to view website
+```
+$ git clone https://github.com/cyber-mary/zero-carbon-engagement-tools.git
+$ cd zero-carbon-engagement-tools
+$ npm install --global http-server
+$ http-server
+```
 
 ## Timeline
 
