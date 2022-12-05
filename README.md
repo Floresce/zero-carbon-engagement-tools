@@ -11,7 +11,7 @@
 # Table of Contents
 
 * [Synopsis](#synopsis)
-* [Features]($features)
+* [Features](#features)
 * [Installation](#installation)
 * [Deployment & Test](#deployment--testing)
 * [Timeline](#timeline)
