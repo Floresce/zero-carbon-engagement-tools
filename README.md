@@ -79,4 +79,3 @@ $ http-server
 </p>
 
 ![Tip Layout](img/tips_layout.png)
-
