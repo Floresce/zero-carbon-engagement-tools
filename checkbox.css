@@ -1,0 +1,33 @@
+.checkbox {
+    display: inline flex;
+    align-items: center;
+    cursor: pointer;
+    }
+
+.checkbox__input{
+    display: none;
+}
+
+.checkbox__box{
+    width: 4em;
+    height: 4em;
+    border: 2px solid #ccc;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.checkbox__box::after{
+    content: '\2714';
+    color: #d3d2d2;
+    
+}
+
+.checkbox__input:checked + .checkbox__box{
+    /* Possible script to add selected item to cart  */
+background-color: #f15c22;
+border-color: #f15c22;
+}
