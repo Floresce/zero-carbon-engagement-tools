@@ -20,6 +20,9 @@
 	            margin-left: 30px;
 	            margin-right: 30px
             }
+            .panel {
+                margin-top: 15px;
+            }
             #fademe {
                 font-family: 'Lato';
                 opacity: 0;
@@ -30,62 +33,95 @@
 
     <body>
         <div class="row">
-            <h3>Popover</h3>
-            <button type="button" class="btn btn-success" data-toggle="popover" data-trigger="focus" data-placement="left" data-content="Button liked">
-                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like
-            </button>
-            <button type="button" class="btn btn-danger" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="Button DISliked">
-                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Dislike
-            </button>
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Tips Report Telemetry </div>
+            
+                <!-- Table -->
+                <table class="table">
+                    <tr>
+                        <th>Page</th>
+                        <th>Pageviews</th>
+                        <th>Unique Pageviews</th>
+                        <th>Avg. Time on Page</th>
+                        <th>Entrances</th>
+                        <th>Bounce Rate</th>
+                        <th>% Exit</th>
+                        <th>Page Value</th>
+                    </tr>
+                    <tr>
+                        <td><a href=".">/en/rebates-and-savings-tips/energy-savings-tips</a></td>
+                        <td>11,439</td>
+                        <td>10,289</td>
+                        <td>00:01:23</td>
+                        <td>7,659</td>
+                        <td>73.62%</td>
+                        <td>67.53%</td>
+                        <td>$0.00</td>
+                    </tr>
+                    <tr>
+                        <td><a href=".">/energytips</a></td>
+                        <td>4,471</td>
+                        <td>4,208</td>
+                        <td>00:01:33</td>
+                        <td>3,846</td>
+                        <td>86.44%</td>
+                        <td>85.54%</td>
+                        <td>$0.00</td>
+                    </tr>
+                    <tr>
+                        <td><a href=".">/savingstips</a></td>
+                        <td>11,439</td>
+                        <td>10,289</td>
+                        <td>00:01:23</td>
+                        <td>7,659</td>
+                        <td>73.62%</td>
+                        <td>67.53%</td>
+                        <td>$0.00</td>
+                    </tr>
+                    <tr>
+                        <td><a href=".">/en/rebates-and-savings-tips/energy-savings-tips</a></td>
+                        <td>4,471</td>
+                        <td>4,208</td>
+                        <td>00:01:33</td>
+                        <td>3,846</td>
+                        <td>86.44%</td>
+                        <td>85.54%</td>
+                        <td>$0.00</td>
+                    </tr>
+                    <tr>
+                        <td><a href=".">/energytips</a></td>
+                        <td>11,439</td>
+                        <td>10,289</td>
+                        <td>00:01:23</td>
+                        <td>7,659</td>
+                        <td>73.62%</td>
+                        <td>67.53%</td>
+                        <td>$0.00</td>
+                    </tr>
+                    <tr>
+                        <td><a href=".">/savingstips</a></td>
+                        <td>4,471</td>
+                        <td>4,208</td>
+                        <td>00:01:33</td>
+                        <td>3,846</td>
+                        <td>86.44%</td>
+                        <td>85.54%</td>
+                        <td>$0.00</td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <div class="row">
-            <h3>Stateful</h3>
-            <button type="button" id="stateful1" class="btn btn-success" data-loading-text="Liked">
-                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like
+            <button type="button" id="fadebutton" class="btn btn-danger" data-toggle="button" aria-pressed="false">
+                <span class="glyphicon glyphicon-share" aria-hidden="true"></span> Export
             </button>
-            <button type="button" id="stateful2" class="btn btn-danger" data-loading-text="Disliked">
-                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Dislike
-            </button>
-        </div>
-        <div class="row">
-            <h3>Toggle</h3>
-            <button type="button" class="btn btn-success" data-toggle="button" aria-pressed="false">
-                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like
-            </button>
-            <button type="button" class="btn btn-danger" data-toggle="button" aria-pressed="false">
-                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Dislike
-            </button>
-        </div>
-        <div class="row">
-            <h3>Fade Text</h3>
-            <button type="button" id="fadebutton1" class="btn btn-success" data-toggle="button" aria-pressed="false">
-                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like
-            </button>
-            <button type="button" id="fadebutton2" class="btn btn-danger" data-toggle="button" aria-pressed="false">
-                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Dislike
-            </button>
-            <h4 id = "fademe">Thanks for the feedback.</h4>
+            <h4 id = "fademe">File automatically downloading... </h4>
         </div>
 
         <script>
-            //Popover Toggle
-            $(document).ready(function(){
-                $('[data-toggle="popover"]').popover();
-            });
-
-            //Stateful buttons
-            $('#stateful1').on('click', function () {
-                var $btn = $(this).button('loading')
-            })
-            $('#stateful2').on('click', function () {
-                var $btn = $(this).button('loading')
-            })
-
             //Fade buttons
-            $('#fadebutton1').on('click', function () {
-                document.getElementById("fademe").style.opacity = 1;
-            })
-            $('#fadebutton2').on('click', function () {
+            $('#fadebutton').on('click', function () {
                 document.getElementById("fademe").style.opacity = 1;
             })
         </script>
