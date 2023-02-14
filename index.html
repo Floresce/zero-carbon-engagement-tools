@@ -5,11 +5,20 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Like and Dislikes Indicator</title>
+
+        <!--Bootstrap 3.3.7-->
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="css/main.css">
-        <link href=""href="https://fonts.googleapis.com/css?family=Lato|Zilla+Slab&display=swap" rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <!--SMUD's main.css: (partial)Bootstrap 3.3.7, normalize.css v3.0.3, html5-boilerplate v5.1.0-->
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <!--Lato and Zilla Slab fonts-->
+        <link href=""href="https://fonts.googleapis.com/css?family=Lato|Zilla+Slab&display=swap" rel="stylesheet">
+        <!--jQuery 3.6.0-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <!--DataTables 1.13.2-->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
+
         <style>
             h3 {
                 font-family: 'Lato';
@@ -34,79 +43,83 @@
     <body>
         <div class="row">
             <div class="panel panel-default">
-                <div class="panel-heading">Tips Report Telemetry gsdfgsdfg</div>
+                <div class="panel-heading">Tips Report Telemetry</div>
 
-                <table class="table">
-                    <tr>
-                        <th>Page</th>
-                        <th>Pageviews</th>
-                        <th>Unique Pageviews</th>
-                        <th>Avg. Time on Page</th>
-                        <th>Entrances</th>
-                        <th>Bounce Rate</th>
-                        <th>% Exit</th>
-                        <th>Page Value</th>
-                    </tr>
-                    <tr>
-                        <td><a href=".">/en/rebates-and-savings-tips/energy-savings-tips</a></td>
-                        <td>11,439</td>
-                        <td>10,289</td>
-                        <td>00:01:23</td>
-                        <td>7,659</td>
-                        <td>73.62%</td>
-                        <td>67.53%</td>
-                        <td>$0.00</td>
-                    </tr>
-                    <tr>
-                        <td><a href=".">/energytips</a></td>
-                        <td>4,471</td>
-                        <td>4,208</td>
-                        <td>00:01:33</td>
-                        <td>3,846</td>
-                        <td>86.44%</td>
-                        <td>85.54%</td>
-                        <td>$0.00</td>
-                    </tr>
-                    <tr>
-                        <td><a href=".">/savingstips</a></td>
-                        <td>11,439</td>
-                        <td>10,289</td>
-                        <td>00:01:23</td>
-                        <td>7,659</td>
-                        <td>73.62%</td>
-                        <td>67.53%</td>
-                        <td>$0.00</td>
-                    </tr>
-                    <tr>
-                        <td><a href=".">/en/rebates-and-savings-tips/energy-savings-tips</a></td>
-                        <td>4,471</td>
-                        <td>4,208</td>
-                        <td>00:01:33</td>
-                        <td>3,846</td>
-                        <td>86.44%</td>
-                        <td>85.54%</td>
-                        <td>$0.00</td>
-                    </tr>
-                    <tr>
-                        <td><a href=".">/energytips</a></td>
-                        <td>11,439</td>
-                        <td>10,289</td>
-                        <td>00:01:23</td>
-                        <td>7,659</td>
-                        <td>73.62%</td>
-                        <td>67.53%</td>
-                        <td>$0.00</td>
-                    </tr>
-                    <tr>
-                        <td><a href=".">/savingstips</a></td>
-                        <td>4,471</td>
-                        <td>4,208</td>
-                        <td>00:01:33</td>
-                        <td>3,846</td>
-                        <td>86.44%</td>
-                        <td>85.54%</td>
-                        <td>$0.00</td>
-                    </tr>
+                <table id="myTable" class="table">
+                    <thead>
+                        <tr>
+                            <th>Page</th>
+                            <th>Pageviews</th>
+                            <th>Unique Pageviews</th>
+                            <th>Avg. Time on Page</th>
+                            <th>Entrances</th>
+                            <th>Bounce Rate</th>
+                            <th>% Exit</th>
+                            <th>Page Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href=".">/en/rebates-and-savings-tips/energy-savings-tips</a></td>
+                            <td>11,439</td>
+                            <td>10,289</td>
+                            <td>00:01:23</td>
+                            <td>7,659</td>
+                            <td>73.62%</td>
+                            <td>67.53%</td>
+                            <td>$0.00</td>
+                        </tr>
+                        <tr>
+                            <td><a href=".">/energytips</a></td>
+                            <td>4,471</td>
+                            <td>4,208</td>
+                            <td>00:01:33</td>
+                            <td>3,846</td>
+                            <td>86.44%</td>
+                            <td>85.54%</td>
+                            <td>$0.00</td>
+                        </tr>
+                        <tr>
+                            <td><a href=".">/savingstips</a></td>
+                            <td>11,439</td>
+                            <td>10,289</td>
+                            <td>00:01:23</td>
+                            <td>7,659</td>
+                            <td>73.62%</td>
+                            <td>67.53%</td>
+                            <td>$0.00</td>
+                        </tr>
+                        <tr>
+                            <td><a href=".">/en/rebates-and-savings-tips/energy-savings-tips</a></td>
+                            <td>4,471</td>
+                            <td>4,208</td>
+                            <td>00:01:33</td>
+                            <td>3,846</td>
+                            <td>86.44%</td>
+                            <td>85.54%</td>
+                            <td>$0.00</td>
+                        </tr>
+                        <tr>
+                            <td><a href=".">/energytips</a></td>
+                            <td>11,439</td>
+                            <td>10,289</td>
+                            <td>00:01:23</td>
+                            <td>7,659</td>
+                            <td>73.62%</td>
+                            <td>67.53%</td>
+                            <td>$0.00</td>
+                        </tr>
+                        <tr>
+                            <td><a href=".">/savingstips</a></td>
+                            <td>4,471</td>
+                            <td>4,208</td>
+                            <td>00:01:33</td>
+                            <td>3,846</td>
+                            <td>86.44%</td>
+                            <td>85.54%</td>
+                            <td>$0.00</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -122,6 +135,10 @@
             $('#fadebutton').on('click', function () {
                 document.getElementById("fademe").style.opacity = 1;
             })
+            //Using DataTables to sort tables
+            $(document).ready( function () {
+                $('#myTable').DataTable();
+            });
         </script>
     </body>
 </html>
