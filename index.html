@@ -149,13 +149,20 @@
                                 <th>User Agent</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="converted-date">
                             <tr>
-                                <td>02/15/2023</td>
-                                <td>Summer thermostat, Oven efficiency</td>
+                                <td class="epoch-timestamp">1676471890</td>
+                                <td>N/A</td>
                                 <td>Thaw food in your fridge</td>
                                 <td>This tips sucks</td>
                                 <td><code>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36</code></td>
+                            </tr>
+                            <tr>
+                                <td class="epoch-timestamp">1673035050</td>
+                                <td>Summer thermostat, Oven efficiency</td>
+                                <td>N/A</td>
+                                <td>This tips not sucks</td>
+                                <td><code>Mozilla/5.0 (iPhone; CPU iPhone OS 16_3_1 like Mac OS X) AppleWebKit/604.1</code></td>
                             </tr>
                         </tbody>
                     </table>
@@ -180,6 +187,14 @@
             $(document).ready( function () {
                 $('#myTable1').DataTable();
                 $('#myTable2').DataTable();
+            });
+            //Convert epoch timestamp to date
+            const epochTimestamps = document.querySelectorAll(".epoch-timestamp");
+
+            epochTimestamps.forEach(cell => {
+                const epochTimestamp = cell.textContent;
+                const date = new Date(epochTimestamp * 1000);
+                cell.textContent = date.toLocaleString();
             });
         </script>
     </body>
