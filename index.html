@@ -25,54 +25,80 @@
                     <h2>Connecting queries to dropdowns and displaying correct tips</h2>
                 </div>
                 <br>
-                <div class="row">
-                    <div class="col">
-                        <label for="category">What category?</label>
-                        <br>
-                        <select name="category" id="category">
-                            <option value="Appliances">Appliances</option>
-                            <option value="Around town">Around town</option>
-                            <option value="Around your home">Around your home</option>
-                            <option value="Cooking">Cooking</option>
-                            <option value="Heating & Cooling">Heating & Cooling</option>
-                            <option value="On Vacation">On Vacation</option>
-                        </select>
-                    </div>
-                    <div class="col">
-                        <label for="subcategory">What Sub category?</label>
-                        <br>
-                        <select name="subcategory" id="subcategory">
-                            <option value="Smart Home">Smart Home</option>
-                            <option value="Habit Changing">Habit Changing</option>
-                            <option value="Washer & Dryer">Washer & Dryer</option>
-                            <option value="Dishwasher">Dishwasher</option>
-                            <option value="Refrigerator">Refrigerator</option>
-                            <option value="Electric Vehicles">Electric Vehicles</option>
-                            <option value="Appliances">Appliances</option>
-                            <option value="Maintenance">Maintenance</option>
-                            <option value="Insultation & Sealing">Insultation & Sealing</option>
-                            <option value="Pools & Spas">Pools & Spas</option>
-                            <option value="Thermostat">Thermostat</option>
-                            <option value="Fans">Fans</option>
-                            <option value="Sealing">Sealing</option>
-                        </select>
-                    </div>
-                    <div class="col">
-                        <label for="season">What Season?</label>
-                        <br>
-                        <select name="season" id="season">
-                            <option value="All">All</option>
-                            <option value="Winter">Winter</option>
-                            <option value="Spring">Spring</option>
-                            <option value="Summer">Summer</option>
-                            <option value="Fall">Fall</option>
-                        </select>
-                    </div>
-                </div>
+
                 <br>
                 <div class="row">
                     <div class="col-sm">
-                    <input type="submit" value="Submit">
+                        <form action="tips.php" method="POST">
+                          <div class="row">
+                            <div class="col">
+                                <label for="category">What category?</label>
+                                <br>
+                                <select name="category" id="category">
+                                    <option value="" disabled selected>Choose a category</option>
+                                    <option value="All Categories">All Categories</option>
+                                    <option value="Appliances">Appliances</option>
+                                    <option value="Around town">Around town</option>
+                                    <option value="Around your home">Around your home</option>
+                                    <option value="Cooking">Cooking</option>
+                                    <option value="Heating & Cooling">Heating & Cooling</option>
+                                    <option value="On Vacation">On Vacation</option>
+                                </select>
+                            </div>
+                            
+                            
+                            <div class="col">
+                                <label for="subcategory">What Sub category?</label>
+                                <br>
+                                <select name="subcategory" id="subcategory">
+                                <option value="" disabled selected>Choose a category first.</option>
+                                </select>
+                            </div>
+                            </div>
+
+                            <br>
+                            <input type="submit" value="Submit">
+   				        </form>
+
+                           <script>
+                            const categorySelect = document.getElementById("category");
+                            const subcategorySelect = document.getElementById("subcategory");
+                            const subcategories = {
+                              'All Categories': ["All Subcategories", "Smart Home", "Habit Changing", 
+                              "Washer & Dryer", "Dishwasher", "Refrigerator", "Electric Vehicles", 
+                              "Appliances", "Maintenance", "Insulation & Sealing", "Pools & Spas", 
+                              "Thermostat", "Fans", "Sealing", "N/A"],
+
+                              'Appliances': ["All Subcategories", "Smart Home", "Habit Changing", "Washer & Dryer", 
+                              "Dishwasher", "Refrigerator", "N/A"],
+
+                              'Around town': ["All Subcategories", "Habit Changing", "Electric Vehicles", "N/A"],
+
+                              'Around your home': ["All Subcategories", "Appliances", "Maintenance", "Insulation & Sealing", 
+                              "Habit Changing", "Sealing", "Pools & Spas"],
+
+                              'Cooking': ["Habit Changing"],
+
+                              'Heating & Cooling': ["All Subcategories", "Thermostat", "Fans", 
+                              "Maintenance", "Appliances"],
+                              
+                              'On Vacation': ["Habit Changing"]
+                            };
+                          
+                            categorySelect.addEventListener("change", () => {
+                              const selectedCategory = categorySelect.value;
+                              subcategorySelect.innerHTML = "";
+                              subcategories[selectedCategory].forEach(category => {
+                                const option = document.createElement("option");
+                                option.value = category;
+                                option.textContent = category;
+                                subcategorySelect.appendChild(option);
+                              });
+                            });
+
+                            subcategories.firstElementChild.disabled = true;
+                          </script>
+
                     </div>
                 </div>
             </form>
