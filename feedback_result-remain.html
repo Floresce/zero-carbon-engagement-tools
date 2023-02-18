@@ -1,0 +1,39 @@
+<div id="feedback" class="feedback">
+    <p class="d-inline-flex align-items-center mb-0">
+        Was this information helpful?
+        <button id="yesBtn" class="btn btn-success" style="margin-left: 1em;">Yes</button>
+        <button id="noBtn" class="btn btn-danger" style="margin-left: 1em;">No</button>
+    </p>
+</div>
+
+<script>
+    const feedbackDiv = document.querySelector('#feedback');
+    const yesBtn = document.querySelector('#yesBtn');
+    const noBtn = document.querySelector('#noBtn');
+
+    yesBtn.addEventListener('click', function() {
+        sessionStorage.setItem('feedbackResult', 'yes');
+        yesBtn.style.pointerEvents = 'none';
+        noBtn.style.display = 'inline-block';
+        noBtn.disabled = true;
+    });
+
+    noBtn.addEventListener('click', function() {
+        sessionStorage.setItem('feedbackResult', 'no');
+        noBtn.style.pointerEvents = 'none';
+        yesBtn.style.display = 'inline-block';
+        yesBtn.disabled = true;
+    });
+
+    if (sessionStorage.getItem('feedbackResult') === 'yes') {
+        sessionStorage.setItem('feedbackResult', 'yes');
+        yesBtn.style.pointerEvents = 'none';
+        noBtn.style.display = 'inline-block';
+        noBtn.disabled = true;
+    } else if (sessionStorage.getItem('feedbackResult') === 'no') {
+        sessionStorage.setItem('feedbackResult', 'no');
+        noBtn.style.pointerEvents = 'none';
+        yesBtn.style.display = 'inline-block';
+        yesBtn.disabled = true;
+    }
+</script>
