@@ -434,10 +434,31 @@ if( isset($_POST['category'], $_POST['subcategory'])){
   sqlsrv_free_stmt($stmt);
   sqlsrv_close($conn); 
 }
+if (isset($_POST['function_name']) && function_exists($_POST['function_name'])) {
+  $function_name = $_POST['function_name'];
+  $arguments = $_POST['arguments'];
+  $result = call_user_func_array($function_name, $arguments);
+  echo $result;
+}
+function addLike($tID) {
+  $sql = "UPDATE TIP_FEEDBACK SET TIP_LIKES = TIP_LIKES+1 WHERE T_ID = $tID";
+  $result = sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
+}
 
+function addDislike($tID) {
+  $sql = "UPDATE TIP_FEEDBACK SET TIP_DISLIKES = TIP_DISLIKES+1 WHERE T_ID = $tID";
+  $result = sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
+}
 
+function getLikes($tID){
+  $sql = "SELECT TIP_LIKES FROM TIP_FEEDBACK WHERE T_ID = $tID";
+  $result = sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
+  return $result;
+}
 
-
-
-
+function getDislikes($tID){
+  $sql = "SELECT TIP_DISLIKES FROM TIP_FEEDBACK WHERE T_ID = $tID";
+  $result = sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
+  return $result;
+}
 ?>
