@@ -426,9 +426,11 @@ if( isset($_POST['category'], $_POST['subcategory'])){
   }
   
   // Retrieve database information
-  while( $row = sqlsrv_fetch_array( $stmt)) {
-    echo $row["T_DESC_ENGLISH"]. str_repeat('<br><br>', 1);
+  $result="";
+  while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC)) {
+    $result .= $row["T_DESC_ENGLISH"]. str_repeat('<br><br>', 1);
   }
+  echo $result;
 
   /* Free statement and connection resources. */  
   sqlsrv_free_stmt($stmt);

@@ -13,6 +13,52 @@ body {
   height: 100vh;
 }
 
+#result{
+  font: 20px;
+  color: black;
+  text-align: left;
+}
+
+.row {
+  display: flex;
+  justify-content: right;
+  align-items: right;
+}
+
+.col {
+  margin-right: 20px;
+}
+
+
+.container.border {
+  width: 75%; /* Set the width of the container */
+  margin: 0 auto; /* Center the container horizontally */
+  text-align: center;
+}
+
+input[type="submit"] {
+  background-color: #F15c22; /* set the background color */
+  border: none; /* remove the border */
+  color: white; /* set the text color */
+  padding: 10px 20px; /* add some padding to the button */
+  text-align: center; /* center the text */
+  text-decoration: none; /* remove the underline */
+  display: inline-block; /* display the button as an inline-block element */
+  font-size: 16px; /* set the font size */
+  margin: 4px 2px; /* add some margin */
+}
+
+input[type=submit]:hover {
+  cursor: pointer;
+  background-color: #d04b1c;
+}
+
+input[type=submit]:active{
+  background-color: #7E2E0A;
+}
+
+
+
 .like_btn {
   width: 30%;
   height: 10%;
