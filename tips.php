@@ -450,8 +450,8 @@ if (count($rows) > 0) {
     $result .= '<div class="btnfeedback">';
     $result .= '<p class="d-inline-flex align-items-center mb-0">Was this information helpful?';
 
-    // id="yesBtn-' . $row["T_ID"] . '" sets the id attribute of the button to a unique string that includes the tips's ID, T_ID
-    // i.e. yesBtn-12 corresponds to the Yes button for Tip 12
+    // id="likeBtn-' . $tipId . '" sets the id attribute of the button to a unique string that includes the tips's ID, T_ID
+    // i.e. likeBtn-12 corresponds to the like button for tip 12
     $result .= '<button id="likeBtn-' . $tipId . '" class="btn btn-success likeBtn" style="margin-left: 1em;">Yes</button>';
     $result .= '<button id="dislikeBtn-' . $tipId . '" class="btn btn-danger dislikeBtn" style="margin-left: 1em;">No</button>';
     $result .= '</p></div></div>';
