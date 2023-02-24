@@ -1,6 +1,6 @@
 <!-- This is a PHP script that establishes a connection to a Microsoft SQL Server database,
      retrieves information from the database, and displays it on a webpage. -->
-     <?php
+<?php
 $servername = "DESKTOP-UK8K0FD";        // Subject to change depending on server name (Anne: DESKTOP-UK8K0FD, Leo: MineHarth)
 $database = "Tips";                     // Subject to change depending on database name
 $username = "";
