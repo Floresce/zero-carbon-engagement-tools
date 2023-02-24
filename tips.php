@@ -1,441 +1,474 @@
-<?php
-/*
-Windows Authentication, connect to the local server and specify the Tips database as the database in use. 
-For example: $serverName = "localhost";
-SQL Server Authentication, set values for the "UID" and "PWD" attributes in the $connectionInfo parameter. 
-For example: $connectionInfo = array("UID" => $uid, "PWD" => $pwd, "Database"=>"Tips");
-*/
-$serverName = "MineHarth";
-$connectionInfo = array( "Database"=>"master");
-$conn = sqlsrv_connect( $serverName, $connectionInfo);
+<!-- This is a PHP script that establishes a connection to a Microsoft SQL Server database,
+     retrieves information from the database, and displays it on a webpage. -->
+     <?php
+$servername = "DESKTOP-UK8K0FD";        // Subject to change depending on server name (Anne: DESKTOP-UK8K0FD, Leo: MineHarth)
+$database = "Tips";                     // Subject to change depending on database name
+$username = "";
+$password = "";
+
+$connectionInfo = array(
+    "Database" => $database,
+    "UID" => $username,
+    "PWD" => $password
+);
+
+// sqlsrv_connect function is called to establish connection to Microsoft SQL Server database
+$conn = sqlsrv_connect($servername, $connectionInfo);
 
 if( $conn === false ) {
-     echo "Connection could not be established.\n";
-     die( print_r( sqlsrv_errors(), true));
+    echo "Connection could not be established.\n";
+    die( print_r( sqlsrv_errors(), true));
 }
+
 //-----------------------------------------------
-// Execute a query to populate with tips
+//-----------------------------------------------
+//-----------------------------------------------
 
+// Execute SQL queries to populate with tips
 
-//make sure category and/or subcategory are selected.
+// Makes sure category and/or subcategory are selected.
 if( isset($_POST['category'], $_POST['subcategory'])){
   
-//All Categories and any/or all subcategories
-
+// All Categories and any/or all subcategories
   switch ($_POST['category'] . '-' . $_POST['subcategory']) {
     case 'All Categories-All Subcategories':
-      $sql = "SELECT T_DESC_ENGLISH FROM TIPS";
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+              FROM TIPS T
+              JOIN CATEGORY C ON T.C_ID = C.C_ID
+              JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID;";
       $stmt = sqlsrv_query($conn, $sql);
       break;
 
     case 'All Categories-Smart Home':
-      $sql = "SELECT * FROM TIPS t
-      JOIN SUBCATEGORY s 
-      ON t.SUB_ID = s.SUB_ID
-      WHERE t.SUB_ID = 1;";
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+              FROM TIPS T
+              JOIN CATEGORY C ON T.C_ID = C.C_ID
+              JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+              WHERE T.SUB_ID = 1;";
       $stmt = sqlsrv_query($conn, $sql);
       break;
 
     case 'All Categories-Habit Changing':
-      $sql = "SELECT * FROM TIPS t
-      JOIN SUBCATEGORY s 
-      ON t.SUB_ID = s.SUB_ID
-      WHERE t.SUB_ID = 2;";
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+              FROM TIPS T
+              JOIN CATEGORY C ON T.C_ID = C.C_ID
+              JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+              WHERE T.SUB_ID = 2;";
       $stmt = sqlsrv_query($conn, $sql);
       break;
       
     case 'All Categories-Washer & Dryer':
-      $sql = "SELECT * FROM TIPS t
-      JOIN SUBCATEGORY s 
-      ON t.SUB_ID = s.SUB_ID
-      WHERE t.SUB_ID = 3;";
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+              FROM TIPS T
+              JOIN CATEGORY C ON T.C_ID = C.C_ID
+              JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+              WHERE T.SUB_ID = 3;";
       $stmt = sqlsrv_query($conn, $sql);
       break;      
 
     case 'All Categories-Dishwasher':
-      $sql = "SELECT * FROM TIPS t
-      JOIN SUBCATEGORY s 
-      ON t.SUB_ID = s.SUB_ID
-      WHERE t.SUB_ID = 4;";
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+              FROM TIPS T
+              JOIN CATEGORY C ON T.C_ID = C.C_ID
+              JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+              WHERE T.SUB_ID = 4;";
       $stmt = sqlsrv_query($conn, $sql);
       break;      
 
     case 'All Categories-Refrigerator':
-      $sql = "SELECT * FROM TIPS t
-      JOIN SUBCATEGORY s 
-      ON t.SUB_ID = s.SUB_ID
-      WHERE t.SUB_ID = 5;";
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+              FROM TIPS T
+              JOIN CATEGORY C ON T.C_ID = C.C_ID
+              JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+              WHERE T.SUB_ID = 5;";
       $stmt = sqlsrv_query($conn, $sql);
       break;
 
     case 'All Categories-Electric Vehicles':
-      $sql = "SELECT * FROM TIPS t
-      JOIN SUBCATEGORY s 
-      ON t.SUB_ID = s.SUB_ID
-      WHERE t.SUB_ID = 6;";
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+              FROM TIPS T
+              JOIN CATEGORY C ON T.C_ID = C.C_ID
+              JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+              WHERE T.SUB_ID = 6;";
       $stmt = sqlsrv_query($conn, $sql);
       break;
 
     case 'All Categories-Appliances':
-      $sql = "SELECT * FROM TIPS t
-      JOIN SUBCATEGORY s 
-      ON t.SUB_ID = s.SUB_ID
-      WHERE t.SUB_ID = 7;";
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+              FROM TIPS T
+              JOIN CATEGORY C ON T.C_ID = C.C_ID
+              JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+              WHERE T.SUB_ID = 7;";
       $stmt = sqlsrv_query($conn, $sql);
       break;
       
     case 'All Categories-Maintenance':
-      $sql = "SELECT * FROM TIPS t
-      JOIN SUBCATEGORY s 
-      ON t.SUB_ID = s.SUB_ID
-      WHERE t.SUB_ID = 8;";
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+              FROM TIPS T
+              JOIN CATEGORY C ON T.C_ID = C.C_ID
+              JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+              WHERE T.SUB_ID = 8;";
       $stmt = sqlsrv_query($conn, $sql);
       break;
 
     case 'All Categories-Insulation & Sealing':
-      $sql = "SELECT * FROM TIPS t
-      JOIN SUBCATEGORY s 
-      ON t.SUB_ID = s.SUB_ID
-      WHERE t.SUB_ID = 9;";
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+              FROM TIPS T
+              JOIN CATEGORY C ON T.C_ID = C.C_ID
+              JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+              WHERE T.SUB_ID = 9;";
       $stmt = sqlsrv_query($conn, $sql);
       break;
       
     case 'All Categories-Pools & Spas':
-      $sql = "SELECT * FROM TIPS t
-      JOIN SUBCATEGORY s 
-      ON t.SUB_ID = s.SUB_ID
-      WHERE t.SUB_ID = 10;";
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+              FROM TIPS T
+              JOIN CATEGORY C ON T.C_ID = C.C_ID
+              JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+              WHERE T.SUB_ID = 10;";
       $stmt = sqlsrv_query($conn, $sql);
       break;
       
     case 'All Categories-Thermostat':
-      $sql = "SELECT * FROM TIPS t
-      JOIN SUBCATEGORY s 
-      ON t.SUB_ID = s.SUB_ID
-      WHERE t.SUB_ID = 11;";
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+              FROM TIPS T
+              JOIN CATEGORY C ON T.C_ID = C.C_ID
+              JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+              WHERE T.SUB_ID = 11;";
       $stmt = sqlsrv_query($conn, $sql);
       break;      
 
     case 'All Categories-Fans':
-      $sql = "SELECT * FROM TIPS t
-      JOIN SUBCATEGORY s 
-      ON t.SUB_ID = s.SUB_ID
-      WHERE t.SUB_ID = 12;";
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+              FROM TIPS T
+              JOIN CATEGORY C ON T.C_ID = C.C_ID
+              JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+              WHERE T.SUB_ID = 12;";
       $stmt = sqlsrv_query($conn, $sql);
       break;
 
     case 'All Categories-Sealing':
-      $sql = "SELECT * FROM TIPS t
-      JOIN SUBCATEGORY s 
-      ON t.SUB_ID = s.SUB_ID
-      WHERE t.SUB_ID = 13;";
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+              FROM TIPS T
+              JOIN CATEGORY C ON T.C_ID = C.C_ID
+              JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+              WHERE T.SUB_ID = 13;";
       $stmt = sqlsrv_query($conn, $sql);
       break;
 
     case 'All Categories-N/A':
-      $sql = "SELECT * FROM TIPS t
-      JOIN SUBCATEGORY s 
-      ON t.SUB_ID = s.SUB_ID
-      WHERE t.SUB_ID = 14;";
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+              FROM TIPS T
+              JOIN CATEGORY C ON T.C_ID = C.C_ID
+              JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+              WHERE T.SUB_ID = 14;";
       $stmt = sqlsrv_query($conn, $sql);
       break;      
 
 // Specific categories and all subcategories
     case 'Appliances-All Subcategories':
-      $sql = "SELECT T_DESC_ENGLISH FROM TIPS t 
-      JOIN CATEGORY c 
-      ON t.C_ID = c.C_ID
-      WHERE t.C_ID = 1;";
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+              FROM TIPS T
+              JOIN CATEGORY C ON T.C_ID = C.C_ID
+              JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+              WHERE T.C_ID = 1;";
       $stmt = sqlsrv_query($conn, $sql);
       break;
     
     case 'Around town-All Subcategories':
-        $sql = "SELECT T_DESC_ENGLISH FROM TIPS t 
-        JOIN CATEGORY c 
-        ON t.C_ID = c.C_ID
-        WHERE c.C_ID = 2;";
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+                FROM TIPS T
+                JOIN CATEGORY C ON T.C_ID = C.C_ID
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                WHERE C.C_ID = 2;";
         $stmt = sqlsrv_query($conn, $sql);
         break;
     
     case 'Around your home-All Subcategories':
-        $sql = "SELECT T_DESC_ENGLISH FROM TIPS t 
-        JOIN CATEGORY c 
-        ON t.C_ID = c.C_ID
-        WHERE t.C_ID = 3;";
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+                FROM TIPS T
+                JOIN CATEGORY C ON T.C_ID = C.C_ID
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                WHERE T.C_ID = 3;";
         $stmt = sqlsrv_query($conn, $sql);
         break;
     
     case 'Cooking-Habit Changing':
-        $sql = "SELECT T_DESC_ENGLISH FROM TIPS t 
-        JOIN CATEGORY c 
-        ON t.C_ID = c.C_ID
-        WHERE t.C_ID = 4;";
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+                FROM TIPS T
+                JOIN CATEGORY C ON T.C_ID = C.C_ID
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                WHERE T.C_ID = 4;";
         $stmt = sqlsrv_query($conn, $sql);
         break;
 
     case 'Heating & Cooling-All Subcategories':
-        $sql = "SELECT T_DESC_ENGLISH FROM TIPS t 
-        JOIN CATEGORY c 
-        ON t.C_ID = c.C_ID
-        WHERE t.C_ID = 5;";
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+                FROM TIPS T
+                JOIN CATEGORY C ON T.C_ID = C.C_ID
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                WHERE T.C_ID = 5;";
         $stmt = sqlsrv_query($conn, $sql);
         break;
     
     case 'On Vacation-Habit Changing':
-        $sql = "SELECT T_DESC_ENGLISH FROM TIPS t 
-        JOIN CATEGORY c 
-        ON t.C_ID = c.C_ID
-        WHERE t.C_ID = 6;";
+        $sql = "SELECT T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+                FROM TIPS T
+                JOIN CATEGORY C ON T.C_ID = C.C_ID
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                WHERE T.C_ID = 6;";
         $stmt = sqlsrv_query($conn, $sql);
         break;
 
 // Appliances and all its subcategories
     case 'Appliances-Smart Home':
-        $sql = "SELECT T_DESC_ENGLISH, C_NAME, SUB_NAME FROM TIPS t
-        JOIN TIP_SEASON ts ON
-        t.T_ID = ts.T_ID
-        JOIN CATEGORY c ON
-        c.C_ID = t.C_ID 
-        JOIN SUBCATEGORY sc ON
-        sc.SUB_ID = t.SUB_ID
-        WHERE c.C_ID = 1 AND sc.SUB_ID = 1;";
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+                FROM TIPS T
+                JOIN CATEGORY C ON T.C_ID = C.C_ID
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                JOIN TIP_SEASON TS ON T.T_ID = TS.T_ID
+                WHERE C.C_ID = 1 AND S.SUB_ID = 1;";
         $stmt = sqlsrv_query($conn, $sql);    
         break;
         
     case 'Appliances-Habit Changing':
-        $sql = "SELECT T_DESC_ENGLISH, C_NAME, SUB_NAME FROM TIPS t
-        JOIN TIP_SEASON ts ON
-        t.T_ID = ts.T_ID
-        JOIN CATEGORY c ON
-        c.C_ID = t.C_ID 
-        JOIN SUBCATEGORY sc ON
-        sc.SUB_ID = t.SUB_ID
-        WHERE c.C_ID = 1 AND sc.SUB_ID = 2;";
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+                FROM TIPS T
+                JOIN CATEGORY C ON T.C_ID = C.C_ID
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                JOIN TIP_SEASON TS ON T.T_ID = TS.T_ID
+                WHERE C.C_ID = 1 AND S.SUB_ID = 2;";
         $stmt = sqlsrv_query($conn, $sql);  
         break;
         
     case 'Appliances-Washer & Dryer':
-        $sql = "SELECT T_DESC_ENGLISH, C_NAME, SUB_NAME FROM TIPS t
-        JOIN TIP_SEASON ts ON
-        t.T_ID = ts.T_ID
-        JOIN CATEGORY c ON
-        c.C_ID = t.C_ID 
-        JOIN SUBCATEGORY sc ON
-        sc.SUB_ID = t.SUB_ID
-        WHERE c.C_ID = 1 AND sc.SUB_ID = 3;";
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+                FROM TIPS T
+                JOIN CATEGORY C ON T.C_ID = C.C_ID
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                JOIN TIP_SEASON TS ON T.T_ID = TS.T_ID
+                WHERE C.C_ID = 1 AND S.SUB_ID = 3;";
         $stmt = sqlsrv_query($conn, $sql);
         break;
 
     case 'Appliances-Dishwasher':
-        $sql = "SELECT T_DESC_ENGLISH, C_NAME, SUB_NAME FROM TIPS t
-        JOIN TIP_SEASON ts ON
-        t.T_ID = ts.T_ID
-        JOIN CATEGORY c ON
-        c.C_ID = t.C_ID 
-        JOIN SUBCATEGORY sc ON
-        sc.SUB_ID = t.SUB_ID
-        WHERE c.C_ID = 1 AND sc.SUB_ID = 4;";
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+                FROM TIPS T
+                JOIN CATEGORY C ON T.C_ID = C.C_ID
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                JOIN TIP_SEASON TS ON T.T_ID = TS.T_ID
+                WHERE C.C_ID = 1 AND S.SUB_ID = 4;";
         $stmt = sqlsrv_query($conn, $sql);
         break;
 
     case 'Appliances-Refrigerator':
-        $sql = "SELECT T_DESC_ENGLISH, C_NAME, SUB_NAME FROM TIPS t
-        JOIN TIP_SEASON ts ON
-        t.T_ID = ts.T_ID
-        JOIN CATEGORY c ON
-        c.C_ID = t.C_ID 
-        JOIN SUBCATEGORY sc ON
-        sc.SUB_ID = t.SUB_ID
-        WHERE c.C_ID = 1 AND sc.SUB_ID = 5;";
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+                FROM TIPS T
+                JOIN CATEGORY C ON T.C_ID = C.C_ID
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                JOIN TIP_SEASON TS ON T.T_ID = TS.T_ID
+                WHERE C.C_ID = 1 AND S.SUB_ID = 5;";
         $stmt = sqlsrv_query($conn, $sql);
         break;
 
     case 'Appliances-N/A':
-        $sql = "SELECT T_DESC_ENGLISH, C_NAME, SUB_NAME FROM TIPS t
-        JOIN TIP_SEASON ts ON
-        t.T_ID = ts.T_ID
-        JOIN CATEGORY c ON
-        c.C_ID = t.C_ID 
-        JOIN SUBCATEGORY sc ON
-        sc.SUB_ID = t.SUB_ID
-        WHERE c.C_ID = 1 AND sc.SUB_ID = 14;";
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+                FROM TIPS T
+                JOIN CATEGORY C ON T.C_ID = C.C_ID
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                JOIN TIP_SEASON TS ON T.T_ID = TS.T_ID
+                WHERE C.C_ID = 1 AND S.SUB_ID = 14;";
         $stmt = sqlsrv_query($conn, $sql);
         break;
 
-//Around town and all its subcategories        
+// Around town and all its subcategories        
     case 'Around town-Habit Changing':
-        $sql = "SELECT T_DESC_ENGLISH, C_NAME, SUB_NAME FROM TIPS t
-        JOIN TIP_SEASON ts ON
-        t.T_ID = ts.T_ID
-        JOIN CATEGORY c ON
-        c.C_ID = t.C_ID 
-        JOIN SUBCATEGORY sc ON
-        sc.SUB_ID = t.SUB_ID
-        WHERE c.C_ID = 2 AND sc.SUB_ID = 2;";
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+                FROM TIPS T
+                JOIN CATEGORY C ON T.C_ID = C.C_ID
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                JOIN TIP_SEASON TS ON T.T_ID = TS.T_ID
+                WHERE C.C_ID = 2 AND S.SUB_ID = 2;";
         $stmt = sqlsrv_query($conn, $sql);
         break;
 
     case 'Around town-Electric Vehicles':
-        $sql = "SELECT T_DESC_ENGLISH, C_NAME, SUB_NAME FROM TIPS t
-        JOIN TIP_SEASON ts ON
-        t.T_ID = ts.T_ID
-        JOIN CATEGORY c ON
-        c.C_ID = t.C_ID 
-        JOIN SUBCATEGORY sc ON
-        sc.SUB_ID = t.SUB_ID
-        WHERE c.C_ID = 2 AND sc.SUB_ID = 6;";
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+                FROM TIPS T
+                JOIN CATEGORY C ON T.C_ID = C.C_ID
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                JOIN TIP_SEASON TS ON T.T_ID = TS.T_ID
+               WHERE C.C_ID = 2 AND S.SUB_ID = 6;";
         $stmt = sqlsrv_query($conn, $sql);
         break;
         
     case 'Around town-N/A':
-        $sql = "SELECT T_DESC_ENGLISH, C_NAME, SUB_NAME FROM TIPS t
-        JOIN TIP_SEASON ts ON
-        t.T_ID = ts.T_ID
-        JOIN CATEGORY c ON
-        c.C_ID = t.C_ID 
-        JOIN SUBCATEGORY sc ON
-        sc.SUB_ID = t.SUB_ID
-        WHERE c.C_ID = 2 AND sc.SUB_ID = 14;";
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+                FROM TIPS T
+                JOIN CATEGORY C ON T.C_ID = C.C_ID
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                JOIN TIP_SEASON TS ON T.T_ID = TS.T_ID
+                WHERE C.C_ID = 2 AND S.SUB_ID = 14;";
         $stmt = sqlsrv_query($conn, $sql);
         break; 
 
-//Around your home and all its subcategories
+// Around your home and all its subcategories
     case 'Around your home-Appliances':
-        $sql = "SELECT T_DESC_ENGLISH, C_NAME, SUB_NAME FROM TIPS t
-        JOIN TIP_SEASON ts ON
-        t.T_ID = ts.T_ID
-        JOIN CATEGORY c ON
-        c.C_ID = t.C_ID 
-        JOIN SUBCATEGORY sc ON
-        sc.SUB_ID = t.SUB_ID
-        WHERE c.C_ID = 3 AND sc.SUB_ID = 7;";
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+                FROM TIPS T
+                JOIN CATEGORY C ON T.C_ID = C.C_ID
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                JOIN TIP_SEASON TS ON T.T_ID = TS.T_ID
+                WHERE C.C_ID = 3 AND S.SUB_ID = 7;";
         $stmt = sqlsrv_query($conn, $sql);
         break; 
 
     case 'Around your home-Maintenance':
-        $sql = "SELECT T_DESC_ENGLISH, C_NAME, SUB_NAME FROM TIPS t
-        JOIN TIP_SEASON ts ON
-        t.T_ID = ts.T_ID
-        JOIN CATEGORY c ON
-        c.C_ID = t.C_ID 
-        JOIN SUBCATEGORY sc ON
-        sc.SUB_ID = t.SUB_ID
-        WHERE c.C_ID = 3 AND sc.SUB_ID = 8;";
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+                FROM TIPS T
+                JOIN CATEGORY C ON T.C_ID = C.C_ID
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                JOIN TIP_SEASON TS ON T.T_ID = TS.T_ID
+                WHERE C.C_ID = 3 AND S.SUB_ID = 8;";
         $stmt = sqlsrv_query($conn, $sql);
         break;
         
     case 'Around your home-Insulation & Sealing':
-        $sql = "SELECT T_DESC_ENGLISH, C_NAME, SUB_NAME FROM TIPS t
-        JOIN TIP_SEASON ts ON
-        t.T_ID = ts.T_ID
-        JOIN CATEGORY c ON
-        c.C_ID = t.C_ID 
-        JOIN SUBCATEGORY sc ON
-        sc.SUB_ID = t.SUB_ID
-        WHERE c.C_ID = 3 AND sc.SUB_ID = 9;";
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+                FROM TIPS T
+                JOIN CATEGORY C ON T.C_ID = C.C_ID
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                JOIN TIP_SEASON TS ON T.T_ID = TS.T_ID
+                WHERE C.C_ID = 3 AND S.SUB_ID = 9;";
         $stmt = sqlsrv_query($conn, $sql);
         break; 
 
     case 'Around your home-Habit Changing':
-        $sql = "SELECT T_DESC_ENGLISH, C_NAME, SUB_NAME FROM TIPS t
-        JOIN TIP_SEASON ts ON
-        t.T_ID = ts.T_ID
-        JOIN CATEGORY c ON
-        c.C_ID = t.C_ID 
-        JOIN SUBCATEGORY sc ON
-        sc.SUB_ID = t.SUB_ID
-        WHERE c.C_ID = 3 AND sc.SUB_ID = 2;";
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+                FROM TIPS T
+                JOIN CATEGORY C ON T.C_ID = C.C_ID
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                JOIN TIP_SEASON TS ON T.T_ID = TS.T_ID
+                WHERE C.C_ID = 3 AND S.SUB_ID = 2;";
         $stmt = sqlsrv_query($conn, $sql);
         break; 
 
     case 'Around your home-Sealing':
-        $sql = "SELECT T_DESC_ENGLISH, C_NAME, SUB_NAME FROM TIPS t
-        JOIN TIP_SEASON ts ON
-        t.T_ID = ts.T_ID
-        JOIN CATEGORY c ON
-        c.C_ID = t.C_ID 
-        JOIN SUBCATEGORY sc ON
-        sc.SUB_ID = t.SUB_ID
-        WHERE c.C_ID = 3 AND sc.SUB_ID = 13;";
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+                FROM TIPS T
+                JOIN CATEGORY C ON T.C_ID = C.C_ID
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                JOIN TIP_SEASON TS ON T.T_ID = TS.T_ID
+                WHERE C.C_ID = 3 AND S.SUB_ID = 13;";
         $stmt = sqlsrv_query($conn, $sql);
         break; 
 
     case 'Around your home-Pools & Spas':
-        $sql = "SELECT T_DESC_ENGLISH, C_NAME, SUB_NAME FROM TIPS t
-        JOIN TIP_SEASON ts ON
-        t.T_ID = ts.T_ID
-        JOIN CATEGORY c ON
-        c.C_ID = t.C_ID 
-        JOIN SUBCATEGORY sc ON
-        sc.SUB_ID = t.SUB_ID
-        WHERE c.C_ID = 3 AND sc.SUB_ID = 10;";
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+                FROM TIPS T
+                JOIN CATEGORY C ON T.C_ID = C.C_ID
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                JOIN TIP_SEASON TS ON T.T_ID = TS.T_ID
+                WHERE C.C_ID = 3 AND S.SUB_ID = 10;";
         $stmt = sqlsrv_query($conn, $sql);
         break; 
 
-//Heating & Cooling and all of its subcategories
+// Heating & Cooling and all of its subcategories
     case 'Heating & Cooling-Thermostat':
-        $sql = "SELECT DISTINCT T_DESC_ENGLISH, C_NAME, SUB_NAME FROM TIPS t
-        JOIN TIP_SEASON ts ON
-        t.T_ID = ts.T_ID
-        JOIN CATEGORY c ON
-        c.C_ID = t.C_ID 
-        JOIN SUBCATEGORY sc ON
-        sc.SUB_ID = t.SUB_ID
-        WHERE c.C_ID = 5 AND sc.SUB_ID = 11;";
+        $sql = "SELECT DISTINCT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+                FROM TIPS T
+                JOIN CATEGORY C ON T.C_ID = C.C_ID
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                JOIN TIP_SEASON TS ON T.T_ID = TS.T_ID
+                WHERE C.C_ID = 5 AND S.SUB_ID = 11;";
         $stmt = sqlsrv_query($conn, $sql);
         break;
         
     case 'Heating & Cooling-Fans':
-        $sql = "SELECT T_DESC_ENGLISH, C_NAME, SUB_NAME FROM TIPS t
-        JOIN TIP_SEASON ts ON
-        t.T_ID = ts.T_ID
-        JOIN CATEGORY c ON
-        c.C_ID = t.C_ID 
-        JOIN SUBCATEGORY sc ON
-        sc.SUB_ID = t.SUB_ID
-        WHERE c.C_ID = 5 AND sc.SUB_ID = 12;";
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+                FROM TIPS T
+                JOIN CATEGORY C ON T.C_ID = C.C_ID
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                JOIN TIP_SEASON TS ON T.T_ID = TS.T_ID
+                WHERE C.C_ID = 5 AND S.SUB_ID = 12;";
         $stmt = sqlsrv_query($conn, $sql);
         break;
 
     case 'Heating & Cooling-Maintenance':
-        $sql = "SELECT DISTINCT T_DESC_ENGLISH, C_NAME, SUB_NAME FROM TIPS t
-        JOIN TIP_SEASON ts ON
-        t.T_ID = ts.T_ID
-        JOIN CATEGORY c ON
-        c.C_ID = t.C_ID 
-        JOIN SUBCATEGORY sc ON
-        sc.SUB_ID = t.SUB_ID
-        WHERE c.C_ID = 5 AND sc.SUB_ID = 8;";
+        $sql = "SELECT DISTINCT T.T_ID, T.T_DESC_ENGLISH, C.C_NAME, S.SUB_NAME
+                FROM TIPS T
+                JOIN CATEGORY C ON T.C_ID = C.C_ID
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                JOIN TIP_SEASON TS ON T.T_ID = TS.T_ID
+                WHERE C.C_ID = 5 AND S.SUB_ID = 8
+                ORDER BY T.T_ID ASC";
         $stmt = sqlsrv_query($conn, $sql);
         break;
 
     case 'Heating & Cooling-Appliances':
-        $sql = "SELECT DISTINCT T_DESC_ENGLISH, C_NAME, SUB_NAME FROM TIPS t
-        JOIN TIP_SEASON ts ON
-        t.T_ID = ts.T_ID
-        JOIN CATEGORY c ON
-        c.C_ID = t.C_ID 
-        JOIN SUBCATEGORY sc ON
-        sc.SUB_ID = t.SUB_ID
-        WHERE c.C_ID = 5 AND sc.SUB_ID = 7;";
+        $sql = "SELECT DISTINCT T.T_ID, T.T_DESC_ENGLISH, C.C_NAME, S.SUB_NAME 
+                FROM TIPS T 
+                JOIN CATEGORY C ON T.C_ID = C.C_ID 
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID 
+                JOIN TIP_SEASON TS ON T.T_ID = TS.T_ID 
+                WHERE C.C_ID = 5 AND S.SUB_ID = 7 
+                ORDER BY T.T_ID ASC";
         $stmt = sqlsrv_query($conn, $sql);
         break;
 
     default:
       // do nothing
   }
-  
-  // Retrieve database information
-  $result="";
-  while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC)) {
-    $result .= $row["T_DESC_ENGLISH"]. str_repeat('<br><br>', 1);
-  }
-  echo $result;
 
-  /* Free statement and connection resources. */  
-  sqlsrv_free_stmt($stmt);
-  sqlsrv_close($conn); 
+// SQL query error check
+if ($stmt === false) {                                               // Checks if SQL query was successful or not                      
+    die(print_r(sqlsrv_errors(), true));                             // Prints out detailed error message
 }
+  
+// Retrieve database information
+$rows = array();                                                     // Creates empty array called '$rows'
+while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {       // While loop fetches current row as '$row', the loop stops when there are no more rows to fetch
+  if ($row !== null) {                                               // Makes sure only non-null rows are added to the array
+    $rows[] = $row;                                                  // '$row' array is appended to '$rows'
+  }                                                      
+}
+
+// Checks whether the '$rows' array has any elements then the 'foreach' loop will execute
+// 'foreach' loop iterates over each element of the '$rows' array, assigning each element to the variable '$row'
+// Allows to access the values of the current row's columns (in the current iteration of the loop) using the keys of the '$row'(C_NAME, SUB_NAME, T_DESC_ENGLISH) array
+if (count($rows) > 0) {
+  foreach ($rows as $row) {
+    $categoryName = $row["C_NAME"];
+    $subcategoryName = $row["SUB_NAME"];
+    $tipDescription = $row["T_DESC_ENGLISH"];
+    $tipId = $row["T_ID"];
+
+    // The '.=' operator concatenates strings in PHP
+    $result = '<div class="tip">';
+    $result .= '<h2>' . $categoryName . ', ' . $subcategoryName . '</h2>';                        // Generates HTML markup that displays
+    $result .= '<p>' . $tipDescription . '</p>';                                                  // the categoryName, subcategoryName, and the tipDescription
+    $result .= '<div class="btnfeedback">';
+    $result .= '<p class="d-inline-flex align-items-center mb-0">Was this information helpful?';
+
+    // id="yesBtn-' . $row["T_ID"] . '" sets the id attribute of the button to a unique string that includes the tips's ID, T_ID
+    // i.e. yesBtn-12 corresponds to the Yes button for Tip 12
+    $result .= '<button id="likeBtn-' . $tipId . '" class="btn btn-success likeBtn" style="margin-left: 1em;">Yes</button>';
+    $result .= '<button id="dislikeBtn-' . $tipId . '" class="btn btn-danger dislikeBtn" style="margin-left: 1em;">No</button>';
+    $result .= '</p></div></div>';
+
+    echo $result;
+  }
+}
+
+// Free statement and connection resources
+sqlsrv_free_stmt($stmt);
+sqlsrv_close($conn); 
+}
+
+//-----------------------------------------------
+//-----------------------------------------------
+//-----------------------------------------------
+
 if (isset($_POST['function_name']) && function_exists($_POST['function_name'])) {
   $function_name = $_POST['function_name'];
   $arguments = $_POST['arguments'];
