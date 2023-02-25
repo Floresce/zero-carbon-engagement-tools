@@ -19,6 +19,12 @@ body {
   text-align: left;
 }
 
+#result2{
+  font: 20px;
+  color: black;
+  text-align: left;
+}
+
 .row {
   display: flex;
   justify-content: right;
@@ -86,3 +92,62 @@ input[type=submit]:active{
   border: 1px solid #1d8296;
   cursor: pointer;
 }
+
+#navlist {
+		background-color: #ffffff;
+		position: absolute;
+		width: 100%;
+	}
+
+	#navlist a:hover {
+		color: #231f20;
+	}
+	
+	.search input[type=text]{
+		width:300px;
+		height:24px;
+		border-radius:24px;
+		border: none;
+	}
+		
+	.search{
+		float:right;
+		margin: 6px;
+    
+	}
+		
+	.search button{
+		background-color: #D3D2D2;
+		color: #231f20;
+		padding: 6px 6px;
+		margin-right: 12px;
+		font-size: 10px;
+		border: none;
+		cursor: pointer;
+	}
+
+  #link{
+    background-color: #F15C22;  
+    color: #FFFFFf;
+    border: #F15C22;
+    padding: 6px 12px;
+    padding-top: 6px;
+    padding-right: 12px;
+    padding-bottom: 6px;
+    padding-left: 12px;
+    margin: 4px 2px; 
+    width: 130px;
+    height: 36px;
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;
+} 
+
+ #link:hover{
+    cursor: pointer;
+    background-color: #d04b1c;
+}
+#link:active{
+    background-color: #7E2E0A;
+}
+ 
