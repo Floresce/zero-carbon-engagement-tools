@@ -32,7 +32,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
 // All Categories and any/or all subcategories
   switch ($_POST['category'] . '-' . $_POST['subcategory']) {
     case 'All Categories-All Subcategories':
-      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
               FROM TIPS T
               JOIN CATEGORY C ON T.C_ID = C.C_ID
               JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID;";
@@ -40,7 +40,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
       break;
 
     case 'All Categories-Smart Home':
-      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
               FROM TIPS T
               JOIN CATEGORY C ON T.C_ID = C.C_ID
               JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -49,7 +49,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
       break;
 
     case 'All Categories-Habit Changing':
-      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
               FROM TIPS T
               JOIN CATEGORY C ON T.C_ID = C.C_ID
               JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -58,7 +58,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
       break;
       
     case 'All Categories-Washer & Dryer':
-      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
               FROM TIPS T
               JOIN CATEGORY C ON T.C_ID = C.C_ID
               JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -67,7 +67,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
       break;      
 
     case 'All Categories-Dishwasher':
-      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
               FROM TIPS T
               JOIN CATEGORY C ON T.C_ID = C.C_ID
               JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -76,7 +76,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
       break;      
 
     case 'All Categories-Refrigerator':
-      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
               FROM TIPS T
               JOIN CATEGORY C ON T.C_ID = C.C_ID
               JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -85,7 +85,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
       break;
 
     case 'All Categories-Electric Vehicles':
-      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
               FROM TIPS T
               JOIN CATEGORY C ON T.C_ID = C.C_ID
               JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -94,7 +94,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
       break;
 
     case 'All Categories-Appliances':
-      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
               FROM TIPS T
               JOIN CATEGORY C ON T.C_ID = C.C_ID
               JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -103,7 +103,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
       break;
       
     case 'All Categories-Maintenance':
-      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
               FROM TIPS T
               JOIN CATEGORY C ON T.C_ID = C.C_ID
               JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -112,7 +112,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
       break;
 
     case 'All Categories-Insulation & Sealing':
-      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
               FROM TIPS T
               JOIN CATEGORY C ON T.C_ID = C.C_ID
               JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -121,7 +121,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
       break;
       
     case 'All Categories-Pools & Spas':
-      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
               FROM TIPS T
               JOIN CATEGORY C ON T.C_ID = C.C_ID
               JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -130,7 +130,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
       break;
       
     case 'All Categories-Thermostat':
-      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
               FROM TIPS T
               JOIN CATEGORY C ON T.C_ID = C.C_ID
               JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -139,7 +139,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
       break;      
 
     case 'All Categories-Fans':
-      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
               FROM TIPS T
               JOIN CATEGORY C ON T.C_ID = C.C_ID
               JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -148,7 +148,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
       break;
 
     case 'All Categories-Sealing':
-      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
               FROM TIPS T
               JOIN CATEGORY C ON T.C_ID = C.C_ID
               JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -157,7 +157,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
       break;
 
     case 'All Categories-N/A':
-      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
               FROM TIPS T
               JOIN CATEGORY C ON T.C_ID = C.C_ID
               JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -167,7 +167,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
 
 // Specific categories and all subcategories
     case 'Appliances-All Subcategories':
-      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+      $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
               FROM TIPS T
               JOIN CATEGORY C ON T.C_ID = C.C_ID
               JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -176,7 +176,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
       break;
     
     case 'Around town-All Subcategories':
-        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
                 JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -185,7 +185,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         break;
     
     case 'Around your home-All Subcategories':
-        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
                 JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -194,7 +194,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         break;
     
     case 'Cooking-Habit Changing':
-        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
                 JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -203,7 +203,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         break;
 
     case 'Heating & Cooling-All Subcategories':
-        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
                 JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -212,7 +212,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         break;
     
     case 'On Vacation-Habit Changing':
-        $sql = "SELECT T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+        $sql = "SELECT T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
                 JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -222,7 +222,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
 
 // Appliances and all its subcategories
     case 'Appliances-Smart Home':
-        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
                 JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -232,7 +232,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         break;
         
     case 'Appliances-Habit Changing':
-        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
                 JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -242,7 +242,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         break;
         
     case 'Appliances-Washer & Dryer':
-        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
                 JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -252,7 +252,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         break;
 
     case 'Appliances-Dishwasher':
-        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
                 JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -262,7 +262,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         break;
 
     case 'Appliances-Refrigerator':
-        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
                 JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -272,7 +272,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         break;
 
     case 'Appliances-N/A':
-        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
                 JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -283,7 +283,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
 
 // Around town and all its subcategories        
     case 'Around town-Habit Changing':
-        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
                 JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -293,7 +293,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         break;
 
     case 'Around town-Electric Vehicles':
-        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
                 JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -303,7 +303,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         break;
         
     case 'Around town-N/A':
-        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
                 JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -314,7 +314,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
 
 // Around your home and all its subcategories
     case 'Around your home-Appliances':
-        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
                 JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -324,7 +324,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         break; 
 
     case 'Around your home-Maintenance':
-        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
                 JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -334,7 +334,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         break;
         
     case 'Around your home-Insulation & Sealing':
-        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
                 JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -344,7 +344,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         break; 
 
     case 'Around your home-Habit Changing':
-        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
                 JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -354,7 +354,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         break; 
 
     case 'Around your home-Sealing':
-        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
                 JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -364,7 +364,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         break; 
 
     case 'Around your home-Pools & Spas':
-        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
                 JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -375,7 +375,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
 
 // Heating & Cooling and all of its subcategories
     case 'Heating & Cooling-Thermostat':
-        $sql = "SELECT DISTINCT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+        $sql = "SELECT DISTINCT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
                 JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -385,7 +385,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         break;
         
     case 'Heating & Cooling-Fans':
-        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME
+        $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
                 JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -395,7 +395,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         break;
 
     case 'Heating & Cooling-Maintenance':
-        $sql = "SELECT DISTINCT T.T_ID, T.T_DESC_ENGLISH, C.C_NAME, S.SUB_NAME
+        $sql = "SELECT DISTINCT T.T_ID, T.T_DESC_ENGLISH, C.C_NAME, S.SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
                 JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
@@ -406,7 +406,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         break;
 
     case 'Heating & Cooling-Appliances':
-        $sql = "SELECT DISTINCT T.T_ID, T.T_DESC_ENGLISH, C.C_NAME, S.SUB_NAME 
+        $sql = "SELECT DISTINCT T.T_ID, T.T_DESC_ENGLISH, C.C_NAME, S.SUB_NAME, PRIMARY_LINK 
                 FROM TIPS T 
                 JOIN CATEGORY C ON T.C_ID = C.C_ID 
                 JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID 
@@ -442,22 +442,37 @@ if (count($rows) > 0) {
     $subcategoryName = $row["SUB_NAME"];
     $tipDescription = $row["T_DESC_ENGLISH"];
     $tipId = $row["T_ID"];
+    
+  
 
     // The '.=' operator concatenates strings in PHP
     $result = '<div class="tip">';
     $result .= '<h2>' . $categoryName . ', ' . $subcategoryName . '</h2>';                        // Generates HTML markup that displays
     $result .= '<p>' . $tipDescription . '</p>';                                                  // the categoryName, subcategoryName, and the tipDescription
-    $result .= '<div class="btnfeedback">';
-    $result .= '<p class="d-inline-flex align-items-center mb-0">Was this information helpful?';
+    $result .= '</div>';
+    
+    echo $result;
 
+    //if statement for each tip to display correct Primary link as a clickable button if any 
+    //placement here also assures that a button will not appear for every single tip in the while loop 
+    //despite not having a link
+         if (!empty($row['PRIMARY_LINK'])) {
+        echo ' <br> <form action="' . $row['PRIMARY_LINK'] . '"target="_blank">
+        <button type="submit" id="link" class="btn btn-default">Instant rebates</button>
+              </form> <br>';
+      }
+    
+    $result2 = '<div class="btnfeedback">';
+    $result2 .= '<p class="d-inline-flex align-items-center mb-0">Was this information helpful?';
     // id="likeBtn-' . $tipId . '" sets the id attribute of the button to a unique string that includes the tips's ID, T_ID
     // i.e. likeBtn-12 corresponds to the like button for tip 12
-    $result .= '<button id="likeBtn-' . $tipId . '" class="btn btn-success likeBtn" style="margin-left: 1em;">Yes</button>';
-    $result .= '<button id="dislikeBtn-' . $tipId . '" class="btn btn-danger dislikeBtn" style="margin-left: 1em;">No</button>';
-    $result .= '</p></div></div>';
+    $result2 .= '<button id="likeBtn-' . $tipId . '" class="btn btn-success likeBtn" style="margin-left: 1em;">Yes</button>';
+    $result2 .= '<button id="dislikeBtn-' . $tipId . '" class="btn btn-danger dislikeBtn" style="margin-left: 1em;">No</button>';
+    $result2 .= '</p></div>';
 
-    echo $result;
-  }
+    echo $result2;
+    }
+    
 }
 
 // Free statement and connection resources
