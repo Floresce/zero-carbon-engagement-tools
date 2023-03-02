@@ -1,5 +1,19 @@
 <!DOCTYPE html>
 
+<?php
+function OpenConnection()
+{
+    $serverName = "mssql";
+    $connectionOptions = array("Database"=>"tips_telemetry",
+        "Uid"=>"sa", "PWD"=>"Programmadelic_123");
+    $conn = sqlsrv_connect($serverName, $connectionOptions);
+    if($conn == false)
+        die(FormatErrors(sqlsrv_errors()));
+
+    return $conn;
+}
+?>
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -55,18 +69,6 @@
                 <div class="panel-default">
                     <table id="myTable1" class="table">
                         <?php
-                        function OpenConnection()
-                        {
-                            $serverName = "mssql";
-                            $connectionOptions = array("Database"=>"tips_telemetry",
-                                "Uid"=>"sa", "PWD"=>"Programmadelic_123");
-                            $conn = sqlsrv_connect($serverName, $connectionOptions);
-                            if($conn == false)
-                                die(FormatErrors(sqlsrv_errors()));
-                    
-                            return $conn;
-                        }
-                        
                         $conn = OpenConnection();
                         
                         // Load SQL query from file
@@ -117,31 +119,41 @@
                 <div class="panel-heading">ID: 1a79a4d60de6718e8e5b326e338ae533</div>
                 <div class="panel-default">
                     <table id="myTable2" class="table">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Liked Tips</th>
-                                <th>Disliked Tips</th>
-                                <th>Comments</th>
-                                <th>User Agent</th>
-                            </tr>
-                        </thead>
-                        <tbody id="converted-date">
-                            <tr>
-                                <td class="epoch-timestamp">1676471890</td>
-                                <td>N/A</td>
-                                <td>Thaw food in your fridge</td>
-                                <td>This tips sucks</td>
-                                <td><code>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36</code></td>
-                            </tr>
-                            <tr>
-                                <td class="epoch-timestamp">1673035050</td>
-                                <td>Summer thermostat, Oven efficiency</td>
-                                <td>N/A</td>
-                                <td>This tips not sucks</td>
-                                <td><code>Mozilla/5.0 (iPhone; CPU iPhone OS 16_3_1 like Mac OS X) AppleWebKit/604.1</code></td>
-                            </tr>
-                        </tbody>
+                    <?php
+                        $conn = OpenConnection();
+                        
+                        // Load SQL query from file
+                        $sql = "SELECT * FROM user_behavior";
+                        
+                        // Execute query
+                        $stmt = sqlsrv_query($conn, $sql);
+
+                        if ($stmt === false) {
+                            die(print_r(sqlsrv_errors(), true));
+                        }
+
+                        echo "<thead>";
+
+                        echo "<tr><th>Date</th><th>Liked Tips</th><th>Disliked Tips</th><th>Comments</th><th>User Agent</th></tr>";
+
+                        echo "</thead>";
+
+                        echo "<tbody id='converted-date'>";
+
+                        while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+                            echo "<tr>";
+                            echo "<td class='epoch-timestamp'>".$row['timestamp_date']."</td>";
+                            echo "<td>".$row['liked_tips']."</td>";
+                            echo "<td>".$row['disliked_tips']."</td>";
+                            echo "<td>".$row['comments']."</td>";
+                            echo "<td><code>".$row['user_agent']."</code></td>";
+                            echo "</tr>";
+                        }
+
+                        echo "</tbody>";
+
+                        sqlsrv_close($conn);
+                        ?>
                     </table>
                 </div>
                 <!--User Behavior table (end)-->
