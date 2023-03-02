@@ -1,4 +1,18 @@
 <!DOCTYPE html>
+<?php
+$server = "mssql";
+
+$options = array(  "UID" => "sa",  "PWD" => "Programmadelic_123",  "Database" => "");
+
+$conn = sqlsrv_connect($server, $options);
+
+if ($conn === false) 
+die("<pre>".print_r(sqlsrv_errors(), true));
+
+echo "Successfully connected!";
+sqlsrv_close($conn);
+?>
+
 <html>
     <head>
         <meta charset="UTF-8">
