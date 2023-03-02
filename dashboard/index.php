@@ -1,17 +1,4 @@
 <!DOCTYPE html>
-<?php
-$server = "mssql";
-
-$options = array(  "UID" => "sa",  "PWD" => "Programmadelic_123",  "Database" => "");
-
-$conn = sqlsrv_connect($server, $options);
-
-if ($conn === false) 
-die("<pre>".print_r(sqlsrv_errors(), true));
-
-echo "Successfully connected!";
-sqlsrv_close($conn);
-?>
 
 <html>
     <head>
@@ -67,80 +54,56 @@ sqlsrv_close($conn);
                 <div class="panel-heading">Tips Report Telemetry</div>
                 <div class="panel-default">
                     <table id="myTable1" class="table">
-                        <thead>
-                            <tr>
-                                <th>Page</th>
-                                <th>Pageviews</th>
-                                <th>Unique Pageviews</th>
-                                <th>Avg. Time on Page</th>
-                                <th>Entrances</th>
-                                <th>Bounce Rate</th>
-                                <th>% Exit</th>
-                                <th>Page Value</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><a href=".">/en/rebates-and-savings-tips/energy-savings-tips</a></td>
-                                <td>11,439</td>
-                                <td>10,289</td>
-                                <td>00:01:23</td>
-                                <td>7,659</td>
-                                <td>73.62%</td>
-                                <td>67.53%</td>
-                                <td>$0.00</td>
-                            </tr>
-                            <tr>
-                                <td><a href=".">/energytips</a></td>
-                                <td>4,471</td>
-                                <td>4,208</td>
-                                <td>00:01:33</td>
-                                <td>3,846</td>
-                                <td>86.44%</td>
-                                <td>85.54%</td>
-                                <td>$0.00</td>
-                            </tr>
-                            <tr>
-                                <td><a href=".">/savingstips</a></td>
-                                <td>11,439</td>
-                                <td>10,289</td>
-                                <td>00:01:23</td>
-                                <td>7,659</td>
-                                <td>73.62%</td>
-                                <td>67.53%</td>
-                                <td>$0.00</td>
-                            </tr>
-                            <tr>
-                                <td><a href=".">/en/rebates-and-savings-tips/energy-savings-tips</a></td>
-                                <td>4,471</td>
-                                <td>4,208</td>
-                                <td>00:01:33</td>
-                                <td>3,846</td>
-                                <td>86.44%</td>
-                                <td>85.54%</td>
-                                <td>$0.00</td>
-                            </tr>
-                            <tr>
-                                <td><a href=".">/energytips</a></td>
-                                <td>11,439</td>
-                                <td>10,289</td>
-                                <td>00:01:23</td>
-                                <td>7,659</td>
-                                <td>73.62%</td>
-                                <td>67.53%</td>
-                                <td>$0.00</td>
-                            </tr>
-                            <tr>
-                                <td><a href=".">/savingstips</a></td>
-                                <td>4,471</td>
-                                <td>4,208</td>
-                                <td>00:01:33</td>
-                                <td>3,846</td>
-                                <td>86.44%</td>
-                                <td>85.54%</td>
-                                <td>$0.00</td>
-                            </tr>
-                        </tbody>
+                        <?php
+                        function OpenConnection()
+                        {
+                            $serverName = "mssql";
+                            $connectionOptions = array("Database"=>"tips_telemetry",
+                                "Uid"=>"sa", "PWD"=>"Programmadelic_123");
+                            $conn = sqlsrv_connect($serverName, $connectionOptions);
+                            if($conn == false)
+                                die(FormatErrors(sqlsrv_errors()));
+                    
+                            return $conn;
+                        }
+                        
+                        $conn = OpenConnection();
+                        
+                        // Load SQL query from file
+                        $sql = "SELECT * FROM telemetry_table";
+                        
+                        // Execute query
+                        $stmt = sqlsrv_query($conn, $sql);
+
+                        if ($stmt === false) {
+                            die(print_r(sqlsrv_errors(), true));
+                        }
+
+                        echo "<thead>";
+
+                        echo "<tr><th>Page</th><th>Pageviews</th><th>Unique Pageviews</th><th>Avg. Time on Page</th><th>Entrances</th><th>Bounce Rate</th><th>% Exit</th><th>Page Value</th></tr>";
+
+                        echo "</thead>";
+
+                        echo "<tbody>";
+
+                        while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+                            echo "<tr>";
+                            echo "<td>".$row['link']."</td>";
+                            echo "<td>".$row['pageviews']."</td>";
+                            echo "<td>".$row['unique_pageviews']."</td>";
+                            echo "<td>".$row['average_time']."</td>";
+                            echo "<td>".$row['entrances']."</td>";
+                            echo "<td>".$row['bounce_rate']."</td>";
+                            echo "<td>".$row['exit_percent']."</td>";
+                            echo "<td>".$row['page_value']."</td>";
+                            echo "</tr>";
+                        }
+
+                        echo "</tbody>";
+
+                        sqlsrv_close($conn);
+                        ?>
                     </table>
                 </div>
                 <!--Tips Report Telementry table (end)-->
