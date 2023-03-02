@@ -472,7 +472,7 @@ if (count($rows) > 0) {
         // i.e. likeBtn-12 corresponds to the like button for tip 12
         $result2 .= '<button id="likeBtn-' . $tipId . '" class="btn btn-success likeBtn" style="margin-left: 1em;"><i class="bi bi-hand-thumbs-up"></i></button>';
         $result2 .= '<button id="dislikeBtn-' . $tipId . '" class="btn btn-danger dislikeBtn"><i class="bi bi-hand-thumbs-down"></i></button>';
-        
+
         // Creates a modal that acts as a hyperlink
         $result2 .= '<a href="#" class="text-primary" data-bs-toggle="modal" data-bs-target="#commentModal-'. $tipId .'" style="margin-left: 1em;">Comment</a>';
         $result2 .= '</p></div>';
@@ -480,7 +480,7 @@ if (count($rows) > 0) {
         echo $result2;
         
         // Includes the code for the modal element
-        include 'comment-modal.php';
+        include 'comment_modal.php';
         }   
 }
 

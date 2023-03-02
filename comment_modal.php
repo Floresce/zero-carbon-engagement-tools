@@ -39,7 +39,7 @@ $(document).ready(function() {
     var submitBtn = $(this);
     var currentDate = new Date(); // Get the current date and time
     $.ajax({
-      url: 'submit-comment.php',
+      url: 'comment_submit.php',
       type: 'post',
       data: {tipId: tipId, comment: comment, date: currentDate},
       success: function(response) {
