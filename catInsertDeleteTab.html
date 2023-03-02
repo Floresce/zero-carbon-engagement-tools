@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Tabs</title>
+    <link rel="stylesheet" type="text/css" href="tabCSS.css">
+</head>
+<body style="padding: 20px">
+<h1 class="title">Tabs</h1>
+<div class="tabContainer">
+    <div class="buttonContainer">
+        <button onclick="showPanel(0,'#f44336')">Tab 1</button>
+        <button onclick="showPanel(1,'#4caf50')">Tab 2</button>
+    </div>
+    <div class="tabPanel">Insert Category
+        <form action="add-category.php" method="post">
+            <label for="category-input">Enter a category to add:</label>
+            <input type="text" id="category-input" name="category" required>
+            <button type="submit">Add </button>
+        </form> 
+    </div>
+
+
+
+    <div class="tabPanel">Delete Category
+        <form action="add-category.php" method="post">
+            <label for="category-input">Enter a category to delete:</label>
+            <input type="text" id="category-input" name="category" required>
+            <button type="submit">Delete </button>
+        </form>
+    </div>
+
+</div>
+
+<script src="tabJs.js"></script>
+</body>
+</html>
