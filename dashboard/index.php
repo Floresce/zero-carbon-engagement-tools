@@ -157,6 +157,8 @@ function OpenConnection()
                     </table>
                 </div>
                 <!--User Behavior table (end)-->
+
+                <button id="add-data-button">Add Data</button>
             </div>
         </div>
 
@@ -184,6 +186,17 @@ function OpenConnection()
                 const epochTimestamp = cell.textContent;
                 const date = new Date(epochTimestamp * 1000);
                 cell.textContent = date.toLocaleString();
+            });
+
+            document.getElementById("add-data-button").addEventListener("click", function() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        alert("Data added successfully!");
+                    }
+                };
+                xhttp.open("GET", "php/add_data.php", true);
+                xhttp.send();
             });
         </script>
     </body>
