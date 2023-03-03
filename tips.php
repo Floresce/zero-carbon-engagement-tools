@@ -476,7 +476,7 @@ if (count($rows) > 0) {
 
         // Creates a modal that acts as a hyperlink
         // Includes the code for the modal element
-        include 'comment_modal.php';
+        include 'comment_modal.html';
         echo '</p></div>';
 
         // Add button to add to plan
