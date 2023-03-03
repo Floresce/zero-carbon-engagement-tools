@@ -443,12 +443,12 @@ if (count($rows) > 0) {
         $tipDescription = $row["T_DESC_ENGLISH"];
         $tipId = $row["T_ID"];
         
-      
+        
 
         // The '.=' operator concatenates strings in PHP
         $result = '<div class="tip">';
         $result .= '<h2>' . $categoryName . ', ' . $subcategoryName . '</h2>';      // Generates HTML markup that displays
-        $result .= '<p>' . $tipDescription . '</p>';                                // the categoryName, subcategoryName, and the tipDescription
+        $result .= '<p>' . $tipDescription . '</p>';                                // the categoryName, subcategoryName, and the tipDescription     
         $result .= '</div>';
         
         echo $result;
@@ -474,13 +474,20 @@ if (count($rows) > 0) {
         $result2 .= '<button id="dislikeBtn-' . $tipId . '" class="btn btn-danger dislikeBtn"><i class="bi bi-hand-thumbs-down"></i></button>';
 
         // Creates a modal that acts as a hyperlink
-        $result2 .= '<a href="#" class="text-primary commentBtn" data-bs-toggle="modal" data-bs-target="#commentModal-' . $tipId . '" data-tipid="' . $tipId . '" style="margin-left: 1em;">Comment</a>';
+        $result2 .= '<a href="#" class="text-primary" data-bs-toggle="modal" data-bs-target="#commentModal-'. $tipId .'" style="margin-left: 1em;">Comment</a>';
         $result2 .= '</p></div>';
           
         echo $result2;
         
         // Includes the code for the modal element
         include 'comment_modal.php';
+
+        // Add button to add to plan
+        $result3 = '<div id="atpDiv-' . $tipId . '">';
+        $result3 .= '<a href="#" class="btn btn-info atpBtn" id="atpBtn-' . $tipId . '">Add to Plan</a>';
+        $result3 .= '</div><br>';
+
+        echo $result3;
         }   
 }
 
