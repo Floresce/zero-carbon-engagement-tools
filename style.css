@@ -205,3 +205,17 @@ a.text-primary:hover {
   color: #C54A1A !important;
 }
 /* End of use for buttons found in tips.php */
+
+/* Used for the comment button in comment_modal.php */
+.btn-link {
+  background-color: transparent;
+  border: none;
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.btn-link:hover {
+  color: #C54A1A;
+  text-decoration: underline;
+}
+/* End of use for the comment button in comment_modal.php */
