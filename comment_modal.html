@@ -31,8 +31,17 @@
   </div>
 </div>
 
+<!-- Button to trigger the modal -->
+<button type="button" class="btn btn-link" id="openCommentModal-<?php echo $tipId; ?>" data-tipid="<?php echo $tipId; ?>">Leave a Comment</button>
+
 <script>
 $(document).ready(function() {
+  // Add a click event listener to the button that opens the modal
+  $('#openCommentModal-<?php echo $tipId; ?>').click(function() {
+    // Show the modal when the button is clicked
+    $('#commentModal-<?php echo $tipId; ?>').modal('show');
+  });
+
   $('#commentBtn-<?php echo $tipId; ?>').click(function() {
     var tipId = $(this).data('tipid');
     var comment = $('#comment-' + tipId).val();

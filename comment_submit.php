@@ -24,7 +24,7 @@ if (isset($_POST['tipId']) && isset($_POST['comment']) && isset($_POST['date']))
     $comment = $_POST['comment'];
     $date = $_POST['date'];
 
-    echo $tipId, $comment, $date;            // Check if the values retrieved are correct
+    echo 'tipId: ',$tipId, '<br>comment: ',$comment, '<br>date: ',$date;            // Check if the values retrieved are correct
 
 } else {
     // Handle the case when one or more POST variables are not set
