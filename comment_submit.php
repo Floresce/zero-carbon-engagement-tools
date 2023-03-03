@@ -18,5 +18,16 @@ if( $conn === false ) {
     die( print_r( sqlsrv_errors(), true));
 }
 
-// Under work
+if (isset($_POST['tipId']) && isset($_POST['comment']) && isset($_POST['date'])) {
+    // Retrieve the values from $_POST array
+    $tipId = $_POST['tipId'];
+    $comment = $_POST['comment'];
+    $date = $_POST['date'];
+
+    echo $tipId, $comment, $date;            // Check if the values retrieved are correct
+
+} else {
+    // Handle the case when one or more POST variables are not set
+    echo 'Error: One or more POST variables not set';
+}
 ?>

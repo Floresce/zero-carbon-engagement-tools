@@ -25,7 +25,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary submitComment" data-bs-toggle="modal" data-bs-target="#commentModal-<?php echo $tipId; ?>" data-tipid="<?php echo $tipId; ?>">Submit</button>
+        <button type="button" class="btn btn-primary" id="commentBtn-<?php echo $tipId; ?>" data-tipid="<?php echo $tipId; ?>">Comment</button>
       </div>
     </div>
   </div>
@@ -33,26 +33,34 @@
 
 <script>
 $(document).ready(function() {
-  $('.submitComment').click(function() {
+  $('#commentBtn-<?php echo $tipId; ?>').click(function() {
     var tipId = $(this).data('tipid');
     var comment = $('#comment-' + tipId).val();
     var submitBtn = $(this);
-    var currentDate = new Date(); // Get the current date and time
+    var currentDate = new Date();
+    var formattedDate = currentDate.toISOString();            // Format date as string in ISO format
+
+    console.log('tipId:', tipId);                             // Check if values are correct, prints in web browser console log
+    console.log('comment:', comment);
+    console.log('date:', formattedDate);
+
     $.ajax({
-      url: 'comment_submit.php',
-      type: 'post',
-      data: {tipId: tipId, comment: comment, date: currentDate},
-      success: function(response) {
-        // Handle success response from server
-        submitBtn.remove();                                   // Remove the Submit button
-        $('#commentSuccess-' + tipId).show();
-        sessionStorage.setItem('comment-' + tipId, comment);  // Save comment text
-        sessionStorage.setItem('success-' + tipId, 'true');   // Save success message state
-      },
-      error: function(xhr, status, error) {
-        // Handle error response from server
-      }
+        url: 'comment_submit.php',
+        type: 'post',
+        data: {tipId: tipId, comment: comment, date: formattedDate},
+        success: function(response) {
+            // Handle success response from server
+            submitBtn.remove();                                   // Remove the Comment button
+            $('#commentSuccess-' + tipId).show();
+            sessionStorage.setItem('comment-' + tipId, comment);  // Save comment text
+            sessionStorage.setItem('success-' + tipId, 'true');   // Save success message state
+        },
+        error: function(xhr, status, error) {
+            // Handle error response from server
+            console.log('Error: ' + error);
+        }
     });
   });
 });
 </script>
+

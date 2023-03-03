@@ -474,7 +474,7 @@ if (count($rows) > 0) {
         $result2 .= '<button id="dislikeBtn-' . $tipId . '" class="btn btn-danger dislikeBtn"><i class="bi bi-hand-thumbs-down"></i></button>';
 
         // Creates a modal that acts as a hyperlink
-        $result2 .= '<a href="#" class="text-primary" data-bs-toggle="modal" data-bs-target="#commentModal-'. $tipId .'" style="margin-left: 1em;">Comment</a>';
+        $result2 .= '<a href="#" class="text-primary commentBtn" data-bs-toggle="modal" data-bs-target="#commentModal-' . $tipId . '" data-tipid="' . $tipId . '" style="margin-left: 1em;">Comment</a>';
         $result2 .= '</p></div>';
           
         echo $result2;
