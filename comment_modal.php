@@ -49,16 +49,16 @@ $(document).ready(function() {
         type: 'post',
         data: {tipId: tipId, comment: comment, date: formattedDate},
         success: function(response) {
-          // Handle success response from server
-          submitBtn.remove();                                   // Remove the Comment button
-          $('#commentSuccess-' + tipId).show();
-          sessionStorage.setItem('comment-' + tipId, comment);  // Save comment text
-          sessionStorage.setItem('success-' + tipId, 'true');   // Save success message state
-      },
-      error: function(xhr, status, error) {
-          // Handle error response from server
-          console.log('Error: ' + error);
-      }
+            // Handle success response from server
+            submitBtn.remove();                                   // Remove the Comment button
+            $('#commentSuccess-' + tipId).show();
+            sessionStorage.setItem('comment-' + tipId, comment);  // Save comment text
+            sessionStorage.setItem('success-' + tipId, 'true');   // Save success message state
+        },
+        error: function(xhr, status, error) {
+            // Handle error response from server
+            console.log('Error: ' + error);
+        }
     });
   });
 });
