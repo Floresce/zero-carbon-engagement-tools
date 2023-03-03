@@ -117,3 +117,62 @@ $(document).ready(function() {
       }); // End of ajax $.ajax({
   }); // End of $('#tips_form').submit(function(e) {
 }); // End of $(document).ready(function() {
+      //ToDo: add error handling to below functions
+  //calls addDislike() in tips.php which increments dislike count in DB
+  function callDislikeFunction(id) {
+    $.ajax({
+        url: "tips.php",
+        type: "POST",
+        data: {
+            function_name: "addDislike",
+            arguments: [id]
+        },
+    });   
+}
+
+//calls addLike() in tips.php which increments like count in DB
+function callLikeFunction(id) {
+	$.ajax({
+		url: "tips.php",
+		type: "POST",
+		data: {
+			function_name: "addLike",
+			arguments: [id]
+		},
+	});   
+  }
+  
+  //calls getLikes() in tips.php which gets the current like count from the DB
+  function callGetLikesFunction(id) {
+	  var count = 0;
+	  $.ajax({
+		  url: "tips.php",
+		  type: "POST",
+		  data: {
+			  function_name: "getLikes",
+			  arguments: [id]
+		  },
+		  success: function(data) {
+			  count = data;
+		  }
+	  });   
+	  return count;
+	}
+	
+	//calls getDislikes() in tips.php which gets the current dislike count from the DB
+	function callGetDislikesFunction(id) {
+	  var count = 0;
+	  $.ajax({
+		  url: "tips.php",
+		  type: "POST",
+		  data: {
+			  function_name: "getDislikes",
+			  arguments: [id]
+		  },
+		  success: function(data) {
+			  count = data;
+		  }
+	  });
+	  return count;  
+	  
+	}
