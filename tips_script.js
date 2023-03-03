@@ -1,3 +1,5 @@
+const tipsPlan = [];
+
 $(document).ready(function() {
   // Submit form
   $('#tips_form').submit(function(e) {
@@ -49,6 +51,30 @@ $(document).ready(function() {
                   sessionStorage.setItem("tip-" + tipId, "dislike");
               });
 
+              $('.atpBtn').on('click', function() {
+                  // Expected format of button id is 'atpBtn-1', where the number represents the tip id
+                  var tipId = this.id.split("-")[1];                                                // Get the tip id from the button id
+              
+                  console.log("User clicked 'Add To Plan' for Tip " + tipId);                     // Check if event listener is working, prints in web browser console log
+                  
+                  // Disable the 'atp' button for this tip
+                  var atpBtn = document.getElementById("atpBtn-" + tipId);
+                  var atpDiv = document.getElementById("atpDiv-" + tipId);
+                  
+                  if(tipsPlan.length < 5)
+                  {
+                     tipsPlan.push(tipId);
+                     const tipsPlanJSON = JSON.stringify(tipsPlan);
+                     sessionStorage.setItem("tipsPlan", tipsPlanJSON);
+                     sessionStorage.setItem("atpBtn-" + tipId, "disabled");
+                     sessionStorage.setItem("atpDiv-" + tipId, "Added to plan!");
+                     this.style.visibility = "hidden";
+                     atpDiv.innerText = sessionStorage.getItem("atpDiv-" + tipId);
+                     //console.log(tipsPlan);
+                     //console.log(sessionStorage.getItem("tipsPlan"));
+                  }
+              });
+
               // Retrieve the state of each tip from sessionStorage
               $('.likeBtn').each(function() {
                   var tipId = this.id.split("-")[1];
@@ -76,6 +102,16 @@ $(document).ready(function() {
                       likeBtn.disabled = true;
                       this.style.pointerEvents = 'none';
                   }
+              });
+
+              $('.atpBtn').each(function() {
+                var tipId = this.id.split("-")[1];
+                var state = sessionStorage.getItem("atpBtn-" + tipId);
+                if (state === "disabled") {
+                    this.style.visibility = "hidden";
+                } else {
+                    this.style.visibility = "visible";
+                }
               });
           } // End of success: function(response) {
       }); // End of ajax $.ajax({
