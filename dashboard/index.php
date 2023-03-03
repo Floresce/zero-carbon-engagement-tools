@@ -119,6 +119,17 @@ function OpenConnection()
                 <div class="panel-heading">ID: 1a79a4d60de6718e8e5b326e338ae533</div>
                 <div class="panel-default">
                     <table id="myTable2" class="table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Liked Tips</th>
+                                <th>Disliked Tips</th>
+                                <th>Comments</th>
+                                <th>User Agent</th>
+                            </tr>
+                        </thead>
+                        <tbody id='converted-date'>
+                        </tbody>
                     </table>
                 </div>
                 <!--User Behavior table (end)-->
@@ -135,7 +146,9 @@ function OpenConnection()
         </div>
 
         <script>
-            setInterval(updateTable, 1000);
+            setInterval(function() {
+            $('#myTable2').DataTable().ajax.reload();
+            }, 1000);
 
             //Fade buttons
             $('#fadebutton').on('click', function () {
@@ -144,7 +157,17 @@ function OpenConnection()
             //Using DataTables to sort tables
             $(document).ready( function () {
                 $('#myTable1').DataTable();
-                $('#myTable2').DataTable();
+
+                $('#myTable2').DataTable({
+                    "ajax": "php/user_behavior.php",
+                    "columns": [
+                        { "data": "timestamp_date" },
+                        { "data": "liked_tips" },
+                        { "data": "disliked_tips" },
+                        { "data": "comments" },
+                        { "data": "user_agent" }
+                    ]
+                });
             });
             //Convert epoch timestamp to date
             const epochTimestamps = document.querySelectorAll(".epoch-timestamp");
@@ -165,16 +188,6 @@ function OpenConnection()
                 xhttp.open("GET", "php/add_data.php", true);
                 xhttp.send();
             });
-
-            function updateTable() {
-                $.ajax({
-                    url: "php/user_behavior.php",
-                    success: function(data) {
-                        $("#myTable2").html(data);
-                    }
-                });
-            }
-
         </script>
     </body>
 </html>
