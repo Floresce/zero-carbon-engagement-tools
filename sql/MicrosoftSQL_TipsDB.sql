@@ -301,6 +301,7 @@ CREATE TABLE TIP_COMMENT
   FOREIGN KEY(T_ID) REFERENCES TIPS(T_ID)
 );
 
+/*
 -- While loop to populate table
 DECLARE @i INT = 1;
 DECLARE @max INT = 44;
@@ -312,5 +313,5 @@ BEGIN
    
    SET @i = @i + 1;
 END
-
+*/
 
