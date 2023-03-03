@@ -119,41 +119,6 @@ function OpenConnection()
                 <div class="panel-heading">ID: 1a79a4d60de6718e8e5b326e338ae533</div>
                 <div class="panel-default">
                     <table id="myTable2" class="table">
-                    <?php
-                        $conn = OpenConnection();
-                        
-                        // Load SQL query from file
-                        $sql = "SELECT * FROM user_behavior";
-                        
-                        // Execute query
-                        $stmt = sqlsrv_query($conn, $sql);
-
-                        if ($stmt === false) {
-                            die(print_r(sqlsrv_errors(), true));
-                        }
-
-                        echo "<thead>";
-
-                        echo "<tr><th>Date</th><th>Liked Tips</th><th>Disliked Tips</th><th>Comments</th><th>User Agent</th></tr>";
-
-                        echo "</thead>";
-
-                        echo "<tbody id='converted-date'>";
-
-                        while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-                            echo "<tr>";
-                            echo "<td class='epoch-timestamp'>".$row['timestamp_date']."</td>";
-                            echo "<td>".$row['liked_tips']."</td>";
-                            echo "<td>".$row['disliked_tips']."</td>";
-                            echo "<td>".$row['comments']."</td>";
-                            echo "<td><code>".$row['user_agent']."</code></td>";
-                            echo "</tr>";
-                        }
-
-                        echo "</tbody>";
-
-                        sqlsrv_close($conn);
-                        ?>
                     </table>
                 </div>
                 <!--User Behavior table (end)-->
@@ -170,6 +135,8 @@ function OpenConnection()
         </div>
 
         <script>
+            setInterval(updateTable, 1000);
+
             //Fade buttons
             $('#fadebutton').on('click', function () {
                 document.getElementById("fademe").style.opacity = 1;
@@ -192,12 +159,22 @@ function OpenConnection()
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
-                        alert("Data added successfully!");
+                        //alert("Data added successfully!");
                     }
                 };
                 xhttp.open("GET", "php/add_data.php", true);
                 xhttp.send();
             });
+
+            function updateTable() {
+                $.ajax({
+                    url: "php/user_behavior.php",
+                    success: function(data) {
+                        $("#myTable2").html(data);
+                    }
+                });
+            }
+
         </script>
     </body>
 </html>
