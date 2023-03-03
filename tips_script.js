@@ -1,5 +1,3 @@
-const tipsPlan = [];
-
 $(document).ready(function() {
   // Submit form
   $('#tips_form').submit(function(e) {
@@ -61,6 +59,8 @@ $(document).ready(function() {
                   var atpBtn = document.getElementById("atpBtn-" + tipId);
                   var atpDiv = document.getElementById("atpDiv-" + tipId);
                   
+                  const tipsPlan = (sessionStorage.getItem("tipsPlan") != null) ? JSON.parse(sessionStorage.getItem("tipsPlan")) : [];
+
                   if(tipsPlan.length < 5)
                   {
                      tipsPlan.push(tipId);
@@ -70,8 +70,8 @@ $(document).ready(function() {
                      sessionStorage.setItem("atpDiv-" + tipId, "Added to plan!");
                      this.style.visibility = "hidden";
                      atpDiv.innerText = sessionStorage.getItem("atpDiv-" + tipId);
-                     //console.log(tipsPlan);
-                     //console.log(sessionStorage.getItem("tipsPlan"));
+                     console.log(tipsPlan);
+                     console.log(sessionStorage.getItem("tipsPlan"));
                   }
               });
 
