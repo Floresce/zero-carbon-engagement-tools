@@ -9,9 +9,9 @@
 <h1 class="title">Database manipulation</h1>
 <div class="tabContainer">
     <div class="buttonContainer">
-        <button onclick="showPanel(0,'#baa7ac')">Tab 1</button>
-        <button onclick="showPanel(1,'#514d4e')">Tab 2</button>
-        <button onclick="showPanel(2,'#201719')">Tab 3</button>
+        <button onclick="showPanel(0,'#baa7ac')">Category</button>
+        <button onclick="showPanel(1,'#514d4e')">Sub-Category</button>
+        <button onclick="showPanel(2,'#201719')">Tips</button>
 
 
     </div>
@@ -45,6 +45,7 @@
     
     <div class="tabPanel">Adding Tip
         <form action="catInsertSQL.php" method="post">
+            <centre>
             <label for="category-input">English description of tip:</label>
             <input type="text" id="category-input" name="category" required><br>
             <label for="category-input">Spanish description of tip:</label>
@@ -60,6 +61,7 @@
             <label for="category-input">Links related to the tip:</label>
             <input type="text" id="category-input" name="category" required><br>
             <button type="Insert Tip">Add Tip </button>
+            </centre>
             </form>
 
     </div>
