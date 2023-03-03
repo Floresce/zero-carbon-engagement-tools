@@ -421,15 +421,15 @@ if( isset($_POST['category'], $_POST['subcategory'])){
   }
 
 // SQL query error check
-if ($stmt === false) {                                               // Checks if SQL query was successful or not                      
-    die(print_r(sqlsrv_errors(), true));                             // Prints out detailed error message
+if ($stmt === false) {                                           // Checks if SQL query was successful or not                      
+    die(print_r(sqlsrv_errors(), true));                         // Prints out detailed error message
 }
-  
+
 // Retrieve database information
-$rows = array();                                                     // Creates empty array called '$rows'
-while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {       // While loop fetches current row as '$row', the loop stops when there are no more rows to fetch
-  if ($row !== null) {                                               // Makes sure only non-null rows are added to the array
-    $rows[] = $row;                                                  // '$row' array is appended to '$rows'
+$rows = array();                                                 // Creates empty array called '$rows'
+while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {   // While loop fetches current row as '$row', the loop stops when there are no more rows to fetch
+    if ($row !== null) {                                         // Makes sure only non-null rows are added to the array
+        $rows[] = $row;                                          // '$row' array is appended to '$rows'
   }                                                      
 }
 
@@ -437,42 +437,51 @@ while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {       // While lo
 // 'foreach' loop iterates over each element of the '$rows' array, assigning each element to the variable '$row'
 // Allows to access the values of the current row's columns (in the current iteration of the loop) using the keys of the '$row'(C_NAME, SUB_NAME, T_DESC_ENGLISH) array
 if (count($rows) > 0) {
-  foreach ($rows as $row) {
-    $categoryName = $row["C_NAME"];
-    $subcategoryName = $row["SUB_NAME"];
-    $tipDescription = $row["T_DESC_ENGLISH"];
-    $tipId = $row["T_ID"];
-    
-  
+    foreach ($rows as $row) {
+        $categoryName = $row["C_NAME"];
+        $subcategoryName = $row["SUB_NAME"];
+        $tipDescription = $row["T_DESC_ENGLISH"];
+        $tipId = $row["T_ID"];
+        
+      
 
-    // The '.=' operator concatenates strings in PHP
-    $result = '<div class="tip">';
-    $result .= '<h2>' . $categoryName . ', ' . $subcategoryName . '</h2>';                        // Generates HTML markup that displays
-    $result .= '<p>' . $tipDescription . '</p>';                                                  // the categoryName, subcategoryName, and the tipDescription
-    $result .= '</div>';
-    
-    echo $result;
+        // The '.=' operator concatenates strings in PHP
+        $result = '<div class="tip">';
+        $result .= '<h2>' . $categoryName . ', ' . $subcategoryName . '</h2>';      // Generates HTML markup that displays
+        $result .= '<p>' . $tipDescription . '</p>';                                // the categoryName, subcategoryName, and the tipDescription
+        $result .= '</div>';
+        
+        echo $result;
 
-    //if statement for each tip to display correct Primary link as a clickable button if any 
-    //placement here also assures that a button will not appear for every single tip in the while loop 
-    //despite not having a link
-         if (!empty($row['PRIMARY_LINK'])) {
-        echo ' <br> <form action="' . $row['PRIMARY_LINK'] . '"target="_blank">
-        <button type="submit" id="link" class="btn btn-default">Instant rebates</button>
-              </form> <br>';
-      }
-    
-    $result2 = '<div class="btnfeedback">';
-    $result2 .= '<p class="d-inline-flex align-items-center mb-0">Was this information helpful?';
-    // id="likeBtn-' . $tipId . '" sets the id attribute of the button to a unique string that includes the tips's ID, T_ID
-    // i.e. likeBtn-12 corresponds to the like button for tip 12
-    $result2 .= '<button id="likeBtn-' . $tipId . '" class="btn btn-success likeBtn" style="margin-left: 1em;">Yes</button>';
-    $result2 .= '<button id="dislikeBtn-' . $tipId . '" class="btn btn-danger dislikeBtn" style="margin-left: 1em;">No</button>';
-    $result2 .= '</p></div>';
+        // if statement for each tip to display correct Primary link as a clickable button if any 
+        // placement here also assures that a button will not appear for every single tip in the while loop 
+        // despite not having a link
+        if (!empty($row['PRIMARY_LINK'])) {
+            echo ' <br> <form action="' . $row['PRIMARY_LINK'] . '"target="_blank">
+                  <button type="submit" id="link" class="btn btn-default">Instant rebates</button>
+                  </form> <br>';
+        }
+        
+        $result2 = '<div class="btnfeedback">';
+        $result2 .= '<p class="d-inline-flex align-items-center mb-0">Was this information helpful?';
 
-    echo $result2;
-    }
-    
+        echo '<link rel="stylesheet" href="style.css?v=1.1">';    // Version control parameter that can be used to force the browser to load the latest version of the stylesheet file
+        echo '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">';   // Enables use of thumbs up/down icons
+
+        // id="likeBtn-' . $tipId . '" sets the id attribute of the button to a unique string that includes the tips's ID, T_ID
+        // i.e. likeBtn-12 corresponds to the like button for tip 12
+        $result2 .= '<button id="likeBtn-' . $tipId . '" class="btn btn-success likeBtn" style="margin-left: 1em;"><i class="bi bi-hand-thumbs-up"></i></button>';
+        $result2 .= '<button id="dislikeBtn-' . $tipId . '" class="btn btn-danger dislikeBtn"><i class="bi bi-hand-thumbs-down"></i></button>';
+
+        // Creates a modal that acts as a hyperlink
+        $result2 .= '<a href="#" class="text-primary" data-bs-toggle="modal" data-bs-target="#commentModal-'. $tipId .'" style="margin-left: 1em;">Comment</a>';
+        $result2 .= '</p></div>';
+          
+        echo $result2;
+        
+        // Includes the code for the modal element
+        include 'comment_modal.php';
+        }   
 }
 
 // Free statement and connection resources

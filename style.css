@@ -150,3 +150,58 @@ input[type=submit]:active{
 #link:active{
   background-color: #7E2E0A;
 }
+
+/* Used for the like/dislike buttons and comment modal found in tips.php */
+.likeBtn .bi {
+  color: #231F20;
+  font-size: 1rem;
+}
+
+.dislikeBtn .bi {
+  color: #231F20;
+  font-size: 1rem;
+}
+
+.likeBtn {
+  background-color: #E6E1DA;
+  color: #fff;
+  border-radius: 1px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+.dislikeBtn {
+  background-color: #E6E1DA;
+  color: #fff;
+  border-radius: 1px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+.likeBtn:hover,
+.dislikeBtn:hover {
+  background-color: #C54A1A;
+  color: #C54A1A;
+  border-color: transparent;
+}
+
+.likeBtn:active,
+.dislikeBtn:active {
+  background-color: #9B3A14 !important;
+  border-color: #9B3A14 !important;
+}
+
+.likeBtn:disabled,
+.dislikeBtn:disabled {
+  background-color: #9B3A14;
+  border-color: #9B3A14;
+}
+
+a.text-primary:hover {
+  color: #C54A1A !important;
+}
+/* End of use for buttons found in tips.php */
