@@ -446,8 +446,6 @@ if (count($rows) > 0) {
         $tipDescription = $row["T_DESC_ENGLISH"];
         $tipId = $row["T_ID"];
         
-        
-
         // The '.=' operator concatenates strings in PHP
         $result = '<div class="tip">';
         $result .= '<h2>' . $categoryName . ', ' . $subcategoryName . '</h2>';      // Generates HTML markup that displays
