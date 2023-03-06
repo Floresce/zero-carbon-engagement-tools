@@ -1,48 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Adding Removing dashboard</title>
-    <link rel="stylesheet" type="text/css" href="tabCSS.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<title>Adding Removing dashboard</title>
+<link rel="stylesheet" type="text/css" href="tabtestCSS.css">
 </head>
-<body style="padding: 20px">
-<h1 class="title">Database manipulation</h1>
-<div class="tabContainer">
-    <div class="buttonContainer">
-        <button onclick="showPanel(0,'#baa7ac')">Category</button>
-        <button onclick="showPanel(1,'#514d4e')">Sub-Category</button>
-        <button onclick="showPanel(2,'#201719')">Tips</button>
+<body>
 
+<div class="tab"> 
+  <button class="tablinks" onclick="openTab(event, 'Tips')">Tips</button>
+  <button class="tablinks" onclick="openTab(event, 'Category')">category</button>
+  <button class="tablinks" onclick="openTab(event, 'Sub-Category')">subcategoty</button>
+</div>
 
-    </div>
-    <div class="tabPanel">Insert Category
-        <form action="catInsertSQL.php" method="post">
-            <label for="category-input">Enter a category to add:</label>
-            <input type="text" id="category-input" name="category" required>
-            <button type="submitCAT">Add </button>
-        </form> 
-        <form action="catInsertSQL.php" method="post">
-            <label for="category-input">Enter a Sub-Category to add:</label>
-            <input type="text" id="category-input" name="category" required>
-            <button type="submitSUB">Add </button>
-        </form> 
-    </div>
-
-
-
-    <div class="tabPanel">Delete Category
-        <form action="catInsertSQL.php" method="post">
-            <label for="category-input">Enter a category to delete:</label>
-            <input type="text" id="category-input" name="category" required>
-            <button type="deleteCAT">Delete </button>
-        </form>
-        <form action="catInsertSQL.php" method="post">
-            <label for="category-input">Enter a sub category to delete:</label>
-            <input type="text" id="category-input" name="category" required>
-            <button type="deleteSUB">Delete </button>
-        </form>
-    </div>
-    
+<div id="Tips" class="tabcontent">
     <div class="tabPanel">Adding Tip
         <form action="catInsertSQL.php" method="post">
             <centre>
@@ -63,11 +35,36 @@
             <button type="Insert Tip">Add Tip </button>
             </centre>
             </form>
-
     </div>
-
 </div>
 
-<script src="tabJs.js"></script>
-</body>
-</html>
+<div id="Category" class="tabcontent">
+    <form action="catInsertSQL.php" method="post">
+        <label for="category-input">Enter a category to add:</label>
+        <input type="text" id="category-input" name="category" required>
+        <button type="submitCAT">Add </button>
+    </form> 
+    <form action="catInsertSQL.php" method="post">
+        <label for="category-input">Enter a Sub-Category to add:</label>
+        <input type="text" id="category-input" name="category" required>
+        <button type="submitSUB">Add </button>
+    </form> 
+</div>
+
+<div id="Sub-Category" class="tabcontent">
+    <form action="catInsertSQL.php" method="post">
+        <label for="category-input">Enter a category to delete:</label>
+        <input type="text" id="category-input" name="category" required>
+        <button type="deleteCAT">Delete </button>
+    </form>
+    <form action="catInsertSQL.php" method="post">
+        <label for="category-input">Enter a sub category to delete:</label>
+        <input type="text" id="category-input" name="category" required>
+        <button type="deleteSUB">Delete </button>
+    </form>
+</div>
+
+<script src="tabtestJS.js"></script>
+
+
+  

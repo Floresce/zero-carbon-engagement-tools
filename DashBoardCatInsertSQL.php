@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST['submit'])) {
     // Get the category from the form data
-    <?php
+
     $servername = "DESKTOP-UK8K0FD";        // Subject to change depending on server name
     $database = "Tips";                     // Subject to change depending on database name
     $username = "";
@@ -22,6 +22,17 @@ if (isset($_POST['submit'])) {
     }  
   
 if (isset($_POST['submitCAT'])) {
+
+  $res_student = mysql_query("SELECT student_id FROM $tbl_name WHERE student_id='$student_id' LIMIT 1 ") or die(mysql_error());
+  if($row_student = mysql_fetch_assoc($res_student))
+  {
+      $error1 = "Record is already exists ... ";
+  }
+  else
+  {
+      $student = mysql_query("INSERT INTO $tbl_name (student_id, comp_name, comp_supervisor, comp_tel, comp_address, comp_city, intake_date, ass_status) VALUES('".$student_id."','".$comp_name."','".$comp_supervisor."','".$comp_tel."','".$comp_address."','".$comp_city."','".$intake_date."','".$ass_status."')") or die("Query failed:4 ".mysql_error());
+      $error1=" Record has been added... ";
+  }   
 
   // Construct the query and execute it
   $sql = "INSERT INTO category (c_name) VALUES ('$category')";
@@ -70,4 +81,4 @@ if (isset($_POST['deleteSUB'])) {
   
     mysqli_close($conn);
   }
-?>
+/?>
