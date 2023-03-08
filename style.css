@@ -200,10 +200,6 @@ input[type=submit]:active{
   background-color: #9B3A14;
   border-color: #9B3A14;
 }
-
-a.text-primary:hover {
-  color: #C54A1A !important;
-}
 /* End of use for buttons found in tips.php */
 
 /* Used for the comment button in comment_modal.php */
@@ -214,6 +210,7 @@ a.text-primary:hover {
   text-decoration: underline;
   cursor: pointer;
 }
+
 .btn-link:hover {
   color: #C54A1A;
   text-decoration: underline;
