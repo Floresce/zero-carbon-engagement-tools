@@ -437,14 +437,15 @@ while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {   // While loop f
 // 'foreach' loop iterates over each element of the '$rows' array, assigning each element to the variable '$row'
 // Allows to access the values of the current row's columns (in the current iteration of the loop) using the keys of the '$row'(C_NAME, SUB_NAME, T_DESC_ENGLISH) array
 if (count($rows) > 0) {
+    echo '<link rel="stylesheet" href="style.css?v=1.1">';    // Version control parameter that can be used to force the browser to load the latest version of the stylesheet file
+    echo '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">';   // Enables use of thumbs up/down icons
+
     foreach ($rows as $row) {
         $categoryName = $row["C_NAME"];
         $subcategoryName = $row["SUB_NAME"];
         $tipDescription = $row["T_DESC_ENGLISH"];
         $tipId = $row["T_ID"];
         
-        
-
         // The '.=' operator concatenates strings in PHP
         $result = '<div class="tip">';
         $result .= '<h2>' . $categoryName . ', ' . $subcategoryName . '</h2>';      // Generates HTML markup that displays
@@ -464,9 +465,6 @@ if (count($rows) > 0) {
         
         $result2 = '<div class="btnfeedback">';
         $result2 .= '<p class="d-inline-flex align-items-center mb-0">Was this information helpful?';
-
-        echo '<link rel="stylesheet" href="style.css?v=1.1">';    // Version control parameter that can be used to force the browser to load the latest version of the stylesheet file
-        echo '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">';   // Enables use of thumbs up/down icons
 
         // id="likeBtn-' . $tipId . '" sets the id attribute of the button to a unique string that includes the tips's ID, T_ID
         // i.e. likeBtn-12 corresponds to the like button for tip 12
