@@ -202,7 +202,7 @@ input[type=submit]:active{
 }
 /* End of use for buttons found in tips.php */
 
-/* Used for the comment button in comment_modal.php */
+/* Used for the comment modal in comment_modal.php */
 .btn-link {
   background-color: transparent;
   border: none;
@@ -215,4 +215,8 @@ input[type=submit]:active{
   color: #C54A1A;
   text-decoration: underline;
 }
-/* End of use for the comment button in comment_modal.php */
+
+.negative-count {
+  color: #EE4B2B;
+}
+/* End of use for the comment modal in comment_modal.php */
