@@ -9,14 +9,15 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="commentModalLabel-<?php echo $tipId; ?>">Leave a Comment</h5>
+        <h5 class="modal-title" id="commentModalLabel-<?php echo $tipId; ?>">Leave a comment about this tip</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form>
           <div class="form-group">
-            <label for="comment">Comment:</label>
-            <textarea class="form-control" id="comment-<?php echo $tipId; ?>" rows="3"></textarea>
+            <label for="comment">Description:</label>
+            <textarea class="form-control" id="comment-<?php echo $tipId; ?>" rows="10"></textarea>
+            <div id="charCount-<?php echo $tipId; ?>"></div>
           </div>
           <div class="form-group" id="commentSuccess-<?php echo $tipId; ?>" style="display:none;">
             <p class="text-success">Comment submitted successfully!</p>
@@ -25,51 +26,77 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="commentBtn-<?php echo $tipId; ?>" data-tipid="<?php echo $tipId; ?>">Comment</button>
+        <button type="button" class="btn btn-primary" id="commentBtn-<?php echo $tipId; ?>" data-tipid="<?php echo $tipId; ?>">Submit</button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- Button to trigger the modal -->
-<button type="button" class="btn btn-link" id="openCommentModal-<?php echo $tipId; ?>" data-tipid="<?php echo $tipId; ?>">Leave a Comment</button>
+<button type="button" class="btn btn-link" id="openCommentModal-<?php echo $tipId; ?>" data-tipid="<?php echo $tipId; ?>">Leave a comment</button>
 
 <script>
 $(document).ready(function() {
-  // Add a click event listener to the button that opens the modal
-  $('#openCommentModal-<?php echo $tipId; ?>').click(function() {
-    // Show the modal when the button is clicked
-    $('#commentModal-<?php echo $tipId; ?>').modal('show');
-  });
+    // Add a click event listener to the button that opens the modal
+    $('#openCommentModal-<?php echo $tipId; ?>').click(function() {
+        $('#commentModal-<?php echo $tipId; ?>').modal('show');
+    });
 
-  $('#commentBtn-<?php echo $tipId; ?>').click(function() {
-    var tipId = $(this).data('tipid');
-    var comment = $('#comment-' + tipId).val();
-    var submitBtn = $(this);
-    var currentDate = new Date();
-    var formattedDate = currentDate.toISOString();            // Format date as string in ISO format
+    // Set max character length of textarea
+    var maxLength = 500;
 
-    console.log('tipId:', tipId);                             // Check if values are correct, prints in web browser console log
-    console.log('comment:', comment);
-    console.log('date:', formattedDate);
+    // Disable submit button
+    $('#commentBtn-<?php echo $tipId; ?>').prop('disabled', true);
 
-    $.ajax({
-        url: 'comment_submit.php',
-        type: 'post',
-        data: {tipId: tipId, comment: comment, date: formattedDate},
-        success: function(response) {
-            // Handle success response from server
-            submitBtn.remove();                                   // Remove the Comment button
-            $('#commentSuccess-' + tipId).show();
-            sessionStorage.setItem('comment-' + tipId, comment);  // Save comment text
-            sessionStorage.setItem('success-' + tipId, 'true');   // Save success message state
-        },
-        error: function(xhr, status, error) {
-            // Handle error response from server
-            console.log('Error: ' + error);
+    // Add an input event listener to the textarea that updates the character count
+    $('#comment-<?php echo $tipId; ?>').on('input', function() {
+        var length = $(this).val().length;
+        var remaining = maxLength - length;
+
+        // Disable the submit button if the comment is either:
+        // false, consists only of whitespace characters, or is longer than the maximum allowed length
+        if (!$(this).val() || $(this).val().trim().length === 0 || $(this).val().trim().length > maxLength) {
+            $('#commentBtn-<?php echo $tipId; ?>').prop('disabled', true);
+        } else {
+            $('#commentBtn-<?php echo $tipId; ?>').prop('disabled', false);
+        }
+
+        // Displays character count when text is inputted in textarea 
+        if (length > maxLength) {
+            $(this).addClass('border border-danger');        // Add red border indicator if input exceeds character limit
+            remaining = length - maxLength;
+            $('#charCount-<?php echo $tipId; ?>').text('-' + remaining + ' characters over the limit').addClass('negative-count');
+        } else {
+            $(this).removeClass('border border-danger');
+            $('#charCount-<?php echo $tipId; ?>').text(length + '/' + maxLength + ' characters used').removeClass('negative-count');
         }
     });
-  });
+
+    // Handles the submission of the comment form via AJAX and and displays a success message when the comment is successfully submitted
+    // It also saves the submitted comment and success message state to session storage.
+    $('#commentBtn-<?php echo $tipId; ?>').click(function() {
+        var tipId = $(this).data('tipid');
+        var comment = $('#comment-' + tipId).val();
+        var submitBtn = $(this);                            // Get reference to the Submit button
+        var currentDate = new Date();
+        var formattedDate = currentDate.toISOString();      // Format date as string in ISO format
+
+        $.ajax({
+            url: 'comment_submit.php',
+            type: 'post',
+            data: {tipId: tipId, comment: comment, date: formattedDate},
+            success: function(response) {
+                // Handle success response from server
+                submitBtn.remove();                                   // Remove the Submit button
+                $('#commentSuccess-' + tipId).show();
+                sessionStorage.setItem('comment-' + tipId, comment);  // Save comment text
+                sessionStorage.setItem('success-' + tipId, 'true');   // Save success message state
+            },
+            error: function(xhr, status, error) {
+                // Handle error response from server
+                console.log('Error: ' + error);
+            }
+        });
+    });
 });
 </script>
-
