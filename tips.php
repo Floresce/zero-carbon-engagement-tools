@@ -495,6 +495,54 @@ sqlsrv_close($conn);
 //-----------------------------------------------
 //-----------------------------------------------
 
+// POST parameters submitted from comment_modal.html
+// Check if tipId, comment, and date are set in the POST request
+if (isset($_POST['tipId']) && isset($_POST['comment']) && isset($_POST['date'])) {
+    // Retrieve the values from $_POST array
+    $tipId = $_POST['tipId'];
+    $comment = $_POST['comment'];
+    $date = $_POST['date'];
+
+    echo 'tipId: ', $tipId, '<br>comment: ', $comment, '<br>date: ', $date;            // Check if the values retrieved are correct
+
+    // Get the current maximum COMMENT_SEQ value for the given T_ID
+    $sql = "SELECT MAX(COMMENT_SEQ) AS max_seq FROM TIP_COMMENT WHERE T_ID = ?";
+    $params = array($tipId);
+    $stmt = sqlsrv_query($conn, $sql, $params);
+    if ($stmt === false) {
+        echo "Error (sqlsrv_query): " . print_r(sqlsrv_errors(), true);
+        exit;
+    }
+
+    // Fetch the result of the query and extract the maximum COMMENT_SEQ value:
+    $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+    $maxSeq = $row['max_seq'];
+    
+    // Increment the maximum COMMENT_SEQ value and insert the new comment
+    $newSeq = $maxSeq + 1;
+    $sql = "INSERT INTO TIP_COMMENT (T_ID, COMMENT_SEQ, COMMENT, TIP_DATE) VALUES (?, ?, ?, ?)";
+    $params = array($tipId, $newSeq, $comment, $date);
+    $stmt = sqlsrv_query($conn, $sql, $params);
+    if ($stmt === false) {
+        echo "Error (sqlsrv_query): " . print_r(sqlsrv_errors(), true);
+        exit;
+    }
+    
+    echo "<br>Comment added successfully.";
+    
+    // Free statement and connection resources
+    sqlsrv_free_stmt($stmt);
+    sqlsrv_close($conn);
+    
+} else {
+    // Handle the case when one or more POST variables are not set
+    echo 'Error: One or more POST variables not set';
+}
+
+//-----------------------------------------------
+//-----------------------------------------------
+//-----------------------------------------------
+
 if (isset($_POST['function_name']) && function_exists($_POST['function_name'])) {
   $function_name = $_POST['function_name'];
   $arguments = $_POST['arguments'];

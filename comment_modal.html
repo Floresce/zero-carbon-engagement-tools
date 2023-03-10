@@ -101,13 +101,14 @@ $(document).ready(function() {
         var formattedDate = currentDate.toISOString();      // Format date as string in ISO format
 
         $.ajax({
-            url: 'comment_submit.php',
+            url: 'tips.php',
             type: 'post',
             data: {tipId: tipId, comment: comment, date: formattedDate},
             success: function(response) {
                 // Handle success response from server
-                submitBtn.remove();                                   // Remove the Submit button
                 $('#commentSuccess-' + tipId).show();
+                submitBtn.remove();                                   // Remove the Submit button                 
+                $('#comment-' + tipId).prop('disabled', true);        // Disable textarea input box
 
                  // Save comment text and success message state to sessionStorage
                 sessionStorage.setItem('comment-' + tipId, comment);
