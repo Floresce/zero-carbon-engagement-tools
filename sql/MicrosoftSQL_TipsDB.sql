@@ -289,29 +289,13 @@ BEGIN
    SET @i = @i + 1;
 END
 
-
 CREATE TABLE TIP_COMMENT
 (
   T_ID INT NOT NULL,
-  COMMENT_SEQ INT,            -- Sequence number that uniquely identifies each comment within a particular tip
+  COMMENT_SEQ INT NOT NULL,     -- Sequence number that uniquely identifies each comment within a particular tip       
   COMMENT VARCHAR(MAX),
   TIP_DATE DATE,
-  PRIMARY KEY(T_ID),
-  UNIQUE (T_ID, COMMENT_SEQ),
+  PRIMARY KEY(T_ID, COMMENT_SEQ),
   FOREIGN KEY(T_ID) REFERENCES TIPS(T_ID)
 );
-
-/*
--- While loop to populate table
-DECLARE @i INT = 1;
-DECLARE @max INT = 44;
-
-WHILE @i <= @max
-BEGIN
-   INSERT INTO TIP_COMMENT (T_ID, TIP_DATE)
-   VALUES (@i, NULL);
-   
-   SET @i = @i + 1;
-END
-*/
 
