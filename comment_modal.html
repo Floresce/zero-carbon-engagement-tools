@@ -40,15 +40,17 @@ $(document).ready(function() {
     // Add a click event listener to the button that opens the modal
     $('#openCommentModal-<?php echo $tipId; ?>').click(function() {
         $('#commentModal-<?php echo $tipId; ?>').modal('show');
+        //var tipId = $(this).data('tipid');
+        //console.log(tipId);
     });
 
-    // Set max character length of textarea
+    // Set max character length of textarea input box
     var maxLength = 500;
 
     // Disable submit button
     $('#commentBtn-<?php echo $tipId; ?>').prop('disabled', true);
 
-    // Add an input event listener to the textarea that updates the character count
+    // Add an input event listener to the textarea input box that updates the character count
     $('#comment-<?php echo $tipId; ?>').on('input', function() {
         var length = $(this).val().length;
         var remaining = maxLength - length;
@@ -61,21 +63,38 @@ $(document).ready(function() {
             $('#commentBtn-<?php echo $tipId; ?>').prop('disabled', false);
         }
 
-        // Displays character count when text is inputted in textarea 
+        // Displays character count when text is inputted in textarea input box 
         if (length > maxLength) {
-            $(this).addClass('border border-danger');        // Add red border indicator if input exceeds character limit
+            $(this).addClass('border border-danger');        // Add red border indicator if input exceeds the character limit
             remaining = length - maxLength;
             $('#charCount-<?php echo $tipId; ?>').text('-' + remaining + ' characters over the limit').addClass('negative-count');
         } else {
             $(this).removeClass('border border-danger');
             $('#charCount-<?php echo $tipId; ?>').text(length + '/' + maxLength + ' characters used').removeClass('negative-count');
         }
+
+        // Save comment text to sessionStorage
+        var tipId = $(this).closest('.modal').attr('id').replace('commentModal-', '');      // Use the unique id assigned to the modal element
+        var comment = $(this).val();
+        sessionStorage.setItem('comment-' + tipId, comment);
     });
 
-    // Handles the submission of the comment form via AJAX and and displays a success message when the comment is successfully submitted
-    // It also saves the submitted comment and success message state to session storage.
+    // Retrieve comment text from sessionStorage
+    var tipId = $('#commentModal-<?php echo $tipId; ?>').attr('id').replace('commentModal-', '');      // Use the unique id assigned to the modal element
+    var comment = sessionStorage.getItem('comment-' + tipId);
+    if (comment) {
+        $('#comment-<?php echo $tipId; ?>').val(comment);
+    }
+
+    // Check if comment has already been submitted and remove the Submit button
+    if (sessionStorage.getItem('success-' + tipId) === 'true') {
+        $('#commentBtn-<?php echo $tipId; ?>').remove();
+        $('#commentSuccess-<?php echo $tipId; ?>').show();
+    }
+
+    // Handles submission of the comment form via AJAX and and displays a success message when the comment is successfully submitted
     $('#commentBtn-<?php echo $tipId; ?>').click(function() {
-        var tipId = $(this).data('tipid');
+        var tipId = $(this).data('tipid');                  // Not to be confused with tipId, 'tipid' is used for data-tipid custom data attribute
         var comment = $('#comment-' + tipId).val();
         var submitBtn = $(this);                            // Get reference to the Submit button
         var currentDate = new Date();
@@ -89,8 +108,10 @@ $(document).ready(function() {
                 // Handle success response from server
                 submitBtn.remove();                                   // Remove the Submit button
                 $('#commentSuccess-' + tipId).show();
-                sessionStorage.setItem('comment-' + tipId, comment);  // Save comment text
-                sessionStorage.setItem('success-' + tipId, 'true');   // Save success message state
+
+                 // Save comment text and success message state to sessionStorage
+                sessionStorage.setItem('comment-' + tipId, comment);
+                sessionStorage.setItem('success-' + tipId, 'true');
             },
             error: function(xhr, status, error) {
                 // Handle error response from server
@@ -98,5 +119,12 @@ $(document).ready(function() {
             }
         });
     });
+
+    // Disable textarea input box if comment has already been submitted for the given tip
+    var tipId = '<?php echo $tipId; ?>';
+    var commentSubmitted = sessionStorage.getItem('success-' + tipId);
+    if (commentSubmitted === 'true') {
+        $('#comment-' + tipId).prop('disabled', true);
+    }
 });
 </script>
