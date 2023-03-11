@@ -19,11 +19,14 @@
   <!-- Navbar items -->
         <div id="navlist">
                 <div class="search">
-                    <form action=""> <input type=" text" placeholder=" Search Tips" name=" search">
+                    <form action="search.php" method = "POST" id = "search_form"> 
+                        <input type=" text" placeholder=" Keyword Tip Search" name="query"/>
+                        <value="Search"/>
                         <button>
                             <i class="fa fa-search"></i>
                         </button>
                     </form>
+                    <div id="results"></div>
                 </div>
         </div>
 
