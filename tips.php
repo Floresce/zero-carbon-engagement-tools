@@ -533,11 +533,7 @@ if (isset($_POST['tipId']) && isset($_POST['comment']) && isset($_POST['date']))
     // Free statement and connection resources
     sqlsrv_free_stmt($stmt);
     sqlsrv_close($conn);
-    
-} else {
-    // Handle the case when one or more POST variables are not set
-    echo 'Error: One or more POST variables not set';
-}
+} 
 
 //-----------------------------------------------
 //-----------------------------------------------
