@@ -1,15 +1,5 @@
 <?php
-
-$serverName = "mssql";
-    $connectionOptions = array("Database"=>"tips_telemetry",
-        "Uid"=>"sa", "PWD"=>"Programmadelic_123");
-    $conn = sqlsrv_connect($serverName, $connectionOptions);
-    if($conn == false)
-        die(FormatErrors(sqlsrv_errors()));
-
-if (!$conn) {
-    die("Connection failed: " . sqlsrv_errors());
-}
+require_once('config.php');
 
 $ts = time();
 
