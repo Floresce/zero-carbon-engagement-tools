@@ -1,19 +1,4 @@
 <!DOCTYPE html>
-
-<?php
-function OpenConnection()
-{
-    $serverName = "mssql";
-    $connectionOptions = array("Database"=>"tips_telemetry",
-        "Uid"=>"sa", "PWD"=>"Programmadelic_123");
-    $conn = sqlsrv_connect($serverName, $connectionOptions);
-    if($conn == false)
-        die(FormatErrors(sqlsrv_errors()));
-
-    return $conn;
-}
-?>
-
 <html>
     <head>
         <meta charset="UTF-8">
@@ -25,18 +10,35 @@ function OpenConnection()
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <script src="js/bootstrap.min.js"></script>
         <!--SMUD's main.css: (partial)Bootstrap 3.3.7, normalize.css v3.0.3, html5-boilerplate v5.1.0-->
-        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <!--<link rel="stylesheet" type="text/css" href="css/main.css">-->
+        <link rel="stylesheet" type="text/css" href="css/css-theme.css">
+        <link rel="stylesheet" type="text/css" href="css/css-app.css">
         <!--Lato and Zilla Slab fonts-->
         <link href=""href="https://fonts.googleapis.com/css?family=Lato|Zilla+Slab&display=swap" rel="stylesheet">
         <!--jQuery 3.6.0-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        
         <!--DataTables 1.13.2-->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
 
         <style>
+            h1 {
+                font-family: 'Lato';
+            }
             h3 {
                 font-family: 'Lato';
+            }
+            #fademe {
+                font-family: 'Lato';
+                opacity: 0;
+                transition: 1s;
+            }
+            .show {
+                display: block !important;
+            }
+            .hidden {
+                display: none !important;
             }
             .row {
                 margin-top: 15px;
@@ -44,150 +46,88 @@ function OpenConnection()
 	            margin-left: 30px;
 	            margin-right: 30px
             }
-            .panel {
-                margin-top: 15px;
-            }
-            .panel-default {
-                margin-top: 10px;
-                margin-bottom: 10px;
-	            margin-left: 10px;
-	            margin-right: 10px
-            }
-            #fademe {
-                font-family: 'Lato';
-                opacity: 0;
-                transition: 1s;
-            }
         </style>
     </head>
 
-    <body>
-        <div class="row">
-            <div class="panel panel-default">
-                <!--Tips Report Telementry table (start)-->
-                <div class="panel-heading">Tips Report Telemetry</div>
-                <div class="panel-default">
-                    <table id="myTable1" class="table">
-                        <?php
-                        $conn = OpenConnection();
-                        
-                        // Load SQL query from file
-                        $sql = "SELECT * FROM telemetry_table";
-                        
-                        // Execute query
-                        $stmt = sqlsrv_query($conn, $sql);
-
-                        if ($stmt === false) {
-                            die(print_r(sqlsrv_errors(), true));
-                        }
-
-                        echo "<thead>";
-
-                        echo "<tr><th>Page</th><th>Pageviews</th><th>Unique Pageviews</th><th>Avg. Time on Page</th><th>Entrances</th><th>Bounce Rate</th><th>% Exit</th><th>Page Value</th></tr>";
-
-                        echo "</thead>";
-
-                        echo "<tbody>";
-
-                        while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-                            echo "<tr>";
-                            echo "<td>".$row['link']."</td>";
-                            echo "<td>".$row['pageviews']."</td>";
-                            echo "<td>".$row['unique_pageviews']."</td>";
-                            echo "<td>".$row['average_time']."</td>";
-                            echo "<td>".$row['entrances']."</td>";
-                            echo "<td>".$row['bounce_rate']."</td>";
-                            echo "<td>".$row['exit_percent']."</td>";
-                            echo "<td>".$row['page_value']."</td>";
-                            echo "</tr>";
-                        }
-
-                        echo "</tbody>";
-
-                        sqlsrv_close($conn);
-                        ?>
-                    </table>
+    <body class="ab-xl ab-desktop">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-md-9">
+                    <h1 id="page-title">Dashboard</h1>
                 </div>
-                <!--Tips Report Telementry table (end)-->
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="panel panel-default">
-                <!--User Behavior table (start)-->
-                <div class="panel-heading">User Behavior</div>
-                <div class="panel-heading">ID: 1a79a4d60de6718e8e5b326e338ae533</div>
-                <div class="panel-default">
-                    <table id="myTable2" class="table">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Liked Tips</th>
-                                <th>Disliked Tips</th>
-                                <th>Comments</th>
-                                <th>User Agent</th>
-                            </tr>
-                        </thead>
-                        <tbody id='converted-date'>
-                        </tbody>
-                    </table>
+                <div class="col-12 col-md-3">
+                    <button class="btn btn-danger btn-block btn-h1 active" id="fadebutton">
+                        <span class="glyphicon glyphicon-share" aria-hidden="true"></span> Export data
+                    </button>
                 </div>
-                <!--User Behavior table (end)-->
-
-                <button id="add-data-button">Add Data</button>
             </div>
-        </div>
 
-        <div class="row">
-            <button type="button" id="fadebutton" class="btn btn-danger" data-toggle="button" aria-pressed="false">
-                <span class="glyphicon glyphicon-share" aria-hidden="true"></span> Export
-            </button>
-            <h4 id = "fademe">File automatically downloading... </h4>
+            <div class="d-flex alert alert-dismissible alert-success hidden" id="fademe">
+                <div class="alert-brand">
+                </div>
+                <div class="alert-content px-3">
+                    File automatically downloading...
+                </div>
+                <div class="alert-close">
+                    <button aria-label="Close" class="close" data-dismiss="alert" type="button">×</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-sm-4 abstract-item center-block border-right">
+                        <h2 class="text-center">Popular Tip</h2>
+                        <h3 class="text-center">Change your air filter</h3>
+                        <p class="text-center">(As of 03/16/2023 00:00:00)</p>
+                    </div>
+                    <div class="col-sm-4 abstract-item center-block border-right border-left">
+                        <h2 class="text-center">Most used browser</h2>
+                        <h3 class="text-center">Google Chrome</h3>
+                        <p class="text-center">(As of 03/16/2023 00:00:00)</p>
+                    </div>
+                    <div class="col-sm-4 abstract-item center-block border-left">
+                        <h2 class="text-center">Total Pageviews</h2>
+                        <h3 class="text-center">500,000,000,000</h3>
+                        <p class="text-center">(As of 03/16/2023 00:00:00)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <!--Tips Report Telementry table (start)-->
+                        <div class="panel-heading">Tips Report Telemetry</div>
+                        <?php include 'php/tips_telemetry.php';?>
+                        <!--Tips Report Telementry table (end)-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <!--User Behavior table (start)-->
+                        <?php include 'php/user_behavior.php';?>
+                        <!--User Behavior table (end)-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    
+                    <h4 id = "fademe">File automatically downloading... </h4>
+                </div>
+            </div>
         </div>
 
         <script>
-            setInterval(function() {
-            $('#myTable2').DataTable().ajax.reload();
-            }, 1000);
-
             //Fade buttons
             $('#fadebutton').on('click', function () {
+                document.getElementById("fademe").className = "d-flex alert alert-dismissible alert-success show";
                 document.getElementById("fademe").style.opacity = 1;
             })
-            //Using DataTables to sort tables
-            $(document).ready( function () {
-                $('#myTable1').DataTable();
-
-                $('#myTable2').DataTable({
-                    "ajax": "php/user_behavior.php",
-                    "columns": [
-                        { "data": "timestamp_date" },
-                        { "data": "liked_tips" },
-                        { "data": "disliked_tips" },
-                        { "data": "comments" },
-                        { "data": "user_agent" }
-                    ]
-                });
-            });
-            //Convert epoch timestamp to date
-            const epochTimestamps = document.querySelectorAll(".epoch-timestamp");
-
-            epochTimestamps.forEach(cell => {
-                const epochTimestamp = cell.textContent;
-                const date = new Date(epochTimestamp * 1000);
-                cell.textContent = date.toLocaleString();
-            });
-
-            document.getElementById("add-data-button").addEventListener("click", function() {
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        //alert("Data added successfully!");
-                    }
-                };
-                xhttp.open("GET", "php/add_data.php", true);
-                xhttp.send();
-            });
         </script>
     </body>
 </html>
