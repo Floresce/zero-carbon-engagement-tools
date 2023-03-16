@@ -15,68 +15,92 @@
     </head>
 
     <body>
-      
-  <!-- Navbar items -->
-        <div id="navlist">
-                <div class="search">
-                    <form action="search.php" method = "POST" id = "search_form"> 
-                        <input type=" text" placeholder=" Keyword Tip Search" name="query"/>
-                        <value="Search"/>
-                        <button>
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </form>
-                    <div id="results"></div>
+        <div class="container">
+
+        <div class="row">        
+
+            <!-- Navbar items -->       
+            <div id="navlist">
+            <br>
+            <div class="row">                    
+                <div class="col">                
+                    <img src="img/smudLogo.png" alt="Logo" style="width: 150px; height: auto;">
+                </div>            
+                <div class="col">
+                    <div class="search">
+                        <form action="search.php" method = "POST" id = "search_form"> 
+                            <input type=" text" placeholder=" Keyword Tip Search" name="query"/>
+                            <value="Search"/>
+                            <button>
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </form>
+                        <div id="results"></div>
+                    </div>
                 </div>
+            </div>
+            </div>
         </div>
-
-        <div class="container border">                
-                <div class="row">
-                    <h2> <br><br> Connecting queries to dropdowns and displaying correct tips</h2>
-                </div>
-                <br>
-                <br>
-                <div class="row">
-                    <div class="col-sm">
-                        <form id="tips_form">
-                          <div class="row">
-                                <div class="col">
-                                <label for="category">What category?</label>
-                                <br>
-                                    <select name="category" id="category">
-                                        <option value="" disabled selected>Choose a category</option>
-                                        <option value="All Categories">All Categories</option>
-                                        <option value="Appliances">Appliances</option>
-                                        <option value="Around town">Around town</option>
-                                        <option value="Around your home">Around your home</option>
-                                        <option value="Cooking">Cooking</option>
-                                        <option value="Heating & Cooling">Heating & Cooling</option>
-                                        <option value="On Vacation">On Vacation</option>
-                                    </select>
-                                </div>
+        <br><br><br>
+        <!-- Banner for the page-->    
+        <div class="row">
+        <div class="banner">
+            <img src="img/SMUD_energy_savings.jpg" alt="Banner">
+        </div>            
+        </div><br><br><br>
+        
+        <!-- Drop down menu and submit button -->
+        <div class="row">                                           
+            <div class="container form"><br>                       
+                <h4>Find energy savings tips</h4>                        
+                <form id="tips_form">                        
+                    <div class="row">       
+                        <div class="col">                               
+                            <label for="category">What category?</label><br>                                   
+                            <select name="category" id="category">                                   
+                                <option value="" disabled selected>Choose a category</option>
+                                <option value="All Categories">All Categories</option>
+                                <option value="Appliances">Appliances</option>
+                                <option value="Around town">Around town</option>
+                                <option value="Around your home">Around your home</option>
+                                <option value="Cooking">Cooking</option>
+                                <option value="Heating & Cooling">Heating & Cooling</option>
+                                <option value="On Vacation">On Vacation</option>
+                            </select>
+                        </div>
                             
                             
-                                <div class="col">
-                                    <label for="subcategory">What Sub category?</label>
-                                    <br>
-                                    <select name="subcategory" id="subcategory">
-                                    <option value="" disabled selected>Choose a category first.</option>
-                                    <script src="tips_dropdown_menu.js"></script>
-                                    </select>
-                                    
-                                </div>
-                            </div>
+                        <div class="col">
+                            <label for="subcategory">What Sub category?</label><br>
+                            <select name="subcategory" id="subcategory">
+                                <option value="" disabled selected>Choose a category first.</option>
+                                <script src="tips_dropdown_menu.js"></script>
+                            </select>                                 
+                        </div>  
 
-                            <br>
+                        <div class="col">
                             <input type="submit" value="Submit">
-
-   				        </form>                                            
-                    </div>                                      
-                    <div id="result"></div>
-                </div>       
+                        </div>                           
+                    </div>                               				        
+                </form>                     
+            </div>                                                                
         </div>
-          
-      
+        <br><br><br>
+        <!-- Results from the queries -->
+        <div class="container result">                    
+            <div class="row">                   
+                <div class="col">
+                    <!--Leave here for images and videos for first column-->
+                    <div id="media"></div>
+                </div>                    
+                <div class="col">
+                    <div id="result"></div>
+                </div>               
+                    
+            </div>                   
+        </div>
 
+        <!-- Close the outmost container -->
+        </div>
     </body>
 </html>
