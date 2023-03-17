@@ -281,3 +281,29 @@ input[type=submit]:active{
   color: #EE4B2B;
 }
 /* End of style for comment_modal.html */
+
+.btn-atp {
+  background-color: #F15C22;  
+  color: #FFFFFf;
+  border: #F15C22;
+  padding: 6px 12px;
+  padding-top: 6px;
+  padding-right: 12px;
+  padding-bottom: 6px;
+  padding-left: 12px;
+  margin: 4px 2px; 
+  display: inline-block;
+  text-align: center;
+  font-size: 16px;
+}
+
+.btn-atp:hover {
+  cursor: pointer;
+  background-color: #d04b1c;
+  color: white;
+}
+
+.btn-atp:active {
+  background-color: #7E2E0A !important;
+  color: white !important;
+}

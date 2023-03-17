@@ -454,15 +454,6 @@ if (count($rows) > 0) {
         
         echo $result;
 
-        // if statement for each tip to display correct Primary link as a clickable button if any 
-        // placement here also assures that a button will not appear for every single tip in the while loop 
-        // despite not having a link
-        if (!empty($row['PRIMARY_LINK'])) {
-            echo ' <br> <form action="' . $row['PRIMARY_LINK'] . '"target="_blank">
-                  <button type="submit" id="link" class="btn btn-default">Instant rebates</button>
-                  </form> <br>';
-        }
-        
         $result2 = '<div class="btnfeedback">';
         $result2 .= '<p class="d-inline-flex align-items-center mb-0">Was this information helpful?';
 
@@ -477,9 +468,18 @@ if (count($rows) > 0) {
         include 'comment_modal.html';
         echo '</p></div>';
 
+        // if statement for each tip to display correct Primary link as a clickable button if any 
+        // placement here also assures that a button will not appear for every single tip in the while loop 
+        // despite not having a link
+        if (!empty($row['PRIMARY_LINK'])) {
+                echo '<form action="' . $row['PRIMARY_LINK'] . '"target="_blank">
+                      <button type="submit" id="link" class="btn btn-default">Instant rebates</button>
+                      </form> <br>';
+        }
+
         // Add button to add to plan
         $result3 = '<div id="atpDiv-' . $tipId . '">';
-        $result3 .= '<a href="#" class="btn btn-info atpBtn" id="atpBtn-' . $tipId . '">Add to Plan</a>';
+        $result3 .= '<a href="#" class="btn btn-atp atpBtn" id="atpBtn-' . $tipId . '">Add to Plan</a>';
         $result3 .= '</div><br>';
 
         echo $result3;
