@@ -505,11 +505,15 @@ if (isset($_POST['tipId']) && isset($_POST['comment']) && isset($_POST['date']))
 
     echo 'tipId: ', $tipId, '<br>comment: ', $comment, '<br>date: ', $date;            // Check if the values retrieved are correct
 
+    // Sanitize the input by replacing special characters with their corresponding HTML entities
+    // i.e. This is a <b>bold</b> comment => This is a &#60;b&#62;bold&#60;/b&#62; comment
+    $comment = filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_SPECIAL_CHARS);
+
     // Get the current maximum COMMENT_SEQ value for the given T_ID
-    $sql = "SELECT MAX(COMMENT_SEQ) AS max_seq FROM TIP_COMMENT WHERE T_ID = ?";
-    $params = array($tipId);
-    $stmt = sqlsrv_query($conn, $sql, $params);
-    if ($stmt === false) {
+    $sql = "SELECT MAX(COMMENT_SEQ) AS max_seq FROM TIP_COMMENT WHERE T_ID = ?";       // '?' is a placeholder for a parameter in the SQL query
+    $params = array($tipId);                                                           // Create an array of values to be used as parameters in the query
+    $stmt = sqlsrv_query($conn, $sql, $params);                                        // Prepare the statement using the SQL and parameter array 
+    if ($stmt === false) {                                                             // Check if the statement executed successfully
         echo "Error (sqlsrv_query): " . print_r(sqlsrv_errors(), true);
         exit;
     }
