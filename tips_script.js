@@ -51,7 +51,7 @@ $(document).ready(function() {
 
               $('.atpBtn').on('click', function() {
                   // Expected format of button id is 'atpBtn-1', where the number represents the tip id
-                  var tipId = this.id.split("-")[1];                                                // Get the tip id from the button id
+                  var tipId = this.id.split("-")[1];                                              // Get the tip id from the button id
               
                   console.log("User clicked 'Add To Plan' for Tip " + tipId);                     // Check if event listener is working, prints in web browser console log
                   
@@ -113,9 +113,65 @@ $(document).ready(function() {
                     this.style.visibility = "visible";
                 }
               });
+
           } // End of success: function(response) {
       }); // End of ajax $.ajax({
   }); // End of $('#tips_form').submit(function(e) {
+
+  // check plan button functionality
+  $('#planBtn').on('click', function() {
+
+    if(sessionStorage.getItem("tipsPlan") != null) 
+    {
+        // make print button visible
+        $('#printBtn').prop('disabled', false);
+
+        // grab tips plan from session storage
+        var tipsPlan = JSON.parse(sessionStorage.getItem("tipsPlan"));
+        console.log(tipsPlan);
+        for(var i = 0; i < tipsPlan.length; i++)
+        {
+            $('#tipsPlanStart').html("");
+            var tipId = tipsPlan[i];
+
+            // query database for the tip id & description using an Id
+            $.ajax({
+                type: "GET",
+                data: {tipId: tipId},
+                url: "tipsPlan.php",
+                success: function(response) {
+                    // if successful, append the data to the modal body
+                    console.log(response);
+                    var planRowContents = "-";
+                    planRowContents += response[0].T_DESC_ENGLISH;
+                    planRowContents += "<br><br>";
+                    var planRow = document.createElement('div');
+                    planRow.innerHTML = planRowContents;
+                    $('#tipsPlanStart').append(planRow);
+                     $('#tipsModal').modal('show');
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // Error code
+                    console.log(textStatus + ": " + errorThrown);
+                }
+            });
+        }
+    }
+    else
+    {
+        // if the plan is empty on session storage, provide a message saying so on the modal
+        console.log("tips plan null");
+        var planRowContents = "No tips added to plan yet! Check back when you have added some.<br>";
+        var planRow = document.createElement('div');
+        planRow.innerHTML = planRowContents;
+    
+        $('#tipsPlanStart').html("");
+        $('#tipsPlanStart').append(planRow);
+        $('#printBtn').prop('disabled', true);
+        $('#tipsModal').modal('show');
+    }
+  });
+
 }); // End of $(document).ready(function() {
       //ToDo: add error handling to below functions
   //calls addDislike() in tips.php which increments dislike count in DB
@@ -176,3 +232,4 @@ function callLikeFunction(id) {
 	  return count;  
 	  
 	}
+
