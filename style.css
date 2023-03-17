@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -91,36 +90,6 @@ input[type=submit]:active{
   background-color: #7E2E0A;
 }
 
-
-
-.like_btn {
-  width: 30%;
-  height: 10%;
-  padding: 10px 15px;
-  background: #ffffff;
-  font-size: 18px;
-  font-family: "Open Sans", sans-serif;
-  border-radius: 5px;
-  color: #1d8296;
-  outline: none;
-  border: 1px solid #1d8296;
-  cursor: pointer;
-}
-
-.dislike_btn {
-  width: 30%;
-  height: 10%;
-  padding: 10px 15px;
-  background: #ffffff;
-  font-size: 18px;
-  font-family: "Open Sans", sans-serif;
-  border-radius: 5px;
-  color: #1d8296;
-  outline: none;
-  border: 1px solid #1d8296;
-  cursor: pointer;
-}
-
 #navlist {
  background-color: #ffffff;
  position: absolute;
@@ -209,7 +178,7 @@ input[type=submit]:active{
   background-color: #7E2E0A;
 }
 
-/* Used for the like/dislike buttons and comment modal found in tips.php */
+/* Used for the like/dislike buttons found in tips.php */
 .likeBtn .bi {
   color: #231F20;
   font-size: 1rem;
@@ -258,14 +227,14 @@ input[type=submit]:active{
   background-color: #9B3A14;
   border-color: #9B3A14;
 }
-/* End of use for buttons found in tips.php */
+/* End of style for tips.php */
 
-/* Used for the comment modal in comment_modal.php */
+/* Used for the comment modal in comment_modal.html */
 .btn-link {
   background-color: transparent;
   border: none;
   color: #007bff;
-  text-decoration: underline;
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -274,7 +243,41 @@ input[type=submit]:active{
   text-decoration: underline;
 }
 
+.btn-secondary {
+  background-color: transparent !important;
+  border: none;
+  color: #007bff;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-secondary:hover {
+  color: #C54A1A;
+  text-decoration: underline;
+}
+
+.btn-primary {
+  background-color: #F15c22 !important;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 0;
+}
+
+.btn-primary:hover {
+  background-color: #C54A1A !important;
+  color: #ffffff;
+  border-color: #C54A1A;
+}
+
+.btn-primary:disabled {
+  background-color: #F79E7B;
+  border-color: #F79E7B;
+}
+
 .negative-count {
   color: #EE4B2B;
 }
-/* End of use for the comment modal in comment_modal.php */
+/* End of style for comment_modal.html */
