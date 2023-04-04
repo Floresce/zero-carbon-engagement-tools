@@ -1,63 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-    
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Energy Tips</title>
-        <link rel="stylesheet" href="css/bootstrap.css">
-        <link rel="stylesheet" href="style.css">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="tips_script.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    
-    </head>
 
-    <body>
-        <div class="container">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Tips</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="tips_script.js"></script>
+    <script src="tips_search.js"></script> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
-        <div class="row">        
-            <!-- Navbar items -->       
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="row">
+            <!-- Navbar items -->
             <div id="navlist">
-            <br>
-            <div class="row">                    
-                <div class="col">                
-                    <img src="img/smudLogo.png" alt="Logo" style="width: 150px; height: auto;">
-                </div>            
-                <div class="col">
-                    <div class="search">
-                        <form action="search.php" method = "POST" id = "search_form"> 
-                            <input type=" text" placeholder=" Keyword Tip Search" name="query"/>
-                            <value="Search"/>
-                            <button>
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </form>
-                        <div id="results"></div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <img src="img/smudLogo.png" alt="Logo" style="width: 150px; height: auto;">
                     </div>
                 </div>
             </div>
-            </div>
         </div>
         <br><br><br>
-        <!-- Banner for the page-->    
+        <!-- Banner for the page-->
         <div class="row">
-        <div class="banner">
-            <img src="img/SMUD_energy_savings.jpg" alt="Banner">
-        </div>            
+            <div class="banner">
+                <img src="img/SMUD_energy_savings.jpg" alt="Banner">
+            </div>
         </div><br><br><br>
-        
+
         <!-- Drop down menu and submit button -->
-        <div class="row">                                           
-            <div class="container form"><br>                       
-                <h4>Find energy savings tips</h4>                        
-                <form id="tips_form">                        
-                    <div class="row">       
-                        <div class="col">                               
-                            <label for="category">What category?</label><br>                                   
-                            <select name="category" id="category">                                   
+        <div class="row">
+            <div class="container form"><br>
+                <h4>Find energy savings tips</h4>
+                <!-- Search bar -->
+                <div class="col">
+                    <div class="search">
+                        <form action="#" method="POST" id="search_form" target="_blank">
+                            <input type=" text" placeholder=" Keyword Tip Search" name="query" id="search-box"/>
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+                <form id="tips_form">
+                    <div class="row">
+                        <div class="col">
+                            <label for="category">What category?</label><br>
+                            <select name="category" id="category">
                                 <option value="" disabled selected>Choose a category</option>
                                 <option value="All Categories">All Categories</option>
                                 <option value="Appliances">Appliances</option>
@@ -68,22 +66,23 @@
                                 <option value="On Vacation">On Vacation</option>
                             </select>
                         </div>
-                            
-                            
+
+
                         <div class="col">
                             <label for="subcategory">What Sub category?</label><br>
                             <select name="subcategory" id="subcategory">
                                 <option value="" disabled selected>Choose a category first.</option>
                                 <script src="tips_dropdown_menu.js"></script>
-                            </select>                                 
-                        </div>  
+                            </select>
+                        </div>
 
                         <div class="col">
                             <input type="submit" value="Submit">
-                        </div>      
+                        </div>
 
                         <!-- Tips Plan To Print Modal, hidden by default until the check plan button is pressed -->
-                        <div class="modal fade" id="tipsModal" tabindex="-1" aria-labelledby="tipsModal" aria-hidden="true">
+                        <div class="modal fade" id="tipsModal" tabindex="-1" aria-labelledby="tipsModal"
+                            aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -95,7 +94,8 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
                                         <button type="button" class="btn btn-primary" id="printBtn">Print</button>
                                     </div>
                                 </div>
@@ -105,27 +105,28 @@
                         <div class="col">
                             <button type="button" class="btn btn-atp" id="planBtn">Check Plan</button>
                         </div>
-                        
-                    </div>                               				        
-                </form>                     
-            </div>                                                                
+
+                    </div>
+                </form>
+            </div>
         </div>
         <br><br><br>
         <!-- Results from the queries -->
-        <div class="container result">                    
-            <div class="row">                   
+        <div class="container result">
+            <div class="row">
                 <div class="col">
                     <!--Leave here for images and videos for first column-->
                     <div id="media"></div>
-                </div>                    
+                </div>
                 <div class="col">
                     <div id="result"></div>
-                </div>               
-                    
-            </div>                   
+                </div>
+
+            </div>
         </div>
 
         <!-- Close the outmost container -->
-        </div>
-    </body>
+    </div>
+</body>
+
 </html>
