@@ -122,35 +122,6 @@ input[type=submit]:active{
  cursor: pointer;
 }
 
-/* #Home styling reflects Energy Savings Tip button on search page */
-#Home {
-  background-color: #F15c22;
-  border: none;  
-  color: white;  
-  padding: 5px 10px;  
-  text-align: center;  
-  text-decoration: none; 
-  display: inline-block;  
-  font-size: 16px;  
-  margin: 4px 2px; 
-  position: absolute;
-  right: 0;
-}
-
-#Home:hover{
-  cursor: pointer;
-  background-color: #d04b1c;
- }
- 
- #Home:active{
-   background-color: #7E2E0A;
- }
-
-.tips{ 
-  margin: 15px;
-} 
-/* End of styling for search page */
-
 /* Primary link button styling for tips.php */
 #link{
  background-color: #F15C22;  
