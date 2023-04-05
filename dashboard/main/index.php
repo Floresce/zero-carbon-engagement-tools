@@ -1,6 +1,14 @@
 <html>
     <?php include '../index.php';?>
     <head>
+        <!--jQuery 3.6.0-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <!--Main CSS-->
+        <!--<link rel="stylesheet" type="text/css" href="css/main.css">-->
+        <!--DataTables 1.13.2-->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
+
         <style>
             .middle-top-bar {
                 background-color: #D3D2D2;
