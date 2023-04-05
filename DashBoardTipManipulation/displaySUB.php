@@ -1,6 +1,5 @@
 <?php
 
-
 $servername = "BOOKPRO";        // Subject to change depending on server name (Anne: DESKTOP-UK8K0FD, Leo: MineHarth)
 $database = "master";                     // Subject to change depending on database name
 $username = "admin";
@@ -19,7 +18,7 @@ $conn = sqlsrv_connect($servername, $connectionInfo);
         die( print_r( sqlsrv_errors(), true));
     }  
 
-    $sql = "SELECT * FROM TIPS";
+    $sql = "SELECT * FROM SUBCATEGORY";
     $stmt = sqlsrv_query($conn, $sql);
 
     if ($stmt === false) {                                           // Checks if SQL query was successful or not                      
@@ -38,39 +37,16 @@ $conn = sqlsrv_connect($servername, $connectionInfo);
 if (count($rows) > 0) {
     // Start building the HTML table
     $table = '<table>';
-    $table .= '<tr><th> ID </th><th> TIP DESCRIPTION (10 words) </th><th> SPANISH DESC (10 words) </th><th> RATE </th><th> TIP CATEGORY </th><th> SUB CATEGORY </th></tr>';
+    $table .= '<tr><th>Subcategory ID</th><th>Subcategory Name</th></tr>';
 
+    // Loop through each row and append it to the table
     foreach ($rows as $row) {
-        $TID = $row["T_ID"];
-        $T_DES_ENG = $row["T_DESC_ENGLISH"];
-        $T_DES_ENG_WORDS = explode(" ", $T_DES_ENG);
-        $T_DES_ENG_SHORT = implode(" ", array_slice($T_DES_ENG_WORDS, 0, 10));
-        $T_DES_SPA = $row["T_DESC_SPANISH"];
-        $T_DES_SPA_WORDS = explode(" ", $T_DES_SPA);
-        $T_DES_SPA_SHORT = implode(" ", array_slice($T_DES_SPA_WORDS, 0, 10));
-        $RATE = $row["RATE"];
-        
-        // Get category name based on C_ID from the CATEGORY table
-        $C_ID = $row["C_ID"];
-        $category_query = "SELECT C_NAME FROM CATEGORY WHERE C_ID = $C_ID";
-        $category_result = sqlsrv_query($conn, $category_query);
-        $category_row = sqlsrv_fetch_array($category_result);
-        $C_NAME = $category_row["C_NAME"];
-        
-        // Get subcategory name based on SUB_ID from the SUBCATEGORY table
-        $SUB_ID = $row["SUB_ID"];
-        $subcategory_query = "SELECT SUB_NAME FROM SUBCATEGORY WHERE SUB_ID = $SUB_ID";
-        $subcategory_result = sqlsrv_query($conn, $subcategory_query);
-        $subcategory_row = sqlsrv_fetch_array($subcategory_result);
-        $SUB_NAME = $subcategory_row["SUB_NAME"];
-        
+        $subcategoryID = $row["SUB_ID"];
+        $subcategoryName = $row["SUB_NAME"];
+
         $table .= '<tr>';
-        $table .= '<td>' . str_pad($TID, 2, '0', STR_PAD_LEFT) . ' |</td>';
-        $table .= '<td>' . $T_DES_ENG_SHORT . '</td>';
-        $table .= '<td>' . $T_DES_SPA_SHORT . '</td>';
-        $table .= '<td>' . $RATE . '</td>';
-        $table .= '<td>' . $C_NAME . '</td>';
-        $table .= '<td>' . $SUB_NAME . '</td>';
+        $table .= '<td>' . $subcategoryID . '</td>';
+        $table .= '<td>' . $subcategoryName . '</td>';
         $table .= '</tr>';
     }
 
@@ -82,3 +58,4 @@ if (count($rows) > 0) {
     // No data was returned
     echo 'No results found.';
 }
+?>
