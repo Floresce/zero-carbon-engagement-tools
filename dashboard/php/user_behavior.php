@@ -4,9 +4,9 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
 
-<div class="panel-heading">User Behavior</div>
-<div class="panel-heading">ID: 1a79a4d60de6718e8e5b326e338ae533</div>
-<div class="panel-default">
+
+<div class="table-responsive p-4">
+    <h3>User Behavior</h3>
     <table id="myTable2" class="table">
         <thead>
             <tr>
@@ -20,8 +20,8 @@
         <tbody>
         </tbody>
     </table>
+    <button id="add-data-button">Add Data</button>
 </div>
-<button id="add-data-button">Add Data</button>
 
 <script>
     setInterval(function() {
