@@ -8,12 +8,6 @@
         <!--DataTables 1.13.2-->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
-
-        <style>
-            .middle-top-bar {
-                background-color: #D3D2D2;
-            }
-        </style>
     </head>
 
     <body>
@@ -31,18 +25,18 @@
                     </div>
                 </div>
 
-                <div class="row middle-top-bar border shadow">
-                    <div class="col p-5 border-end">
+                <div class="row my-4">
+                    <div class="col p-5 border shadow" style="background-color: #EDEAE8">
                         <h2 class="text-center">Popular Tip</h2>
                         <h3 class="text-center">Change your air filter</h3>
                         <p class="text-center">(As of 03/16/2023 00:00:00)</p>
                     </div>
-                    <div class="col p-5 border-top border-end">
+                    <div class="col p-5 mx-4 border shadow" style="background-color: #EDEAE8">
                         <h2 class="text-center">Most used browser</h2>
                         <h3 class="text-center">Google Chrome</h3>
                         <p class="text-center">(As of 03/16/2023 00:00:00)</p>
                     </div>
-                    <div class="col p-5 border-top">
+                    <div class="col p-5 border shadow" style="background-color: #EDEAE8">
                         <h2 class="text-center">Total Pageviews</h2>
                         <h3 class="text-center">500,000,000,000</h3>
                         <p class="text-center">(As of 03/16/2023 00:00:00)</p>
