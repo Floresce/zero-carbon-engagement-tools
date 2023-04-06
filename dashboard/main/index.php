@@ -60,12 +60,15 @@
                         <h2>Reset data</h2>
                         <p>Click button to reset shit</p>
                         <button class="btn btn-danger" id="resetdelete">
-                            Delete
+                            Reset
                         </button>
                     </div>
                     <div class="col p-3 mx-4 border shadow">
-                        <h2>Test</h2>
-                        <p>Test</p>
+                        <h2>Delete data</h2>
+                        <p>Click button to delete shit</p>
+                        <button class="btn btn-warning" id="deletedelete">
+                            Delete
+                        </button>
                     </div>
                     <div class="col p-3 mx-4 border shadow">
                         <h2>Test</h2>
@@ -86,6 +89,12 @@
                     $('#resetdelete').on('click', function () {
                         $.ajax({
                             url: 'php/reset_data.php',
+                            method: 'POST'
+                        });
+                    })
+                    $('#deletedelete').on('click', function () {
+                        $.ajax({
+                            url: 'php/delete_data.php',
                             method: 'POST'
                         });
                     })
