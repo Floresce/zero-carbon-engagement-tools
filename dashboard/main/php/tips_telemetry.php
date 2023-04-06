@@ -1,4 +1,4 @@
-<div class="table-responsive border p-4 my-4 shadow">
+<div class="table-responsive p-4">
     <h3>Tips Report Telemetry</h3>
     <table class="table">
         <tbody>

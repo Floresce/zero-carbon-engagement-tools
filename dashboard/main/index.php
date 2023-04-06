@@ -49,19 +49,51 @@
                     </div>
                 </div>
 
-                <!--Tips Report Telementry table (start)-->
-                <?php include 'php/tips_telemetry.php';?>
-                <!--Tips Report Telementry table (end)-->
+                <div class="row border my-4 shadow">
+                    <!--Tips Report Telementry table (start)-->
+                    <?php include 'php/tips_telemetry.php';?>
+                    <!--Tips Report Telementry table (end)-->
+                </div>
 
-                <!--User Behavior table (start)-->
-                <?php include 'php/user_behavior.php';?>
-                <!--User Behavior table (end)-->
+                <div class="row border my-4 shadow">
+                    <!--User Behavior table (start)-->
+                    <?php include 'php/user_behavior.php';?>
+                    <!--User Behavior table (end)-->
+                </div>
+
+                <div class="row my-4">
+                    <div class="col p-3 border shadow">
+                        <h2>Reset data</h2>
+                        <p>Click button to reset shit</p>
+                        <button class="btn btn-danger" id="resetdelete">
+                            Delete
+                        </button>
+                    </div>
+                    <div class="col p-3 mx-4 border shadow">
+                        <h2>Test</h2>
+                        <p>Test</p>
+                    </div>
+                    <div class="col p-3 mx-4 border shadow">
+                        <h2>Test</h2>
+                        <p>Test</p>
+                    </div>
+                    <div class="col p-3 border shadow">
+                        <h2>Test</h2>
+                        <p>Test</p>
+                    </div>
+                </div>
 
                 <script>
                     //Fade buttons
                     $('#fadebutton').on('click', function () {
                         document.getElementById("fademe").className = "d-flex alert alert-dismissible alert-success show";
                         document.getElementById("fademe").style.opacity = 1;
+                    })
+                    $('#resetdelete').on('click', function () {
+                        $.ajax({
+                            url: 'php/reset_data.php',
+                            method: 'POST'
+                        });
                     })
                 </script>
             </div>

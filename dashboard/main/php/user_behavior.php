@@ -5,7 +5,7 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
 
 
-<div class="table-responsive border p-4 my-4 shadow">
+<div class="table-responsive p-4">
     <h3>User Behavior</h3>
     <table id="myTable2" class="table">
         <thead>
