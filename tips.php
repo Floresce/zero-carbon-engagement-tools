@@ -1,7 +1,7 @@
 <!-- This is a PHP script that establishes a connection to a Microsoft SQL Server database,
      retrieves information from the database, and displays it on a webpage. -->
 <?php
-$servername = "DESKTOP-UK8K0FD";        // Subject to change depending on server name (Anne: DESKTOP-UK8K0FD, Leo: MineHarth)
+$servername = "MineHarth";        // Subject to change depending on server name (Anne: DESKTOP-UK8K0FD, Leo: MineHarth)
 $database = "Tips";                     // Subject to change depending on database name
 $username = "";
 $password = "";
@@ -84,7 +84,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
       $stmt = sqlsrv_query($conn, $sql);
       break;
 
-    case 'All Categories-Electric Vehicles':
+    case 'All Categories-Electric vehicles':
       $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
               FROM TIPS T
               JOIN CATEGORY C ON T.C_ID = C.C_ID
@@ -184,7 +184,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         $stmt = sqlsrv_query($conn, $sql);
         break;
     
-    case 'Around your home-All Subcategories':
+    case 'Around Your Home-All Subcategories':
         $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
@@ -201,6 +201,15 @@ if( isset($_POST['category'], $_POST['subcategory'])){
                 WHERE T.C_ID = 4;";
         $stmt = sqlsrv_query($conn, $sql);
         break;
+        
+        case 'Cooking-All Subcategories':
+                $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
+                        FROM TIPS T
+                        JOIN CATEGORY C ON T.C_ID = C.C_ID
+                        JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                        WHERE T.C_ID = 4;";
+                $stmt = sqlsrv_query($conn, $sql);
+                break;
 
     case 'Heating & Cooling-All Subcategories':
         $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
@@ -212,6 +221,15 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         break;
     
     case 'On Vacation-Habit Changing':
+        $sql = "SELECT T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
+                FROM TIPS T
+                JOIN CATEGORY C ON T.C_ID = C.C_ID
+                JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                WHERE T.C_ID = 6;";
+        $stmt = sqlsrv_query($conn, $sql);
+        break;
+        
+        case 'On Vacation-All Subcategories':
         $sql = "SELECT T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
@@ -312,8 +330,8 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         $stmt = sqlsrv_query($conn, $sql);
         break; 
 
-// Around your home and all its subcategories
-    case 'Around your home-Appliances':
+// Around Your Home and all its subcategories
+    case 'Around Your Home-Appliances':
         $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
@@ -323,7 +341,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         $stmt = sqlsrv_query($conn, $sql);
         break; 
 
-    case 'Around your home-Maintenance':
+    case 'Around Your Home-Maintenance':
         $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
@@ -333,7 +351,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         $stmt = sqlsrv_query($conn, $sql);
         break;
         
-    case 'Around your home-Insulation & Sealing':
+    case 'Around Your Home-Insulation & Sealing':
         $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
@@ -343,7 +361,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         $stmt = sqlsrv_query($conn, $sql);
         break; 
 
-    case 'Around your home-Habit Changing':
+    case 'Around Your Home-Habit Changing':
         $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
@@ -353,7 +371,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         $stmt = sqlsrv_query($conn, $sql);
         break; 
 
-    case 'Around your home-Sealing':
+    case 'Around Your Home-Sealing':
         $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
@@ -363,7 +381,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         $stmt = sqlsrv_query($conn, $sql);
         break; 
 
-    case 'Around your home-Pools & Spas':
+    case 'Around Your Home-Pools & Spas':
         $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID

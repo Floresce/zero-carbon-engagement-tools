@@ -55,26 +55,13 @@
                     <div class="row">
                         <div class="col">
                             <label for="category">What category?</label><br>
-                            <select name="category" id="category">
-                                <option value="" disabled selected>Choose a category</option>
-                                <option value="All Categories">All Categories</option>
-                                <option value="Appliances">Appliances</option>
-                                <option value="Around town">Around town</option>
-                                <option value="Around your home">Around your home</option>
-                                <option value="Cooking">Cooking</option>
-                                <option value="Heating & Cooling">Heating & Cooling</option>
-                                <option value="On Vacation">On Vacation</option>
-                            </select>
+                            <select name="category" id="category"></select>
                         </div>
-
-
                         <div class="col">
                             <label for="subcategory">What Sub category?</label><br>
-                            <select name="subcategory" id="subcategory">
-                                <option value="" disabled selected>Choose a category first.</option>
-                                <script src="tips_dropdown_menu.js"></script>
-                            </select>
+                            <select name="subcategory" id="subcategory"></select>
                         </div>
+
 
                         <div class="col">
                             <input type="submit" value="Submit">
@@ -127,6 +114,8 @@
 
         <!-- Close the outmost container -->
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="tips_dropdown_menu.js"></script>
 </body>
 
 </html>
