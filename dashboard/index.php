@@ -52,14 +52,14 @@
                         <ul class="nav flex-column">
 
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="http://localhost/dashboard/main/">
+                                <a class="nav-link <?php if(strpos($_SERVER['REQUEST_URI'], '/main/') !== false && basename($_SERVER['PHP_SELF']) == 'index.php') echo 'active'; ?>" aria-current="page" href="http://localhost/dashboard/main/">
                                     <i class="bi bi-activity"></i>
                                     Telemetry
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="http://localhost/dashboard/DashBoardTipManipulation/">
+                                <a class="nav-link <?php if(strpos($_SERVER['REQUEST_URI'], '/DashBoardTipManipulation/') !== false && basename($_SERVER['PHP_SELF']) == 'index.php') echo 'active'; ?>" aria-current="page" href="http://localhost/dashboard/DashBoardTipManipulation/">
                                     <i class="bi bi-sliders"></i>
                                     Modify Tips
                                 </a>
