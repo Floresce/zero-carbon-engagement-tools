@@ -20,20 +20,39 @@
     </head>
 
     <body>
-        <header class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow">
+        <nav class="navbar navbar-dark sticky-top d-flex p-0 shadow">
 
             <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="/dashboard/">
                 <i class="bi bi-speedometer2"></i>
                 Dashboard
             </a>
 
-            <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <div class=" flex-nowrap">
+                <?php
+                if (strpos($_SERVER['REQUEST_URI'], '/DashBoardTipManipulation/') !== false && basename($_SERVER['PHP_SELF']) == 'index.php') {
+                    echo '
+                    <div class=" flex-nowrap">
+                        <ul class="nav">
+                            <li class="tab nav-item active py-1">
+                                <a class="nav-link px-3" href="#" onclick="openTab(event, \'Tips\')">Tips</a>
+                            </li>
+                            <li class="tab nav-item py-1">
+                                <a class="nav-link px-3" href="#" onclick="openTab(event, \'Categorie\')">Category</a>
+                            </li>
+                            <li class="tab nav-item py-1">
+                                <a class="nav-link px-3" href="#" onclick="openTab(event, \'Sub-Category\')">Sub-Category</a>
+                            </li>
+                            <li class="tab nav-item py-1">
+                                <a class="nav-link px-3" href="#" onclick="openTab(event, \'DIsplayTips\')">Sub-Category</a>
+                            </li>
+                        </ul>
+                    </div>
+                    ';
+                }
+                ?>
+            </div>
 
-            <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
-
-            <div class="navbar-nav">
+            <div class="navbar-nav py-1">
                 <div class="nav-item text-nowrap">
                     <a class="nav-link px-3" href="#">
                         <i class="bi bi-door-closed"></i>
@@ -42,7 +61,7 @@
                 </div>
             </div>
 
-        </header>
+        </nav>
 
         <div class="container-fluid">
             <div class="row">
@@ -50,7 +69,7 @@
                 <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
                     <div class="position-sticky pt-3 sidebar-sticky">
 
-                        <ul class="nav flex-column">
+                        <ul class="nav flex-column mx-3">
 
                             <li class="nav-item">
                                 <a class="nav-link <?php if(strpos($_SERVER['REQUEST_URI'], '/main/') !== false && basename($_SERVER['PHP_SELF']) == 'index.php') echo 'active'; ?>" aria-current="page" href="http://localhost/dashboard/main/">
@@ -64,16 +83,6 @@
                                     <i class="bi bi-sliders"></i>
                                     Modify Tips
                                 </a>
-                            </li>
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="bi bi-sliders"></i> Modify Tips</a>
-                                <ul class="dropdown-menu mx-3">
-                                    <li><a class="dropdown-item" href="#">Tips</a></li>
-                                    <li><a class="dropdown-item" href="#">Category</a></li>
-                                    <li><a class="dropdown-item" href="#">Sub-Category</a></li>
-                                    <li><a class="dropdown-item" href="#">Sub-Category</a></li>
-                                </ul>
                             </li>
 
                         </ul>

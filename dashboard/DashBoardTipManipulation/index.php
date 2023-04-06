@@ -13,12 +13,15 @@
 
 <body>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    
+    <!--
     <div class="tab">
         <button class="tablinks" onclick="openTab(event, 'Tips')">Tips</button>
         <button class="tablinks" onclick="openTab(event, 'Categorie')">Category</button>
         <button class="tablinks" onclick="openTab(event, 'Sub-Category')">Sub-Category</button>
         <button class="tablinks" onclick="openTab(event, 'DIsplayTips')">Sub-Category</button>
     </div>
+    -->
 
     <div id="Tips" class="tabcontent">
         <div class="tabPanel">Adding Tip
