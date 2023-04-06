@@ -1,3 +1,14 @@
+@font-face {
+  font-family: 'ArcherMediumPro';
+  src: url("/dashboard/fonts/ArcherMediumPro.otf") format("opentype");
+  font-style: normal;
+}
+
+h1 {
+  font-family: 'ArcherMediumPro', sans-serif;
+  font-size: 40px;
+}
+
 /*
  * Navbar
  */
