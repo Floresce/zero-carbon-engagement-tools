@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <title>Adding Removing dashboard</title>
-    <link rel="stylesheet" type="text/css" href="DashBoardTab.css">
+    <link rel="stylesheet" type="text/css" href="css/DashBoardTab.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -18,7 +18,6 @@
         <button class="tablinks" onclick="openTab(event, 'Categorie')">Category</button>
         <button class="tablinks" onclick="openTab(event, 'Sub-Category')">Sub-Category</button>
         <button class="tablinks" onclick="openTab(event, 'DIsplayTips')">Sub-Category</button>
-        <button class="tablinks" onclick="openTab(event, 'Test')">Test</button>
     </div>
 
     <div id="Tips" class="tabcontent">
@@ -72,9 +71,6 @@
         <button id="refreshButton">Refresh</button>
     </div>
 
-
-    <div id="Test" class="tabcontent">
-    </div>
     </main>
 
 
@@ -90,7 +86,7 @@
                 var name = $("#PLinks").val();
                 var name = $("#SLinks").val();
                 $.ajax({
-                    url: 'ADDTIP.php',
+                    url: 'php/ADDTIP.php',
                     method: 'POST',
                     data: {
                         ENdescription: ENdescription,
@@ -112,7 +108,7 @@
             $("#CATADD").click(function () {
                 var name = $("#CATname").val();
                 $.ajax({
-                    url: 'ADDCAT.php',
+                    url: 'php/ADDCAT.php',
                     method: 'POST',
                     data: {
                         name: name,
@@ -127,7 +123,7 @@
             $("#SUBADD").click(function () {
                 var name = $("#SUBname").val();
                 $.ajax({
-                    url: 'ADDSUB.php',
+                    url: 'php/ADDSUB.php',
                     method: 'POST',
                     data: {
                         name: name,
@@ -142,7 +138,7 @@
             $("#CATDEL").click(function () {
                 var name = $("#DELCATname").val();
                 $.ajax({
-                    url: 'CATDEL.php',
+                    url: 'php/CATDEL.php',
                     method: 'POST',
                     data: {
                         name: name,
@@ -157,7 +153,7 @@
             $("#SUBDEL").click(function () {
                 var name = $("#DELSUBname").val();
                 $.ajax({
-                    url: 'SUBDEL.php',
+                    url: 'php/SUBDEL.php',
                     method: 'POST',
                     data: {
                         name: name,
@@ -172,7 +168,7 @@
 
             function displayTips() {
                 $.ajax({
-                    url: 'displayTips.php',
+                    url: 'php/displayTips.php',
                     method: 'POST',
                     success: function (response) {
                         $("#resultsTable").html(response);
@@ -189,9 +185,6 @@
             });
 
         });
-
-
-
 
     </script>
     
@@ -218,7 +211,7 @@
         });
     </script>
     
-    <script src="DashBoardTab.js"></script>
+    <script src="js\DashBoardTab.js"></script>
 
 </body>
 

@@ -41,6 +41,7 @@
                     </a>
                 </div>
             </div>
+
         </header>
 
         <div class="container-fluid">
@@ -65,6 +66,16 @@
                                 </a>
                             </li>
 
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="bi bi-sliders"></i> Modify Tips</a>
+                                <ul class="dropdown-menu mx-3">
+                                    <li><a class="dropdown-item" href="#">Tips</a></li>
+                                    <li><a class="dropdown-item" href="#">Category</a></li>
+                                    <li><a class="dropdown-item" href="#">Sub-Category</a></li>
+                                    <li><a class="dropdown-item" href="#">Sub-Category</a></li>
+                                </ul>
+                            </li>
+
                         </ul>
 
                     </div>
@@ -73,7 +84,7 @@
             </div>
         </div>
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        </main>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"></main>
+
     </body>
 </html>
