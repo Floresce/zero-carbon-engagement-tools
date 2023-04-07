@@ -42,9 +42,6 @@
                             <li class="tab nav-item py-1">
                                 <a class="custom-topbar nav-link px-3" href="#" onclick="openTab(event, \'Sub-Category\')">Sub-Category</a>
                             </li>
-                            <li class="tab nav-item py-1">
-                                <a class="custom-topbar nav-link px-3" href="#" onclick="openTab(event, \'DIsplayTips\')">Sub-Category</a>
-                            </li>
                         </ul>
                     </div>
                     ';
