@@ -1,8 +1,8 @@
 <?php
-$servername = "DESKTOP-UK8K0FD";        // Subject to change depending on server name (Anne: DESKTOP-UK8K0FD, Leo: MineHarth)
+$servername = "BLD";        // Subject to change depending on server name (Anne: DESKTOP-UK8K0FD, Leo: MineHarth)
 $database = "Tips";                     // Subject to change depending on database name
-$username = "";
-$password = "";
+$username = "cybermary"; 
+$password = "SeniorPrj22-23";
 
 $connectionInfo = array(
     "Database" => $database,

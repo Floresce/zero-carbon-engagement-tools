@@ -1,5 +1,5 @@
 <?php
-$serverName = "Your Server Name"; 
+$serverName = "BLD"; 
 //serverName\instanceName
 
 // Since UID and PWD are not specified in the $connectionInfo array,

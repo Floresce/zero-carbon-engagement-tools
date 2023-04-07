@@ -17,9 +17,10 @@ $(document).ready(function() {
                   // creating an array with two elements: 'likeBtn' and the tip id
                   // The [1] index is used to select the second element of the array
                   var tipId = this.id.split("-")[1];                                              // Get the tip id from the button id
-
-                  //console.log("User clicked 'Like' for Tip " + tipId);                          // Check if event listener is working, prints in web browser console log
                   
+                  console.log("User clicked 'Like' for Tip " + tipId);                          // Check if event listener is working, prints in web browser console log
+                  callLikeFunction(tipId);
+
                   // Disable the 'like' button for this tip
                   // Disabled 'like' button then acts as a visual highlight when clicked 
                   var dislikeBtn = document.getElementById("dislikeBtn-" + tipId);
@@ -28,6 +29,7 @@ $(document).ready(function() {
 
                   // Store the state of this tip in sessionStorage
                   sessionStorage.setItem("tip-" + tipId, "like");
+                  
               });
               
               $('.dislikeBtn').on('click', function() {
@@ -47,6 +49,7 @@ $(document).ready(function() {
                   
                   // Store the state of this tip in sessionStorage
                   sessionStorage.setItem("tip-" + tipId, "dislike");
+                  callDislikeFunction(tipId);
               });
 
               $('.atpBtn').on('click', function() {
@@ -65,7 +68,7 @@ $(document).ready(function() {
                   {
                      tipsPlan.push(tipId);
                      const tipsPlanJSON = JSON.stringify(tipsPlan);
-                     sessionStorage.setItem("tipsPlan", tipsPlanJSON);
+                     sessionStorage.setItem("tipsPlan", tipsPlanJSON); 
                      sessionStorage.setItem("atpBtn-" + tipId, "disabled");
                      sessionStorage.setItem("atpDiv-" + tipId, "Added to plan!");
                      this.style.visibility = "hidden";
@@ -173,6 +176,7 @@ $(document).ready(function() {
   });
 
 }); // End of $(document).ready(function() {
+
       //ToDo: add error handling to below functions
   //calls addDislike() in tips.php which increments dislike count in DB
   function callDislikeFunction(id) {
@@ -180,56 +184,72 @@ $(document).ready(function() {
         url: "tips.php",
         type: "POST",
         data: {
-            function_name: "addDislike",
+            function_name: 'addDislike',
             arguments: [id]
+        }, 
+        success: function(id){
+            console.log("JS working for id " + id);
         },
+        error: function(jqXHR, textStatus, errorThrown) {
+            // Error code
+            console.log(textStatus + ": " + errorThrown);
+        }
     });   
 }
 
 //calls addLike() in tips.php which increments like count in DB
 function callLikeFunction(id) {
+    console.log("calling like function for tip" + id);
 	$.ajax({
 		url: "tips.php",
 		type: "POST",
 		data: {
-			function_name: "addLike",
-			arguments: [id]
+			function_name: ['addLike'],
+			tId: [id]
 		},
 	});   
   }
   
   //calls getLikes() in tips.php which gets the current like count from the DB
-  function callGetLikesFunction(id) {
-	  var count = 0;
-	  $.ajax({
-		  url: "tips.php",
-		  type: "POST",
-		  data: {
-			  function_name: "getLikes",
-			  arguments: [id]
-		  },
-		  success: function(data) {
-			  count = data;
-		  }
-	  });   
-	  return count;
-	}
+//   function callGetLikesFunction(id) {
+// 	  var count = 0;
+// 	  $.ajax({
+// 		  url: "tips_feedback.php",
+// 		  type: "POST",
+// 		  data: {
+// 			  function_name: "getLikes",
+// 			  arguments: id
+// 		  },
+// 		  success: function(data) {
+// 			  count = data;
+// 		  },
+//           error: function(jqXHR, textStatus, errorThrown) {
+//             // Error code
+//             console.log(textStatus + ": " + errorThrown);
+//         }
+// 	  });   
+// 	  return count;
+// 	}
 	
-	//calls getDislikes() in tips.php which gets the current dislike count from the DB
-	function callGetDislikesFunction(id) {
-	  var count = 0;
-	  $.ajax({
-		  url: "tips.php",
-		  type: "POST",
-		  data: {
-			  function_name: "getDislikes",
-			  arguments: [id]
-		  },
-		  success: function(data) {
-			  count = data;
-		  }
-	  });
-	  return count;  
+// 	//calls getDislikes() in tips.php which gets the current dislike count from the DB
+// 	function callGetDislikesFunction(id) {
+// 	  var count = 0;
+// 	  $.ajax({
+// 		  url: "tips_feedback.php",
+// 		  type: "POST",
+// 		  data: {
+// 			  function_name: "getDislikes",
+// 			  arguments: [id]
+// 		  },
+// 		  success: function(data) {
+// 			  count = data;
+// 		  },
+//           error: function(jqXHR, textStatus, errorThrown) {
+//             // Error code
+//             console.log(textStatus + ": " + errorThrown);
+//         }
+// 	  });
+// 	  return count;  
 	  
-	}
+// 	}
 
