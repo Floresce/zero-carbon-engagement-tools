@@ -300,7 +300,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         break;
 
 // Around town and all its subcategories        
-    case 'Around town-Habit Changing':
+    case 'Around Town-Habit Changing':
         $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
@@ -310,7 +310,17 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         $stmt = sqlsrv_query($conn, $sql);
         break;
 
-    case 'Around town-Electric Vehicles':
+        case 'Around Town-All Subcategories':
+                $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
+                        FROM TIPS T
+                        JOIN CATEGORY C ON T.C_ID = C.C_ID
+                        JOIN SUBCATEGORY S ON T.SUB_ID = S.SUB_ID
+                        JOIN TIP_SEASON TS ON T.T_ID = TS.T_ID
+                        WHERE S.SUB_ID = 2;";
+                $stmt = sqlsrv_query($conn, $sql);
+                break;
+
+    case 'Around Town-Electric vehicles':
         $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
@@ -320,7 +330,7 @@ if( isset($_POST['category'], $_POST['subcategory'])){
         $stmt = sqlsrv_query($conn, $sql);
         break;
         
-    case 'Around town-N/A':
+    case 'Around Town-N/A':
         $sql = "SELECT T.T_ID, T_DESC_ENGLISH, C_NAME, SUB_NAME, PRIMARY_LINK
                 FROM TIPS T
                 JOIN CATEGORY C ON T.C_ID = C.C_ID
@@ -456,7 +466,7 @@ while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {   // While loop f
 // Allows to access the values of the current row's columns (in the current iteration of the loop) using the keys of the '$row'(C_NAME, SUB_NAME, T_DESC_ENGLISH) array
 if (count($rows) > 0) {
     echo '<link rel="stylesheet" href="style.css?v=1.1">';    // Version control parameter that can be used to force the browser to load the latest version of the stylesheet file
-    echo '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">';   // Enables use of thumbs up/down icons
+    echo '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />';   // Enables use of thumbs up/down icons from Google
 
     foreach ($rows as $row) {
         $categoryName = $row["C_NAME"];
@@ -477,8 +487,10 @@ if (count($rows) > 0) {
 
         // id="likeBtn-' . $tipId . '" sets the id attribute of the button to a unique string that includes the tips's ID, T_ID
         // i.e. likeBtn-12 corresponds to the like button for tip 12
-        $result2 .= '<button id="likeBtn-' . $tipId . '" class="btn btn-success likeBtn" style="margin-left: 1em;"><i class="bi bi-hand-thumbs-up"></i></button>';
-        $result2 .= '<button id="dislikeBtn-' . $tipId . '" class="btn btn-danger dislikeBtn"><i class="bi bi-hand-thumbs-down"></i></button>';
+        $result2 .= '<button id="likeBtn-' . $tipId . '" class="btn btn-success likeBtn" style="margin-left: 1em;">
+        <span class="material-symbols-rounded">thumb_up</span></button>';
+        $result2 .= '<button id="dislikeBtn-' . $tipId . '" class="btn btn-danger dislikeBtn">
+        <span class="material-symbols-rounded">thumb_down</span></button>';
         echo $result2;
 
         // Creates a modal that acts as a hyperlink
