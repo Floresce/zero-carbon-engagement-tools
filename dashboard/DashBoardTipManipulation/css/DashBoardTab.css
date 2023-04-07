@@ -28,14 +28,14 @@
   to {opacity: 1;}
 }
 
-.nav-link{
+.custom-topbar {
   color: white;
 }
 
-.nav-link:hover {
+.custom-topbar:hover {
   color: white;
 }
 
-.nav-link:focus {
+.custom-topbar:focus {
   color: white;
 }

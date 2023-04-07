@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="light">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,16 +34,16 @@
                     <div class=" flex-nowrap">
                         <ul class="nav">
                             <li class="tab nav-item active py-1">
-                                <a class="nav-link px-3" href="#" onclick="openTab(event, \'Tips\')">Tips</a>
+                                <a class="custom-topbar nav-link px-3" href="#" onclick="openTab(event, \'Tips\')">Tips</a>
                             </li>
                             <li class="tab nav-item py-1">
-                                <a class="nav-link px-3" href="#" onclick="openTab(event, \'Categorie\')">Category</a>
+                                <a class="custom-topbar nav-link px-3" href="#" onclick="openTab(event, \'Categorie\')">Category</a>
                             </li>
                             <li class="tab nav-item py-1">
-                                <a class="nav-link px-3" href="#" onclick="openTab(event, \'Sub-Category\')">Sub-Category</a>
+                                <a class="custom-topbar nav-link px-3" href="#" onclick="openTab(event, \'Sub-Category\')">Sub-Category</a>
                             </li>
                             <li class="tab nav-item py-1">
-                                <a class="nav-link px-3" href="#" onclick="openTab(event, \'DIsplayTips\')">Sub-Category</a>
+                                <a class="custom-topbar nav-link px-3" href="#" onclick="openTab(event, \'DIsplayTips\')">Sub-Category</a>
                             </li>
                         </ul>
                     </div>
@@ -63,37 +63,37 @@
 
         </nav>
 
-        <div class="container-fluid">
-            <div class="row">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+            <div class="position-sticky pt-3 sidebar-sticky">
 
-                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
-                    <div class="position-sticky pt-3 sidebar-sticky">
+                <ul class="nav flex-column mx-3">
 
-                        <ul class="nav flex-column mx-3">
+                    <li class="nav-item">
+                        <a class="nav-link <?php if(strpos($_SERVER['REQUEST_URI'], '/main/') !== false && basename($_SERVER['PHP_SELF']) == 'index.php') echo 'active'; ?>" aria-current="page" href="http://localhost/dashboard/main/">
+                            <i class="bi bi-activity"></i>
+                            Telemetry
+                        </a>
+                    </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link <?php if(strpos($_SERVER['REQUEST_URI'], '/main/') !== false && basename($_SERVER['PHP_SELF']) == 'index.php') echo 'active'; ?>" aria-current="page" href="http://localhost/dashboard/main/">
-                                    <i class="bi bi-activity"></i>
-                                    Telemetry
-                                </a>
-                            </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php if(strpos($_SERVER['REQUEST_URI'], '/DashBoardTipManipulation/') !== false && basename($_SERVER['PHP_SELF']) == 'index.php') echo 'active'; ?>" aria-current="page" href="http://localhost/dashboard/DashBoardTipManipulation/">
+                            <i class="bi bi-sliders"></i>
+                            Modify Tips
+                        </a>
+                    </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link <?php if(strpos($_SERVER['REQUEST_URI'], '/DashBoardTipManipulation/') !== false && basename($_SERVER['PHP_SELF']) == 'index.php') echo 'active'; ?>" aria-current="page" href="http://localhost/dashboard/DashBoardTipManipulation/">
-                                    <i class="bi bi-sliders"></i>
-                                    Modify Tips
-                                </a>
-                            </li>
-
-                        </ul>
-
-                    </div>
-                </nav>
+                </ul>
 
             </div>
-        </div>
+        </nav>
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"></main>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <?php
+            if ($_SERVER['REQUEST_URI'] == '/dashboard/' && basename($_SERVER['PHP_SELF']) == 'index.php') {
+                include 'wut.php';
+            }
+            ?>
+        </main>
 
     </body>
 </html>
