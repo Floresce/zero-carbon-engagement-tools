@@ -64,33 +64,25 @@
         </nav>
 
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
-            <div class="position-sticky pt-3 sidebar-sticky">
 
-                <ul class="nav flex-column mx-3">
+                <div class="nav d-flex align-items-start flex-column mx-3 pt-3" style="height: 93vh;">
 
-                    <li class="nav-item">
-                        <a class="nav-link <?php if(strpos($_SERVER['REQUEST_URI'], '/main/') !== false && basename($_SERVER['PHP_SELF']) == 'index.php') echo 'active'; ?>" aria-current="page" href="http://localhost/dashboard/main/">
-                            <i class="bi bi-activity"></i>
-                            Telemetry
-                        </a>
-                    </li>
+                    <a class="nav-link <?php if(strpos($_SERVER['REQUEST_URI'], '/main/') !== false && basename($_SERVER['PHP_SELF']) == 'index.php') echo 'active'; ?>" aria-current="page" href="http://localhost/dashboard/main/">
+                        <i class="bi bi-activity"></i>
+                        Telemetry
+                    </a>
 
-                    <li class="nav-item">
-                        <a class="nav-link <?php if(strpos($_SERVER['REQUEST_URI'], '/DashBoardTipManipulation/') !== false && basename($_SERVER['PHP_SELF']) == 'index.php') echo 'active'; ?>" aria-current="page" href="http://localhost/dashboard/DashBoardTipManipulation/">
-                            <i class="bi bi-sliders"></i>
-                            Modify Tips
-                        </a>
-                    </li>
+                    <a class="nav-link mb-auto <?php if(strpos($_SERVER['REQUEST_URI'], '/DashBoardTipManipulation/') !== false && basename($_SERVER['PHP_SELF']) == 'index.php') echo 'active'; ?>" aria-current="page" href="http://localhost/dashboard/DashBoardTipManipulation/">
+                        <i class="bi bi-sliders"></i>
+                        Modify Tips
+                    </a>
 
-                    <li class="nav-item">
-                        <a class="nav-link" onclick="toggleTheme()" href="#">
-                            Toggle Theme
-                        </a>
-                    </li>
+                    <a class="nav-link" onclick="toggleTheme()" href="#">
+                        <i class="bi bi-circle-half"></i>
+                        Toggle Theme
+                    </a>
 
-                </ul>
-
-            </div>
+                </div>
         </nav>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
