@@ -121,7 +121,7 @@
 
                 // send AJAX request with data
                 $.ajax({
-                    url: 'ADDTIP.php',
+                    url: 'php/ADDTIP.php',
                     method: 'POST',
                     data: {
                         ENdescription: ENdescription,
@@ -148,7 +148,7 @@
                 }
 
                 $.ajax({
-                    url: 'ADDCAT.php',
+                    url: 'php/ADDCAT.php',
                     method: 'POST',
                     data: {
                         name: name,
@@ -167,7 +167,7 @@
                     return;
                 }
                 $.ajax({
-                    url: 'ADDSUB.php',
+                    url: 'php/ADDSUB.php',
                     method: 'POST',
                     data: {
                         name: name,
@@ -190,7 +190,7 @@
                     return;
                 }
                 $.ajax({
-                    url: 'TIPDEL.php',
+                    url: 'php/TIPDEL.php',
                     method: 'POST',
                     data: {
                         ID: ID,
@@ -209,7 +209,7 @@
                     return;
                 }
                 $.ajax({
-                    url: 'CATDEL.php',
+                    url: 'php/CATDEL.php',
                     method: 'POST',
                     data: {
                         name: name,
@@ -228,7 +228,7 @@
                     return;
                 }
                 $.ajax({
-                    url: 'SUBDEL.php',
+                    url: 'php/SUBDEL.php',
                     method: 'POST',
                     data: {
                         name: name,
@@ -243,7 +243,7 @@
 
             function displaySUB() {
                 $.ajax({
-                    url: 'displaySUB.php',
+                    url: 'php/displaySUB.php',
                     method: 'POST',
                     success: function (response) {
                         $("#resultsTableSUB").html(response);
@@ -260,7 +260,7 @@
 
             function displayCAT() {
                 $.ajax({
-                    url: 'displayCAT.php',
+                    url: 'php/displayCAT.php',
                     method: 'POST',
                     success: function (response) {
                         $("#resultsTableCAT").html(response);
@@ -277,7 +277,7 @@
 
             function displayTIPS() {
                 $.ajax({
-                    url: 'displayTIPS.php',
+                    url: 'php/displayTIPS.php',
                     method: 'POST',
                     success: function (response) {
                         $("#resultsTableTIPS").html(response);
