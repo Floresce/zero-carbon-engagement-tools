@@ -1,3 +1,28 @@
+.column {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.tid {
+  padding-right: 10px;
+}
+
+.results-container {
+  background-color: #f1f8ff; /* light blue color */
+  height: 45vh;
+  overflow-y: auto; /* add scrollbar if content overflows */
+}
+.required {
+  color: red;
+}
+
 /* Style the tab */
 .tab {
   overflow: hidden;
@@ -28,6 +53,7 @@
   to {opacity: 1;}
 }
 
+/* Custom color fonts for top navbar */
 .custom-topbar {
   color: white;
 }
