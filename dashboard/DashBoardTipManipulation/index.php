@@ -19,59 +19,69 @@
         <button class="tablinks" onclick="openTab(event, 'Tips')">Tips</button>
         <button class="tablinks" onclick="openTab(event, 'Categorie')">Category</button>
         <button class="tablinks" onclick="openTab(event, 'Sub-Category')">Sub-Category</button>
-        <button class="tablinks" onclick="openTab(event, 'DIsplayTips')">Sub-Category</button>
     </div>
     -->
 
     <div id="Tips" class="tabcontent">
-        <div class="tabPanel">Adding Tip
-            <centre>
-                <label for="category-input">English description of tip:</label>
-                <input type="text" id="ENdescription" name="category" required><br>
-                <label for="category-input">Spanish description of tip:</label>
-                <input type="text" id="ESdescription" name="category" ><br>
-                <label for="category-input">Category of tip:</label>
-                <input type="text" id="Category" name="category" required><br>
-                <label for="category-input">Sub-Category of tip:</label>
-                <input type="text" id="Subcategory" name="category" required><br>
-                <label for="category-input">Season of tip:</label>
-                <input type="text" id="Season" name="category" required><br>
-                <label for="category-input">Rate of tip:</label>
-                <input type="text" id="Rate" name="category" ><br>
-                <label for="category-input">Primary links related to the tip: a</label>
-                <input type="text" id="PLinks" name="category" ><br>
-                <label for="category-input">Secondary links related to the tip: a</label>
-                <input type="text" id="SLinks" name="category" ><br>
-                <button type="submit" id="TIPADD">SAVE</button>
-            </centre>
-        </div>
+        <div id="tableDiv"></div>
+        <div id="resultsTableTIPS" class="results-container"></div>
+        <button id="refreshButton">Refresh</button>
+        <br> <br>
+        <label for="text"><span class="required">(* is required)</span></label>
+        <br>
+        <label for="category-input">English description of tip:<span class="required">(*)</span></label>
+        <input type="text" id="ENdescription" name="category" required><br>
+        <label for="category-input">Spanish description of tip:</label>
+        <input type="text" id="ESdescription" name="category"><br>
+        <label for="category-input">Category of tip:<span class="required">(*)</span></label>
+        <input type="text" id="Category" name="category" required><br>
+        <label for="category-input">Sub-Category of tip:<span class="required">(*)</span></label>
+        <input type="text" id="Subcategory" name="category" required><br>
+        <label for="category-input">Rate of tip:</label>
+        <input type="text" id="Rate" name="category"><br>
+        <label for="category-input">Primary links related to the tip: a</label>
+        <input type="text" id="PLinks" name="category"><br>
+        <label for="category-input">Secondary links related to the tip: a</label>
+        <input type="text" id="SLinks" name="category"><br>
+        <button type="submit" id="TIPADD">SAVE</button>
+        <br> <br>
+        <label for="category-input">Enter ID of TIP to remove:</label>
+        <input type="text" id="DELTIPname" name="removeTIP" required>
+        <br>
+        <button type="submit" id="TIPDEL">DELETE</button>
     </div>
 
     <div id="Categorie" class="tabcontent">
+
+        <div id="tableDiv"></div>
+        <div id="resultsTableCAT" class="results-container"></div>
+        <button id="refreshButtonCAT">Refresh</button>
+        <br>
         <label for="category-input">Enter a Category to add:</label>
         <input type="text" id="CATname" name="submitCAT" required>
         <button type="submit" id="CATADD">SAVE</button>
         <br>
-        <label for="category-input">Enter a Sub-category to add:</label>
-        <input type="text" id="SUBname" name="submitSUB" required>
-        <button type="submit" id="SUBADD">SAVE</button>
-    </div>
-
-    <div id="Sub-Category" class="tabcontent">
         <label for="category-input">Enter a Category to remove:</label>
         <input type="text" id="DELCATname" name="submitCAT" required>
         <button type="submit" id="CATDEL">SAVE</button>
+
+    </div>
+
+    <div id="Sub-Category" class="tabcontent">
+
+        <div id="tableDiv"></div>
+        <div id="resultsTableSUB" class="results-container"></div>
+        <button id="refreshButtonSUB">Refresh</button>
+        <br>
+
+        <label for="category-input">Enter a Sub-category to add:</label>
+        <input type="text" id="SUBname" name="submitSUB" required>
+        <button type="submit" id="SUBADD">SAVE</button>
         <br>
         <label for="category-input">Enter a Sub-category to remove:</label>
         <input type="text" id="DELSUBname" name="submitSUB" required>
         <button type="submit" id="SUBDEL">SAVE</button>
-    </div>
 
-
-    <div id="DIsplayTips" class="tabcontent">
-        <div id="tableDiv"></div>
-        <div id="resultsTable"></div>
-        <button id="refreshButton">Refresh</button>
     </div>
 
     </main>
@@ -81,22 +91,43 @@
         $(document).ready(function () {
             //AJAX for adding TIP
             $("#TIPADD").click(function () {
-                var name = $("#ENdescription").val();
-                var name = $("#ESdescription").val();
-                var name = $("#Category").val();
-                var name = $("#Subcategory").val();
-                var name = $("#Rate").val();
-                var name = $("#PLinks").val();
-                var name = $("#SLinks").val();
+                var ENdescription = $("#ENdescription").val();
+                var ESdescription = $("#ESdescription").val();
+                var Category = $("#Category").val();
+                var Subcategory = $("#Subcategory").val();
+                var Rate = $("#Rate").val();
+                var PLinks = $("#PLinks").val();
+                var SLinks = $("#SLinks").val();
+
+                // check if required fields are empty
+                if (ENdescription.trim() === "" || Category.trim() === "" || Subcategory.trim() === "") {
+                    alert("Please fill all required fields");
+                    return;
+                }
+
+                // set empty string for fields that are not filled
+                if (ESdescription.trim() === "") {
+                    ESdescription = "";
+                }
+                if (Rate.trim() === "") {
+                    Rate = "";
+                }
+                if (PLinks.trim() === "") {
+                    PLinks = "";
+                }
+                if (SLinks.trim() === "") {
+                    SLinks = "";
+                }
+
+                // send AJAX request with data
                 $.ajax({
-                    url: 'php/ADDTIP.php',
+                    url: 'ADDTIP.php',
                     method: 'POST',
                     data: {
                         ENdescription: ENdescription,
                         ESdescription: ESdescription,
-                        Category : Category,
+                        Category: Category,
                         Subcategory: Subcategory,
-                        Season: Season,
                         Rate: Rate,
                         PLinks: PLinks,
                         SLinks: SLinks,
@@ -110,8 +141,14 @@
             //AJAX for adding CATEGORY
             $("#CATADD").click(function () {
                 var name = $("#CATname").val();
+
+                if (name.trim() === "") {
+                    alert("Please enter a value");
+                    return;
+                }
+
                 $.ajax({
-                    url: 'php/ADDCAT.php',
+                    url: 'ADDCAT.php',
                     method: 'POST',
                     data: {
                         name: name,
@@ -125,8 +162,12 @@
             //AJAX for adding SUBCATEGORY
             $("#SUBADD").click(function () {
                 var name = $("#SUBname").val();
+                if (name.trim() === "") {
+                    alert("Please enter a value");
+                    return;
+                }
                 $.ajax({
-                    url: 'php/ADDSUB.php',
+                    url: 'ADDSUB.php',
                     method: 'POST',
                     data: {
                         name: name,
@@ -137,11 +178,38 @@
                 });
             });
 
+            //AJAX for deleting TIP
+            $("#TIPDEL").click(function () {
+                var ID = $("#DELTIPname").val();
+                if (ID.trim() === "") {
+                    alert("Please enter a value");
+                    return;
+                }
+                if (!$.isNumeric(ID)) {
+                    alert("Please enter a valid integer");
+                    return;
+                }
+                $.ajax({
+                    url: 'TIPDEL.php',
+                    method: 'POST',
+                    data: {
+                        ID: ID,
+                    },
+                    success: function (data) {
+                        alert(data);
+                    }
+                });
+            });
+
             //AJAX for deleting CATEGORY
             $("#CATDEL").click(function () {
                 var name = $("#DELCATname").val();
+                if (name.trim() === "") {
+                    alert("Please enter a value");
+                    return;
+                }
                 $.ajax({
-                    url: 'php/CATDEL.php',
+                    url: 'CATDEL.php',
                     method: 'POST',
                     data: {
                         name: name,
@@ -155,8 +223,12 @@
             //AJAX for deleting SUBCATEGORY
             $("#SUBDEL").click(function () {
                 var name = $("#DELSUBname").val();
+                if (name.trim() === "") {
+                    alert("Please enter a value");
+                    return;
+                }
                 $.ajax({
-                    url: 'php/SUBDEL.php',
+                    url: 'SUBDEL.php',
                     method: 'POST',
                     data: {
                         name: name,
@@ -169,53 +241,61 @@
             });
 
 
-            function displayTips() {
+            function displaySUB() {
                 $.ajax({
-                    url: 'php/displayTips.php',
+                    url: 'displaySUB.php',
                     method: 'POST',
                     success: function (response) {
-                        $("#resultsTable").html(response);
+                        $("#resultsTableSUB").html(response);
                     }
                 });
             }
-
             // Call the function on page load
-            displayTips();
+            displaySUB();
+
+            // Attach click event to the refresh button
+            $("#refreshButtonSUB").click(function () {
+                displaySUB();
+            });
+
+            function displayCAT() {
+                $.ajax({
+                    url: 'displayCAT.php',
+                    method: 'POST',
+                    success: function (response) {
+                        $("#resultsTableCAT").html(response);
+                    }
+                });
+            }
+            // Call the function on page load
+            displayCAT();
+
+            // Attach click event to the refresh button
+            $("#refreshButtonCAT").click(function () {
+                displayCAT();
+            });
+
+            function displayTIPS() {
+                $.ajax({
+                    url: 'displayTIPS.php',
+                    method: 'POST',
+                    success: function (response) {
+                        $("#resultsTableTIPS").html(response);
+                    }
+                });
+            }
+            // Call the function on page load
+            displayTIPS();
 
             // Attach click event to the refresh button
             $("#refreshButton").click(function () {
-                displayTips();
+                displayTIPS();
             });
-
         });
 
-    </script>
-    
-    <script>
-        // Get the form element
-        var form = document.getElementById("Tips");
-    
-        // Add an event listener to the form's submit button
-        form.addEventListener("submit", function(event) {
-            // Get the required input fields
-            var ENdescription = document.getElementById("ENdescription");
-            var Category = document.getElementById("Category");
-            var Subcategory = document.getElementById("Subcategory");
-            var Season = document.getElementById("Season");
-    
-            // Check if the required fields are empty
-            if (ENdescription.value.trim() === "" || Category.value.trim() === "" || Subcategory.value.trim() === "" || Season.value.trim() === "") {
-                // Prevent the form from submitting
-                event.preventDefault();
-    
-                // Display an error message
-                alert("Please fill in all required fields.");
-            }
-        });
+
     </script>
     
     <script src="js\DashBoardTab.js"></script>
 
 </body>
-
-</html>
