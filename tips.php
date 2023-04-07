@@ -536,7 +536,7 @@ if (isset($_POST['tipId']) && isset($_POST['comment']) && isset($_POST['date']))
     echo 'tipId: ', $tipId, '<br>comment: ', $comment, '<br>date: ', $date;            // Check if the values retrieved are correct
 
     // Sanitize the input to remove any potential HTML tags or SQL injection attempts
-    $comment = filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_STRING);
+    $comment = filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_SPECIAL_CHARS);
     $comment = str_replace(['<', '>', ';', '--', "'", '&#39'], '', $comment);
 	
     // Decode HTML entities and remove HTML tags
