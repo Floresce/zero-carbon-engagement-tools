@@ -82,6 +82,12 @@
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="toggleTheme()" href="#">
+                            Toggle Theme
+                        </a>
+                    </li>
+
                 </ul>
 
             </div>
@@ -94,6 +100,21 @@
             }
             ?>
         </main>
+
+        <script>
+            function toggleTheme() {
+                const htmlTag = document.querySelector('html');;
+                const theme = htmlTag.getAttribute('data-bs-theme');
+
+                if (theme === 'light') {
+                    htmlTag.setAttribute('data-bs-theme', 'dark');
+                } else {
+                    htmlTag.setAttribute('data-bs-theme', 'light');
+                }
+
+                console.log(theme);
+		    }
+        </script>
 
     </body>
 </html>
