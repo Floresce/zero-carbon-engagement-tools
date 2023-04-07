@@ -53,30 +53,113 @@ $(document).ready(function() {
               });
 
               $('.atpBtn').on('click', function() {
-                  // Expected format of button id is 'atpBtn-1', where the number represents the tip id
-                  var tipId = this.id.split("-")[1];                                              // Get the tip id from the button id
-              
-                  console.log("User clicked 'Add To Plan' for Tip " + tipId);                     // Check if event listener is working, prints in web browser console log
-                  
-                  // Disable the 'atp' button for this tip
-                  var atpBtn = document.getElementById("atpBtn-" + tipId);
-                  var atpDiv = document.getElementById("atpDiv-" + tipId);
-                  
-                  const tipsPlan = (sessionStorage.getItem("tipsPlan") != null) ? JSON.parse(sessionStorage.getItem("tipsPlan")) : [];
+                // Expected format of button id is 'atpBtn-1', where the number represents the tip id
+                var tipId = this.id.split("-")[1];                                              // Get the tip id from the button id
+            
+                //console.log("User clicked 'Add To Plan' for Tip " + tipId);                     // Check if event listener is working, prints in web browser console log
+                
+                var atpBtn = document.getElementById("atpBtn-" + tipId);
+                var atpDiv = document.getElementById("atpDiv-" + tipId);
+                
+                // modify session storage to reflect tips plan
+                const tipsPlan = (sessionStorage.getItem("tipsPlan") != null) ? JSON.parse(sessionStorage.getItem("tipsPlan")) : [];
+                tipsPlan.push(tipId);
+                const tipsPlanJSON = JSON.stringify(tipsPlan);
+                sessionStorage.setItem("tipsPlan", tipsPlanJSON);
+                sessionStorage.setItem("atpBtn-" + tipId, "disabled");
+                sessionStorage.setItem("atpDiv-" + tipId, "Added to plan!");
 
-                  if(tipsPlan.length < 5)
-                  {
-                     tipsPlan.push(tipId);
-                     const tipsPlanJSON = JSON.stringify(tipsPlan);
-                     sessionStorage.setItem("tipsPlan", tipsPlanJSON); 
-                     sessionStorage.setItem("atpBtn-" + tipId, "disabled");
-                     sessionStorage.setItem("atpDiv-" + tipId, "Added to plan!");
-                     this.style.visibility = "hidden";
-                     atpDiv.innerText = sessionStorage.getItem("atpDiv-" + tipId);
-                     console.log(tipsPlan);
-                     console.log(sessionStorage.getItem("tipsPlan"));
-                  }
-              });
+                //this.style.visibility = "hidden";
+                atpDiv.innerText = sessionStorage.getItem("atpDiv-" + tipId);
+
+                if (sessionStorage.getItem("tipsPlan") != null) {
+                    // make print button visible
+                    $('#printBtn').prop('disabled', false);
+
+                    // grab tips plan from session storage
+                    //var tipsPlan = JSON.parse(sessionStorage.getItem("tipsPlan"));
+                    for (let tip in tipsPlan) {
+                        $('#tipsPlanStart').html("");
+
+                        // query database for the tip id & description using an Id
+                        $.ajax({
+                            type: "GET",
+                            data: { tipId: tipsPlan[tip] },
+                            url: "tipsPlan.php",
+                            success: function (response) {
+                                // if successful, append the data to the tips canvas body
+                                var planRowContents = `<button type="button" class="btn btn-success trashBtn" id="trashBtn-${tipsPlan[tip]}" aria-label="RemoveFromPlan"><i class="bi bi-trash"></i></button>`;
+                                console.log(planRowContents);
+                                planRowContents += " - ";
+                                planRowContents += response[0].T_DESC_ENGLISH;
+                                planRowContents += "<br><br>";
+
+                                var planRow = document.createElement('div');
+                                planRow.setAttribute("id", `tipsCanvasDiv-${tipsPlan[tip]}`);
+                                planRow.innerHTML = planRowContents;
+                                $('#tipsPlanStart').append(planRow);
+
+                                // trash button listener
+                                $(`#trashBtn-${tipsPlan[tip]}`).on('click', function() {
+                                  var IdTip = this.id.split("-")[1];
+                                  var trashTipsPlan = (sessionStorage.getItem("tipsPlan") != null) ? JSON.parse(sessionStorage.getItem("tipsPlan")) : [];
+                                  if(trashTipsPlan.length > 0)
+                                  {
+                                      // remove associated tip from session storage
+                                      var trashIndex = trashTipsPlan.indexOf(IdTip);
+                                      if (trashIndex > -1) {
+                                          trashTipsPlan.splice(trashIndex, 1);
+                                      }
+                                      console.log("After: " + trashTipsPlan);
+                                      const trashTipsPlanJSON = JSON.stringify(trashTipsPlan);
+                                      sessionStorage.setItem("tipsPlan", trashTipsPlanJSON);
+                                      sessionStorage.setItem("atpBtn-" + IdTip, "enabled");
+                                      sessionStorage.setItem("atpDiv-" + IdTip, "");
+
+                                      // modify html page to reflect changes
+                                      //$(`#atpBtn-${IdTip}`).button.css("visibility", "visible"); requires bugfix
+                                      $(`#atpDiv-${IdTip}`).text(sessionStorage.getItem("atpDiv-" + IdTip));
+                                      $(`#tipsCanvasDiv-${IdTip}`).remove();
+                                      
+                                      trashTipsPlan = (sessionStorage.getItem("tipsPlan") != null) ? JSON.parse(sessionStorage.getItem("tipsPlan")) : [];
+                                      if(trashTipsPlan.length <= 0)
+                                        {
+                                            // if the plan is empty on session storage, provide a message saying so on the tips canvas
+                                            console.log("tips plan null");
+                                            var planRowContents = "No tips added to plan yet! Check back when you have added some.<br>";
+                                            var planRow = document.createElement('div');
+                                            planRow.innerHTML = planRowContents;
+
+                                            $('#tipsPlanStart').html("");
+                                            $('#tipsPlanStart').append(planRow);
+                                            $('#printBtn').prop('disabled', true);
+                                        }
+                                    }
+                                });
+
+                                // show the canvas
+                                $('#tipsCanvasRight').offcanvas('show');
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                // Error code
+                                console.log(textStatus + ": " + errorThrown);
+                            }
+                        });
+                    }
+                }
+                else {
+                    // if the plan is empty on session storage, provide a message saying so on the tips canvas
+                    console.log("tips plan null");
+                    var planRowContents = "No tips added to plan yet! Check back when you have added some.<br>";
+                    var planRow = document.createElement('div');
+                    planRow.innerHTML = planRowContents;
+
+                    $('#tipsPlanStart').html("");
+                    $('#tipsPlanStart').append(planRow);
+                    $('#printBtn').prop('disabled', true);
+                }
+
+            });
 
               // Retrieve the state of each tip from sessionStorage
               $('.likeBtn').each(function() {
@@ -121,57 +204,81 @@ $(document).ready(function() {
       }); // End of ajax $.ajax({
   }); // End of $('#tips_form').submit(function(e) {
 
-  // check plan button functionality
-  $('#planBtn').on('click', function() {
+ // check plan button functionality
+ $('#planBtn').on('click', function() {
 
-    if(sessionStorage.getItem("tipsPlan") != null) 
-    {
+    const tipsPlan = (sessionStorage.getItem("tipsPlan") != null) ? JSON.parse(sessionStorage.getItem("tipsPlan")) : [];
+
+    if (sessionStorage.getItem("tipsPlan") != null) {
         // make print button visible
         $('#printBtn').prop('disabled', false);
 
         // grab tips plan from session storage
-        var tipsPlan = JSON.parse(sessionStorage.getItem("tipsPlan"));
-        console.log(tipsPlan);
-        for(var i = 0; i < tipsPlan.length; i++)
-        {
+        //var tipsPlan = JSON.parse(sessionStorage.getItem("tipsPlan"));
+        for (let tip in tipsPlan) {
             $('#tipsPlanStart').html("");
-            var tipId = tipsPlan[i];
 
             // query database for the tip id & description using an Id
             $.ajax({
                 type: "GET",
-                data: {tipId: tipId},
+                data: { tipId: tipsPlan[tip] },
                 url: "tipsPlan.php",
-                success: function(response) {
-                    // if successful, append the data to the modal body
-                    console.log(response);
-                    var planRowContents = "-";
+                success: function (response) {
+                    // if successful, append the data to the tips canvas body
+                    var planRowContents = `<button type="button" class="btn btn-success trashBtn" id="trashBtn-${tipsPlan[tip]}" aria-label="RemoveFromPlan"><i class="bi bi-trash"></i></button>`;
+                    console.log(planRowContents);
+                    planRowContents += " - ";
                     planRowContents += response[0].T_DESC_ENGLISH;
                     planRowContents += "<br><br>";
+
                     var planRow = document.createElement('div');
+                    planRow.setAttribute("id", `tipsCanvasDiv-${tipsPlan[tip]}`);
                     planRow.innerHTML = planRowContents;
                     $('#tipsPlanStart').append(planRow);
-                     $('#tipsModal').modal('show');
+
+                    // trash button listener
+                    $(`#trashBtn-${tipsPlan[tip]}`).on('click', function() {
+                      var IdTip = this.id.split("-")[1];
+                      var trashTipsPlan = (sessionStorage.getItem("tipsPlan") != null) ? JSON.parse(sessionStorage.getItem("tipsPlan")) : [];
+                      if(trashTipsPlan.length > 0)
+                      {
+                          // remove associated tip from session storage
+                          var trashIndex = trashTipsPlan.indexOf(IdTip);
+                          if (trashIndex > -1) {
+                              trashTipsPlan.splice(trashIndex, 1);
+                          }
+                          console.log("After: " + trashTipsPlan);
+                          const trashTipsPlanJSON = JSON.stringify(trashTipsPlan);
+                          sessionStorage.setItem("tipsPlan", trashTipsPlanJSON);
+                          sessionStorage.setItem("atpBtn-" + IdTip, "enabled");
+                          sessionStorage.setItem("atpDiv-" + IdTip, "");
+
+                          // modify html page to reflect changes
+                          $(`#atpDiv-${IdTip}`).text(sessionStorage.getItem("atpDiv-" + IdTip));
+                          $(`#tipsCanvasDiv-${IdTip}`).remove();
+                      }
+                    });
+
+                    // show the canvas
+                    //$('#tipsCanvasRight').offcanvas('show');
                 },
-                error: function(jqXHR, textStatus, errorThrown) {
+                error: function (jqXHR, textStatus, errorThrown) {
                     // Error code
                     console.log(textStatus + ": " + errorThrown);
                 }
             });
         }
     }
-    else
-    {
-        // if the plan is empty on session storage, provide a message saying so on the modal
+    else {
+        // if the plan is empty on session storage, provide a message saying so on the tips canvas
         console.log("tips plan null");
         var planRowContents = "No tips added to plan yet! Check back when you have added some.<br>";
         var planRow = document.createElement('div');
         planRow.innerHTML = planRowContents;
-    
+
         $('#tipsPlanStart').html("");
         $('#tipsPlanStart').append(planRow);
         $('#printBtn').prop('disabled', true);
-        $('#tipsModal').modal('show');
     }
   });
 

@@ -67,31 +67,29 @@
                             <input type="submit" value="Submit">
                         </div>
 
-                        <!-- Tips Plan To Print Modal, hidden by default until the check plan button is pressed -->
-                        <div class="modal fade" id="tipsModal" tabindex="-1" aria-labelledby="tipsModal"
-                            aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="tipsModalLabel">Tips Plan To Print</h5>
-                                    </div>
-                                    <div class="modal-body container-md">
-                                        <div id="tipsPlanStart">
-
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary" id="printBtn">Print</button>
+                        <div class="col">
+                            <button class="btn btn-atp" type="button" id="planBtn" data-bs-toggle="offcanvas"
+                                data-bs-target="#tipsCanvasRight" aria-controls="tipsCanvasRight">Tips Plan</button>
+                            </div>
+                            
+                            <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="tipsCanvasRight"
+                                aria-labelledby="tipsCanvasRightLabel" aria-hidden="true">
+                                <div class="offcanvas-header">
+                                    <h4 id="tipsCanvasRightLabel">Tips Plan:</h4>
+                                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="offcanvas-body">
+                                    <div id="tipsPlanStart">
+    
+                                        
                                     </div>
                                 </div>
+    
+                                <div class="planBottom">
+                                    <button type="button" class="btn btn-atp" id="printBtn">Print</button>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="col">
-                            <button type="button" class="btn btn-atp" id="planBtn">Check Plan</button>
-                        </div>
 
                     </div>
                 </form>

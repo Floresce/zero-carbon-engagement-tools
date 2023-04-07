@@ -278,3 +278,43 @@ input[type=submit]:active{
   background-color: #7E2E0A !important;
   color: white !important;
 }
+
+.offcanvas{
+  width:12% !important;
+} 
+
+.planBottom{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.trashBtn .bi {
+  color: #231F20;
+  font-size: 1rem;
+}
+
+.trashBtn {
+  background-color: #E6E1DA;
+  color: #fff;
+  border-radius: 1px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+.trashBtn:hover {
+  background-color: #C54A1A;
+  color: #C54A1A;
+  border-color: transparent;
+}
+
+.trashBtn:active{
+  background-color: #9B3A14 !important;
+  border-color: #9B3A14 !important;
+}
+
+.trashBtn:disabled {
+  background-color: #9B3A14;
+  border-color: #9B3A14;
+}
