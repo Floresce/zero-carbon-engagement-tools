@@ -2,8 +2,6 @@
      checks if comments are inserted correctly with no errors during the insertion process. -->
 <!-- Tested using: PHPUnit 10.0.19, PHP 8.1.10 -->
 <?php
-require_once 'tips.php';
-
 use PHPUnit\Framework\TestCase;
 
 class InsertCommentTest extends TestCase

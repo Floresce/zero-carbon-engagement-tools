@@ -2,8 +2,6 @@
      checks for SQL injection attempts by sanitizing and validating user input before inserting it into a database. -->
 <!-- Tested using: PHPUnit 10.0.19, PHP 8.1.10 -->
 <?php
-require_once 'tips.php';
-
 use PHPUnit\Framework\TestCase;
 
 class SQLInjectionTest extends TestCase
