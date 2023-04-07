@@ -1,6 +1,7 @@
 <!-- This is a PHP script that establishes a connection to a Microsoft SQL Server database,
      retrieves information from the database, and displays it on a webpage. -->
 <?php
+
 $servername = "MineHarth";        // Subject to change depending on server name (Anne: DESKTOP-UK8K0FD, Leo: MineHarth)
 $database = "Tips";                     // Subject to change depending on database name
 $username = "";
@@ -571,36 +572,36 @@ if (isset($_POST['tipId']) && isset($_POST['comment']) && isset($_POST['date']))
     sqlsrv_free_stmt($stmt);
     sqlsrv_close($conn);
 } 
-
-//-----------------------------------------------
-//-----------------------------------------------
-//-----------------------------------------------
-
-if (isset($_POST['function_name']) && function_exists($_POST['function_name'])) {
-  $function_name = $_POST['function_name'];
-  $arguments = $_POST['arguments'];
-  $result = call_user_func_array($function_name, $arguments);
-  echo $result;
+if (isset($_POST['function_name']) && isset($_POST['tipId'])){
+        $funcName = $_POST['function_name'];
+        $tID = $_POST['tipId'];
+        
+       switch($funcName){
+          case 'addLike':
+                $sql = "UPDATE TIP_FEEDBACK SET TIP_LIKES = TIP_LIKES+1 WHERE T_ID = $tID;";
+                $result = sqlsrv_query($conn,$sql);
+                break;
+            break;
+          case 'addDislike':
+                $sql = "UPDATE TIP_FEEDBACK SET TIP_DISLIKES = TIP_DISLIKES+1 WHERE T_ID = $tID;";
+                $result = sqlsrv_query($conn,$sql);
+                break;
+          case 'getLikes':
+                $sql = "SELECT TIP_LIKES FROM TIP_FEEDBACK WHERE T_ID = $tID;";
+                $result = sqlsrv_query($conn,$sql);
+                break;
+          case 'getDislikes':
+                $sql = "SELECT TIP_DISLIKES FROM TIP_FEEDBACK WHERE T_ID = $tID;";
+                $result = sqlsrv_query($conn,$sql);
+           default:
+                //do nothing
+       }
+       if ($result === false) {                                           // Checks if SQL query was successful or not                      
+        echo "Error (sqlsrv_query): " . print_r(sqlsrv_errors(), true);
+        exit;
+    }
+    sqlsrv_free_stmt($stmt);
+    sqlsrv_close($conn);
 }
-function addLike($tID) {
-  $sql = "UPDATE TIP_FEEDBACK SET TIP_LIKES = TIP_LIKES+1 WHERE T_ID = $tID";
-  $result = sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
-}
 
-function addDislike($tID) {
-  $sql = "UPDATE TIP_FEEDBACK SET TIP_DISLIKES = TIP_DISLIKES+1 WHERE T_ID = $tID";
-  $result = sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
-}
-
-function getLikes($tID){
-  $sql = "SELECT TIP_LIKES FROM TIP_FEEDBACK WHERE T_ID = $tID";
-  $result = sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
-  return $result;
-}
-
-function getDislikes($tID){
-  $sql = "SELECT TIP_DISLIKES FROM TIP_FEEDBACK WHERE T_ID = $tID";
-  $result = sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
-  return $result;
-}
 ?>
