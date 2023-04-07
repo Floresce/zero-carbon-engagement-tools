@@ -508,9 +508,10 @@ if (count($rows) > 0) {
                       </form> <br>';
         }
 
+        echo '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">';
         // Add button to add to plan
         $result3 = '<div id="atpDiv-' . $tipId . '">';
-        $result3 .= '<a href="#" class="btn btn-atp atpBtn" id="atpBtn-' . $tipId . '">Add to Plan</a>';
+        $result3 .= '<a href="#" onclick="return false;" class="btn btn-atp atpBtn" id="atpBtn-' . $tipId . '">Add to Plan</a>';
         $result3 .= '</div><br>';
 
         echo $result3;
