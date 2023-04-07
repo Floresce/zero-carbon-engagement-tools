@@ -47,7 +47,12 @@
                     <!--Tips Report Telementry table (start)-->
                     <?php include 'php/tips_telemetry.php';?>
                     <!--Tips Report Telementry table (end)-->
+                    <div class="col p-4">
+                        <canvas id="myChart"></canvas>
+                    </div>
                 </div>
+
+                
 
                 <div class="row border my-4 shadow">
                     <!--User Behavior table (start)-->
@@ -80,6 +85,8 @@
                     </div>
                 </div>
 
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
                 <script>
                     //Fade buttons
                     $('#fadebutton').on('click', function () {
@@ -98,6 +105,27 @@
                             method: 'POST'
                         });
                     })
+
+                    const ctx = document.getElementById('myChart');
+
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                        datasets: [{
+                            label: '# of Votes',
+                            data: [12, 19, 3, 5, 2, 3],
+                            borderWidth: 1
+                        }]
+                        },
+                        options: {
+                        scales: {
+                            y: {
+                            beginAtZero: true
+                            }
+                        }
+                        }
+                    });
                 </script>
             </div>
         </main>

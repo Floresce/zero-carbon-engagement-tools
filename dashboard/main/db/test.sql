@@ -17,24 +17,24 @@ GO
 
 -- create the table
 CREATE TABLE telemetry_table (
-    link VARCHAR(200) PRIMARY KEY,
-    pageviews INT,
-    unique_pageviews INT,
-    average_time VARCHAR(50),
-    entrances INT,
-    bounce_rate VARCHAR(50),
-    exit_percent VARCHAR(50),
-    page_value VARCHAR(50)
+    tip_id VARCHAR(200) PRIMARY KEY,
+    tip_description VARCHAR(200),
+    likes INT,
+    dislikes INT,
+    added_plans INT,
+    viewcount INT,
+    unique_viewcount INT,
+    exit_percent VARCHAR(200)
 );
 
 -- insert data into the table
-INSERT INTO telemetry_table (link, pageviews, unique_pageviews, average_time, entrances, bounce_rate, exit_percent, page_value)
-VALUES ('/en/rebates-and-savings-tips/energy-savings-tips'  , 11439, 10289, '00:01:23', 7659, '73.62%', '67.53%', '$0.00'),
-       ('/en/rebates-and-savings-tips/'  , 4471, 4208, '00:01:33', 3846, '86.44%', '85.54%', '$0.00'),
-       ('/en/'                                       , 4471, 4208, '00:01:33', 3846, '86.44%', '85.54%', '$0.00'),
-       ('/energytips'                                       , 11439, 10289, '00:01:23', 7659, '73.62%', '67.53%', '$0.00'),
-       ('/energysavings'                                       , 11439, 10289, '00:01:23', 7659, '73.62%', '67.53%', '$0.00'),
-       ('/energydying'                                       , 4471, 4208, '00:01:33', 3846, '86.44%', '85.54%', '$0.00');
+INSERT INTO telemetry_table (tip_id, tip_description, likes, dislikes, added_plans, viewcount, unique_viewcount, exit_percent)
+VALUES ('1', 'Smart Home', 7289, 867, 100, 25000, 1, '67.53%'),
+       ('2', 'Habit Changing', 4860, 654, 200, 18000, 1, '85.54%'),
+       ('3', 'Washer & Dryer', 5346, 76, 300, 42000, 1, '85.54%'),
+       ('4', 'Dishwasher', 6543, 674, 400, 00000, 1, '67.53%'),
+       ('5', 'Refriderator', 9365, 99, 500, 21222, 1, '67.53%'),
+       ('6', 'Maintenance', 2321, 5000, 666, 1, 1, '85.54%');
 GO
 
 CREATE TABLE user_behavior (
