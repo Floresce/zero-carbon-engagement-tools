@@ -130,35 +130,6 @@ input[type=submit]:active{
  cursor: pointer;
 }
 
-/* #Home styling reflects Energy Savings Tip button on search page */
-#Home {
-  background-color: #F15c22;
-  border: none;  
-  color: white;  
-  padding: 5px 10px;  
-  text-align: center;  
-  text-decoration: none; 
-  display: inline-block;  
-  font-size: 16px;  
-  margin: 4px 2px; 
-  position: absolute;
-  right: 0;
-}
-
-#Home:hover{
-  cursor: pointer;
-  background-color: #d04b1c;
- }
- 
- #Home:active{
-   background-color: #7E2E0A;
- }
-
-.tips{ 
-  margin: 15px;
-} 
-/* End of styling for search page */
-
 /* Primary link button styling for tips.php */
 #link{
  background-color: #F15C22;  
@@ -199,7 +170,7 @@ input[type=submit]:active{
 
 .likeBtn {
   background-color: #E6E1DA;
-  color: #fff;
+  color: #464545;
   border-radius: 1px;
   border: 1px solid transparent;
   cursor: pointer;
@@ -209,7 +180,7 @@ input[type=submit]:active{
 
 .dislikeBtn {
   background-color: #E6E1DA;
-  color: #fff;
+  color: #464545;
   border-radius: 1px;
   border: 1px solid transparent;
   cursor: pointer;
@@ -220,7 +191,7 @@ input[type=submit]:active{
 .likeBtn:hover,
 .dislikeBtn:hover {
   background-color: #C54A1A;
-  color: #C54A1A;
+  color: #090909;
   border-color: transparent;
 }
 
@@ -315,6 +286,7 @@ input[type=submit]:active{
   background-color: #7E2E0A !important;
   color: white !important;
 }
+
 /* For Phones */
 @media only screen and (max-width: 768px) {
   body {
@@ -393,3 +365,4 @@ input[type=submit]:active{
     margin: 4px 2px; /* add some margin */
   }
 }
+

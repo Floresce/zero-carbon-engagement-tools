@@ -1,193 +1,109 @@
 <!DOCTYPE html>
-
-<?php
-function OpenConnection()
-{
-    $serverName = "mssql";
-    $connectionOptions = array("Database"=>"tips_telemetry",
-        "Uid"=>"sa", "PWD"=>"Programmadelic_123");
-    $conn = sqlsrv_connect($serverName, $connectionOptions);
-    if($conn == false)
-        die(FormatErrors(sqlsrv_errors()));
-
-    return $conn;
-}
-?>
-
-<html>
+<html data-bs-theme="light">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dashboard</title>
-
-        <!--Bootstrap 3.3.7-->
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-        <script src="js/bootstrap.min.js"></script>
-        <!--SMUD's main.css: (partial)Bootstrap 3.3.7, normalize.css v3.0.3, html5-boilerplate v5.1.0-->
-        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <!--Bootstrap 5.3.0-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+        </script>
         <!--Lato and Zilla Slab fonts-->
-        <link href=""href="https://fonts.googleapis.com/css?family=Lato|Zilla+Slab&display=swap" rel="stylesheet">
-        <!--jQuery 3.6.0-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <!--DataTables 1.13.2-->
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Lato|Zilla+Slab&display=swap" rel="stylesheet">
 
-        <style>
-            h3 {
-                font-family: 'Lato';
-            }
-            .row {
-                margin-top: 15px;
-                margin-bottom: 15px;
-	            margin-left: 30px;
-	            margin-right: 30px
-            }
-            .panel {
-                margin-top: 15px;
-            }
-            .panel-default {
-                margin-top: 10px;
-                margin-bottom: 10px;
-	            margin-left: 10px;
-	            margin-right: 10px
-            }
-            #fademe {
-                font-family: 'Lato';
-                opacity: 0;
-                transition: 1s;
-            }
-        </style>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+
+        <link rel="stylesheet" type="text/css" href="/dashboard/css/dashboard.css">
     </head>
 
     <body>
-        <div class="row">
-            <div class="panel panel-default">
-                <!--Tips Report Telementry table (start)-->
-                <div class="panel-heading">Tips Report Telemetry</div>
-                <div class="panel-default">
-                    <table id="myTable1" class="table">
-                        <?php
-                        $conn = OpenConnection();
-                        
-                        // Load SQL query from file
-                        $sql = "SELECT * FROM telemetry_table";
-                        
-                        // Execute query
-                        $stmt = sqlsrv_query($conn, $sql);
+        <nav class="navbar navbar-dark sticky-top d-flex p-0 shadow">
 
-                        if ($stmt === false) {
-                            die(print_r(sqlsrv_errors(), true));
-                        }
+            <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="/dashboard/">
+                <i class="bi bi-speedometer2"></i>
+                Dashboard
+            </a>
 
-                        echo "<thead>";
-
-                        echo "<tr><th>Page</th><th>Pageviews</th><th>Unique Pageviews</th><th>Avg. Time on Page</th><th>Entrances</th><th>Bounce Rate</th><th>% Exit</th><th>Page Value</th></tr>";
-
-                        echo "</thead>";
-
-                        echo "<tbody>";
-
-                        while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-                            echo "<tr>";
-                            echo "<td>".$row['link']."</td>";
-                            echo "<td>".$row['pageviews']."</td>";
-                            echo "<td>".$row['unique_pageviews']."</td>";
-                            echo "<td>".$row['average_time']."</td>";
-                            echo "<td>".$row['entrances']."</td>";
-                            echo "<td>".$row['bounce_rate']."</td>";
-                            echo "<td>".$row['exit_percent']."</td>";
-                            echo "<td>".$row['page_value']."</td>";
-                            echo "</tr>";
-                        }
-
-                        echo "</tbody>";
-
-                        sqlsrv_close($conn);
-                        ?>
-                    </table>
-                </div>
-                <!--Tips Report Telementry table (end)-->
+            <div class=" flex-nowrap">
+                <?php
+                if (strpos($_SERVER['REQUEST_URI'], '/DashBoardTipManipulation/') !== false && basename($_SERVER['PHP_SELF']) == 'index.php') {
+                    echo '
+                    <div class=" flex-nowrap">
+                        <ul class="nav">
+                            <li class="tab nav-item active py-1">
+                                <a class="custom-topbar nav-link px-3" href="#" onclick="openTab(event, \'Tips\')">Tips</a>
+                            </li>
+                            <li class="tab nav-item py-1">
+                                <a class="custom-topbar nav-link px-3" href="#" onclick="openTab(event, \'Categorie\')">Category</a>
+                            </li>
+                            <li class="tab nav-item py-1">
+                                <a class="custom-topbar nav-link px-3" href="#" onclick="openTab(event, \'Sub-Category\')">Sub-Category</a>
+                            </li>
+                        </ul>
+                    </div>
+                    ';
+                }
+                ?>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="panel panel-default">
-                <!--User Behavior table (start)-->
-                <div class="panel-heading">User Behavior</div>
-                <div class="panel-heading">ID: 1a79a4d60de6718e8e5b326e338ae533</div>
-                <div class="panel-default">
-                    <table id="myTable2" class="table">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Liked Tips</th>
-                                <th>Disliked Tips</th>
-                                <th>Comments</th>
-                                <th>User Agent</th>
-                            </tr>
-                        </thead>
-                        <tbody id='converted-date'>
-                        </tbody>
-                    </table>
+            <div class="navbar-nav py-1">
+                <div class="nav-item text-nowrap">
+                    <a class="nav-link px-3" href="#">
+                        <i class="bi bi-door-closed"></i>
+                        Sign out
+                    </a>
                 </div>
-                <!--User Behavior table (end)-->
-
-                <button id="add-data-button">Add Data</button>
             </div>
-        </div>
 
-        <div class="row">
-            <button type="button" id="fadebutton" class="btn btn-danger" data-toggle="button" aria-pressed="false">
-                <span class="glyphicon glyphicon-share" aria-hidden="true"></span> Export
-            </button>
-            <h4 id = "fademe">File automatically downloading... </h4>
-        </div>
+        </nav>
+
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+
+                <div class="nav d-flex align-items-start flex-column mx-3 pt-3" style="height: 93vh;">
+
+                    <a class="nav-link <?php if(strpos($_SERVER['REQUEST_URI'], '/main/') !== false && basename($_SERVER['PHP_SELF']) == 'index.php') echo 'active'; ?>" aria-current="page" href="http://localhost/dashboard/main/">
+                        <i class="bi bi-activity"></i>
+                        Telemetry
+                    </a>
+
+                    <a class="nav-link mb-auto <?php if(strpos($_SERVER['REQUEST_URI'], '/DashBoardTipManipulation/') !== false && basename($_SERVER['PHP_SELF']) == 'index.php') echo 'active'; ?>" aria-current="page" href="http://localhost/dashboard/DashBoardTipManipulation/">
+                        <i class="bi bi-sliders"></i>
+                        Modify Tips
+                    </a>
+
+                    <a class="nav-link" onclick="toggleTheme()" href="#">
+                        <i class="bi bi-circle-half"></i>
+                        Toggle Theme
+                    </a>
+
+                </div>
+        </nav>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <?php
+            if ($_SERVER['REQUEST_URI'] == '/dashboard/' && basename($_SERVER['PHP_SELF']) == 'index.php') {
+                include 'wut.php';
+            }
+            ?>
+        </main>
 
         <script>
-            setInterval(function() {
-            $('#myTable2').DataTable().ajax.reload();
-            }, 1000);
+            function toggleTheme() {
+                const htmlTag = document.querySelector('html');;
+                const theme = htmlTag.getAttribute('data-bs-theme');
 
-            //Fade buttons
-            $('#fadebutton').on('click', function () {
-                document.getElementById("fademe").style.opacity = 1;
-            })
-            //Using DataTables to sort tables
-            $(document).ready( function () {
-                $('#myTable1').DataTable();
+                if (theme === 'light') {
+                    htmlTag.setAttribute('data-bs-theme', 'dark');
+                } else {
+                    htmlTag.setAttribute('data-bs-theme', 'light');
+                }
 
-                $('#myTable2').DataTable({
-                    "ajax": "php/user_behavior.php",
-                    "columns": [
-                        { "data": "timestamp_date" },
-                        { "data": "liked_tips" },
-                        { "data": "disliked_tips" },
-                        { "data": "comments" },
-                        { "data": "user_agent" }
-                    ]
-                });
-            });
-            //Convert epoch timestamp to date
-            const epochTimestamps = document.querySelectorAll(".epoch-timestamp");
-
-            epochTimestamps.forEach(cell => {
-                const epochTimestamp = cell.textContent;
-                const date = new Date(epochTimestamp * 1000);
-                cell.textContent = date.toLocaleString();
-            });
-
-            document.getElementById("add-data-button").addEventListener("click", function() {
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        //alert("Data added successfully!");
-                    }
-                };
-                xhttp.open("GET", "php/add_data.php", true);
-                xhttp.send();
-            });
+                console.log(theme);
+		    }
         </script>
+
     </body>
 </html>

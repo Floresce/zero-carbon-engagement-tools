@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Tips Search Results</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="tips_script.js"></script>
+    <script src="tips_search.js"></script> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    
+</head>
+
+<body>   
+    <div class="container">
+
+        <div class="row">
+            <!-- Navbar items -->
+            <div id="navlist">
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <img src="img/smudLogo.png" alt="Logo" style="width: 150px; height: auto;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br><br>
+        <!-- Banner for the page-->
+        <div class="row">
+            <div class="banner">
+                <img src="img/SMUD_energy_savings.jpg" alt="Banner">
+            </div>
+        </div><br><br><br>
+
+        <!-- Drop down menu and submit button -->
+        <div class="row">
+            <div class="container form"><br>
+                <h4>Search For Energy Savings Tips</h4>
+                <!-- Search bar -->
+                <div class="col">
+                    <div class="search">
+                        <form action="#" method="POST" id="search_form" target="_self">
+                            <input type=" text" placeholder=" Keyword Tip Search" name="query" id="search-box"/>
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br><br>
+        <!-- Results from the search queries -->
+        <div class="container result">
+            <div class="row">
+                <div class="col">
+                    <!--Leave here for images and videos for first column-->
+                    <div id="media"></div>
+                </div>
+                <div class="col">
+                    <div id="search-results"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Close the outmost container -->
+    </div>
+
+</body>
+
+</html>
