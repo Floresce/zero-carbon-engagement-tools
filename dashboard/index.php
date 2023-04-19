@@ -51,7 +51,7 @@
 
             <div class="navbar-nav py-1">
                 <div class="nav-item text-nowrap">
-                    <a class="nav-link px-3" href="#">
+                    <a class="nav-link px-3" href="/">
                         <i class="bi bi-door-closed"></i>
                         Sign out
                     </a>
@@ -64,12 +64,12 @@
 
                 <div class="nav d-flex align-items-start flex-column mx-3 pt-3" style="height: 93vh;">
 
-                    <a class="nav-link <?php if(strpos($_SERVER['REQUEST_URI'], '/main/') !== false && basename($_SERVER['PHP_SELF']) == 'index.php') echo 'active'; ?>" aria-current="page" href="http://localhost/dashboard/main/">
+                    <a class="nav-link <?php if(strpos($_SERVER['REQUEST_URI'], '/main/') !== false && basename($_SERVER['PHP_SELF']) == 'index.php') echo 'active'; ?>" aria-current="page" href="/dashboard/main/">
                         <i class="bi bi-activity"></i>
                         Telemetry
                     </a>
 
-                    <a class="nav-link mb-auto <?php if(strpos($_SERVER['REQUEST_URI'], '/DashBoardTipManipulation/') !== false && basename($_SERVER['PHP_SELF']) == 'index.php') echo 'active'; ?>" aria-current="page" href="http://localhost/dashboard/DashBoardTipManipulation/">
+                    <a class="nav-link mb-auto <?php if(strpos($_SERVER['REQUEST_URI'], '/DashBoardTipManipulation/') !== false && basename($_SERVER['PHP_SELF']) == 'index.php') echo 'active'; ?>" aria-current="page" href="/dashboard/DashBoardTipManipulation/">
                         <i class="bi bi-sliders"></i>
                         Modify Tips
                     </a>
