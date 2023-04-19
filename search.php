@@ -1,5 +1,5 @@
 <?php
-$serverName = "BLD"; 
+$serverName = "programmadelic.database.windows.net"; 
 //serverName\instanceName
 
 // Since UID and PWD are not specified in the $connectionInfo array,
