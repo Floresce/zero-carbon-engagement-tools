@@ -1,15 +1,20 @@
 <?php
-$serverName = "programmadelic.database.windows.net"; 
-//serverName\instanceName
+$servername = "programmadelic.database.windows.net";
+$database = "tips";
+$username = "sa_user"; 
+$password = "Programmadelic_123!";
 
-// Since UID and PWD are not specified in the $connectionInfo array,
-// The connection will be attempted using Windows Authentication.
-$connectionInfo = array( "Database"=>"Tips");
-$conn = sqlsrv_connect( $serverName, $connectionInfo);
+$connectionInfo = array(
+    "Database" => $database,
+    "UID" => $username,
+    "PWD" => $password
+);
+$conn = sqlsrv_connect($servername, $connectionInfo);
 
-if( $conn ) {
+if($conn) {
      //echo "Connection established.<br />";
-}else{
+}
+else{
      echo "Connection could not be established.<br /><br />";
      die( print_r( sqlsrv_errors(), true));
 }
