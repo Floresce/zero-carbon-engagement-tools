@@ -2,10 +2,10 @@
      retrieves information from the database, and displays it on a webpage. -->
 <?php
 
-$servername = "MineHarth";        // Subject to change depending on server name (Anne: DESKTOP-UK8K0FD, Leo: MineHarth)
-$database = "Tips";                     // Subject to change depending on database name
-$username = "";
-$password = "";
+$servername = "programmadelic.database.windows.net";        // Subject to change depending on server name (Anne: DESKTOP-UK8K0FD, Leo: MineHarth)
+$database = "tips";                     // Subject to change depending on database name
+$username = "sa_user";
+$password = "Programmadelic_123!";
 
 $connectionInfo = array(
     "Database" => $database,
