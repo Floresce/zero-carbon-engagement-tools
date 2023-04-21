@@ -1,23 +1,6 @@
 <?php
-$servername = "programmadelic.database.windows.net";
-$database = "tips";
-$username = "sa_user"; 
-$password = "Programmadelic_123!";
-
-$connectionInfo = array(
-    "Database" => $database,
-    "UID" => $username,
-    "PWD" => $password
-);
-$conn = sqlsrv_connect($servername, $connectionInfo);
-
-if($conn) {
-     //echo "Connection established.<br />";
-}
-else{
-     echo "Connection could not be established.<br /><br />";
-     die( print_r( sqlsrv_errors(), true));
-}
+// Database connection
+include 'config.php';
 
 $query = $_POST['query'];
 //keyword must be at least 3 characters long
