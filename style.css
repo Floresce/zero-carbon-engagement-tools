@@ -334,7 +334,7 @@ input[type=submit]:active{
 
 .trashBtn {
   background-color: #E6E1DA;
-  color: #464545;
+  color: #fff;
   border-radius: 1px;
   border: 1px solid transparent;
   cursor: pointer;
@@ -344,7 +344,7 @@ input[type=submit]:active{
 
 .trashBtn:hover {
   background-color: #C54A1A;
-  color: #090909;
+  color: #C54A1A;
   border-color: transparent;
 }
 
