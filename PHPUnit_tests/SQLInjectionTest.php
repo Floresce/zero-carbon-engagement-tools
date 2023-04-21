@@ -11,28 +11,28 @@ class SQLInjectionTest extends TestCase {
 
   protected function setUp(): void
   {
-      // establish database connection
-      $servername = "DESKTOP-UK8K0FD";       
-      $database = "Tips";							      // DO NOT use original database when running tests                      
-      $username = "";
-      $password = "";
+    // establish database connection
+    $servername = "DESKTOP-UK8K0FD";       
+    $database = "Tips";							      // DO NOT use original database when running tests                      
+    $username = "";
+    $password = "";
 
-      $connectionInfo = array(
-          "Database" => $database,
-          "UID" => $username,
-          "PWD" => $password
-      );
+    $connectionInfo = array(
+      "Database" => $database,
+      "UID" => $username,
+      "PWD" => $password
+    );
 
-      $this->conn = sqlsrv_connect($servername, $connectionInfo);
+    $this->conn = sqlsrv_connect($servername, $connectionInfo);
   }
 
   public static function sqlInjectionProvider()
   {
-      return [
-        [1, "This is a test comment", date("Y-m-d H:i:s")],
-        [2, "'; DROP TABLE TIP_COMMENT;--", date("Y-m-d H:i:s")],
-        [3, "A third test comment; SELECT * FROM USERS", date("Y-m-d H:i:s")]
-      ];
+    return [
+      [1, "This is a test comment", date("Y-m-d H:i:s")],
+      [2, "'; DROP TABLE TIP_COMMENT;--", date("Y-m-d H:i:s")],
+      [3, "A third test comment; SELECT * FROM USERS", date("Y-m-d H:i:s")]
+    ];
   }
 
   /**
@@ -53,8 +53,9 @@ class SQLInjectionTest extends TestCase {
 	  $this->assertNotFalse($stmt);
 
 	  $comments = array();
-	  while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-		$comments[] = $row['COMMENT'];
+	  while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) 
+    {
+		  $comments[] = $row['COMMENT'];
 	  }
 
 	  // Check that the input has been sanitized correctly
