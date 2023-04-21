@@ -458,11 +458,13 @@ if (count($rows) > 0) {
         $tipDescription = $row["T_DESC_ENGLISH"];
         $tipId = $row["T_ID"];
         
+        $result = '<div class="row"> <div class="col-md-6"> <img src="img/Appliance.jpg" 
+        alt="Appliance" width="90%" height="auto"></div>';
         // The '.=' operator concatenates strings in PHP
-        $result = '<div class="tip">';
-        $result .= '<h2>' . $categoryName . ', ' . $subcategoryName . '</h2>';      // Generates HTML markup that displays
+        $result .= '<div class="col-md-6">';
+        //$result .= '<h2>' . $categoryName . ', ' . $subcategoryName . '</h2>';      // Generates HTML markup that displays
         $result .= '<p>' . $tipDescription . '</p>';                                // the categoryName, subcategoryName, and the tipDescription     
-        $result .= '</div>';
+        //$result .= '</div>';
         
         echo $result;
 
@@ -495,7 +497,7 @@ if (count($rows) > 0) {
         // Add button to add to plan
         $result3 = '<div id="atpDiv-' . $tipId . '">';
         $result3 .= '<a href="#" onclick="return false;" class="btn btn-atp atpBtn" id="atpBtn-' . $tipId . '">Add to Plan</a>';
-        $result3 .= '</div><br>';
+        $result3 .= '</div></div></div><br><br>';
 
         echo $result3;
         }   
@@ -608,7 +610,6 @@ if (isset($_POST['function_name']) && isset($_POST['tipId'])){
                 $sql = "UPDATE TIP_FEEDBACK SET TIP_LIKES = TIP_LIKES+1 WHERE T_ID = $tID;";
                 $result = sqlsrv_query($conn,$sql);
                 break;
-            break;
           case 'addDislike':
                 $sql = "UPDATE TIP_FEEDBACK SET TIP_DISLIKES = TIP_DISLIKES+1 WHERE T_ID = $tID;";
                 $result = sqlsrv_query($conn,$sql);

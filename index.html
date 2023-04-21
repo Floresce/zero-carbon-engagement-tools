@@ -19,26 +19,67 @@
 <body>
     <div class="container">
 
-        <div class="row">
-            <!-- Navbar items -->
-            <div id="navlist">
-                <br>
-                <div class="row">
-                    <div class="col">
-                      <a href="https://programmadelic.azurewebsites.net/">
-                        <img src="img/smudLogo.png" alt="Logo" style="width: 150px; height: auto; margin: 10px 0 10px 0; margin-top: -5px;">
-                      </a>                                                                                      
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br><br><br>
         <!-- Banner for the page-->
         <div class="row">
             <div class="banner">
                 <img src="img/SMUD_energy_savings.jpg" alt="Banner">
             </div>
         </div><br><br><br>
+
+    
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <div class="container-fluid">
+                <!-- Logo -->
+                <a class="navbar-brand" href="#">
+                    <a href="https://www.smud.org/">
+                        <img src="img/smudLogo.png" alt="Logo" style="width: 150px; height: auto;"></a></a>
+        
+                <!-- Toggler/collapsible Button -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+        
+                <!-- Navbar Items -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Menu
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="dashboard/">Dashboard</a></li>
+                                <li><button class="dropdown-item" id="planBtn" data-bs-toggle="offcanvas"
+                                    data-bs-target="#tipsCanvasRight" aria-controls="tipsCanvasRight">Tips Plan</button></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+          
+            
+        <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="tipsCanvasRight"
+                aria-labelledby="tipsCanvasRightLabel" aria-hidden="true">
+                <div class="offcanvas-header">
+                    <h4 id="tipsCanvasRightLabel">Tips Plan:</h4>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div id="tipsPlanStart">
+
+                        
+                    </div>
+                </div>
+
+                <div class="planBottom">
+                    <button type="button" class="btn btn-atp" id="printBtn">Print</button>
+                </div>                            
+        </div>
+    
 
         <!-- Drop down menu and submit button -->
         <div class="row">
@@ -67,52 +108,22 @@
                         <div class="col">
                             <input type="submit" value="Submit">
                         </div>
+                        
 
-                        <div class="col">
-                            <button class="btn btn-atp" type="button" id="planBtn" data-bs-toggle="offcanvas"
-                                data-bs-target="#tipsCanvasRight" aria-controls="tipsCanvasRight">Tips Plan</button>
-                            </div>
-                            
-                            <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="tipsCanvasRight"
-                                aria-labelledby="tipsCanvasRightLabel" aria-hidden="true">
-                                <div class="offcanvas-header">
-                                    <h4 id="tipsCanvasRightLabel">Tips Plan:</h4>
-                                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="offcanvas-body">
-                                    <div id="tipsPlanStart">
-    
-                                        
-                                    </div>
-                                </div>
-    
-                                <div class="planBottom">
-                                    <button type="button" class="btn btn-atp" id="printBtn">Print</button>
-                                </div>
-                            </div>
 
-                    </div>
+                    </div><br>
                 </form>
             </div>
         </div>
         <br><br><br>
         <!-- Results from the queries -->
         <div class="container result">
-            <div class="row">
-                <div class="col">
-                    <!--Leave here for images and videos for first column-->
-                    <div id="media"></div>
-                </div>
-                <div class="col">
-                    <div id="result"></div>
-                </div>
-
-            </div>
+            <!-- Populated tips -->
+            <div id="result"></div>
         </div>
 
         <!-- Close the outmost container -->
-        <button type="button" class="btn btn-atp" onclick="window.location.href = 'dashboard/'">Go to Dashboard</button>
+        
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
