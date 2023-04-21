@@ -1,17 +1,8 @@
   <!---------------------------- PHP--------------------------  -->
   <?php  
 // ///////////SQL QUERY for a selected tip///////////////////////
-    $serverName = "LAPTOP-BBPRS3C8"; 
-    $connectionOptions = [
-         "Database"=>"Energy Savings Tips",
-         "Uid" => "",   
-         "PWD" => "" 
-    ]; 
-    
-    // establish connection
-    $conn = sqlsrv_connect($serverName, $connectionOptions);
-    if($conn == false)
-         die(print_r(sqlsrv_errors(), true));
+  // Database connection
+  include 'config.php';
    
    
     $catNum = 1;
