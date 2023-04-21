@@ -1,11 +1,10 @@
 $(document).ready(function() {
 
-
 const searchBox = document.getElementById("search-box");
 const min_length = 3;
 
 function submitSearch(event) {
-  event.preventDefault(); //Prevents form submission and will give alert 
+  event.preventDefault(); //Prevents form submission and will give an alert 
   const query = searchBox.value.trim();
     if (query.length < min_length) {
       alert("Search keyword must be at least " + min_length + " characters long.");
@@ -38,8 +37,13 @@ const searchResultsElement = document.getElementById("search-results");
   //If there are 0 results for a search, then a message will be displayed
   if (searchResults == 0) {
     const searchResultsElement = document.getElementById("search-results");
-    searchResultsElement.innerHTML = "No results. Please try again";
+    searchResultsElement.innerHTML = "No results found for your search, please try again.";
     searchResultsElement.style.fontSize = "24px"; 
   }
+
+  const titleElement = document.getElementById("title");
+    let title = new URLSearchParams(window.location.search).get('title');
+    titleElement.innerHTML = title;
   }
+  
 }); // End of $(document).ready(function() {

@@ -1,23 +1,6 @@
 <?php
-$servername = "programmadelic.database.windows.net";
-$database = "tips";
-$username = "sa_user"; 
-$password = "Programmadelic_123!";
-
-$connectionInfo = array(
-    "Database" => $database,
-    "UID" => $username,
-    "PWD" => $password
-);
-$conn = sqlsrv_connect($servername, $connectionInfo);
-
-if($conn) {
-     //echo "Connection established.<br />";
-}
-else{
-     echo "Connection could not be established.<br /><br />";
-     die( print_r( sqlsrv_errors(), true));
-}
+// Database connection
+include 'config.php';
 
 $query = $_POST['query'];
 //keyword must be at least 3 characters long
@@ -56,14 +39,27 @@ if (sqlsrv_execute($stmt)) {
 
 if (count($rows) > 0) {
     $search_results = "";
+    $count = count($rows);
+    $title .=  $count . ' Search Results for "' . $query . '"';
+
     foreach ($rows as $row) {
         $tipDescription = $row["T_DESC_ENGLISH"];
+        //highlight feature that will highlight the keyword regardless of case sensitivity
+        //stripos finds the postion of the first occurence of the case-insensitive 'query'
+        $pos = stripos($tipDescription, $query);
+        //while loop to find/highlight all matches in a description 
+        while ($pos !== false) {
+            $match = substr($tipDescription, $pos, strlen($query));
+            $highlighted = '<span style="background-color: #fcf8e3">' . $match . '</span>';
+            $tipDescription = substr_replace($tipDescription, $highlighted, $pos, strlen($query));
+            
+            $pos = stripos($tipDescription, $query, $pos + strlen($highlighted));
+        }
         $categoryName = $row["C_NAME"];
         $subcategoryName = $row["SUB_NAME"];
         $tipId = $row["T_ID"];
-
-        $result = '<div class="tips">';     
-        $result .= '<h2>' . $categoryName . ', ' . $subcategoryName . '</h2>';
+   
+        $result = '<h2>' . $categoryName . ', ' . $subcategoryName . '</h2>';
         $result .= '<br><p>' . $tipDescription . '</p>'; 
         
         //if statement for each tip to display correct Primary link as a clickable button if any
@@ -72,7 +68,6 @@ if (count($rows) > 0) {
             $result .= '<button type="submit" id="link" class="btn btn-default">Instant Rebate</button>';
             $result .= '</form><br>';
         }
-        $result .= '</div>';
         
         //search_results will be used to send results to result.html
         $search_results .= $result;
@@ -86,8 +81,8 @@ sqlsrv_close($conn);
 
 }
 
-    //search results will be passed as a query parameter in the URL
-    header("Location: results.html?search_results=" . urlencode($search_results));
+    //search results and search title will be passed as a query parameter in the URL
+    header("Location: results.html?search_results=" . urlencode($search_results). "&title=$title");
     exit(); // Stop the script execution after sending the header
 }
 ?>
