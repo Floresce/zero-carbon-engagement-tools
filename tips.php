@@ -510,42 +510,73 @@ sqlsrv_close($conn);
 //-----------------------------------------------
 //-----------------------------------------------
 
-function addComment($tipId, $comment, $date, $conn) {
-  // Sanitize the input to remove any potential HTML tags or SQL injection attempts
-  $comment = filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_SPECIAL_CHARS);
-  $comment = str_replace(['<', '>', ';', '--', "'", '&#39'], '', $comment);
+function getMaxCommentSeq($tipId, $conn) {
+  // Prepare the SQL statement with placeholders
+  $sql = "SELECT MAX(COMMENT_SEQ) AS max_seq FROM TIP_COMMENT WHERE T_ID = ?";
 
-  // Decode HTML entities and remove HTML tags
-  $comment = strip_tags(htmlspecialchars_decode($comment));
-   
-  // Get the current maximum COMMENT_SEQ value for the given T_ID
-  $sql = "SELECT MAX(COMMENT_SEQ) AS max_seq FROM TIP_COMMENT WHERE T_ID = ?";       // '?' is a placeholder for a parameter in the SQL query
-  $params = array($tipId);                                                           // Create an array of values to be used as parameters in the query
-  $stmt = sqlsrv_query($conn, $sql, $params);                                        // Prepare the statement using the SQL and parameter array 
-  if ($stmt === false) {                                                             // Check if the statement executed successfully
-      echo "Error (sqlsrv_query): " . print_r(sqlsrv_errors(), true);
-      exit;
+  // Create a statement object and bind the parameters
+  $stmt = sqlsrv_prepare($conn, $sql, array(&$tipId));
+
+  // Check if the statement prepared successfully
+  if ($stmt === false) {
+    echo "Error (sqlsrv_prepare): " . print_r(sqlsrv_errors(), true);
+    exit;
+  }
+
+  // Execute the statement
+  if (sqlsrv_execute($stmt) === false) {
+    echo "Error (sqlsrv_execute): " . print_r(sqlsrv_errors(), true);
+    exit;
   }
 
   // Fetch the result of the query and extract the maximum COMMENT_SEQ value:
   $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
   $maxSeq = $row['max_seq'];
-  
-  // Increment the maximum COMMENT_SEQ value and insert the new comment
-  $newSeq = $maxSeq + 1;
-  $sql = "INSERT INTO TIP_COMMENT (T_ID, COMMENT_SEQ, COMMENT, TIP_DATE) VALUES (?, ?, ?, ?)";
-  $params = array($tipId, $newSeq, $comment, $date);
-  $stmt = sqlsrv_query($conn, $sql, $params);
-  if ($stmt === false) {
-      echo "Error (sqlsrv_query): " . print_r(sqlsrv_errors(), true);
-      exit;
-  }
-  
-  echo "<br>Comment added successfully.";
-  
-  // Free statement and connection resources
+
+  // Free statement resources
   sqlsrv_free_stmt($stmt);
-  sqlsrv_close($conn);
+
+  // Return the maximum COMMENT_SEQ value
+  return $maxSeq;
+}
+
+function sanitizeInput($comment) {
+  // Remove unwanted characters from input
+  $comment = trim($comment); 								// Remove trailing white spaces
+  $comment = preg_replace('/[^\w\s]+/', '', $comment); 		// Remove special characters except spaces
+  
+  return $comment;
+}
+
+function addComment($tipId, $comment, $date, $conn) {
+  // Sanitize and validate the input
+  $comment = sanitizeInput($comment);
+
+  // Prepare the SQL statement with placeholders
+  $sql = "INSERT INTO TIP_COMMENT (T_ID, COMMENT_SEQ, COMMENT, TIP_DATE) VALUES (?, ?, ?, ?)";
+
+  // Create a statement object and bind the parameters
+  $stmt = sqlsrv_prepare($conn, $sql, array(&$tipId, &$commentSeq, &$comment, &$date));
+
+  // Check if the statement prepared successfully
+  if ($stmt === false) {
+    echo "Error (sqlsrv_prepare): " . print_r(sqlsrv_errors(), true);
+    exit;
+  }
+
+  // Set the values for the bound parameters
+  $commentSeq = getMaxCommentSeq($tipId, $conn) + 1;
+
+  // Execute the statement
+  if (sqlsrv_execute($stmt) === false) {
+    echo "Error (sqlsrv_execute): " . print_r(sqlsrv_errors(), true);
+    exit;
+  }
+
+  echo "<br>Comment added successfully.";
+
+  // Free statement resources
+  sqlsrv_free_stmt($stmt);
 }
 
 // POST parameters submitted from comment_modal.html
@@ -559,6 +590,9 @@ if (isset($_POST['tipId']) && isset($_POST['comment']) && isset($_POST['date']))
   echo 'tipId: ', $tipId, '<br>comment: ', $comment, '<br>date: ', $date;            // Check if the values retrieved are correct
 
   addComment($tipId, $comment, $date, $conn);
+
+  // Free connection resources
+  sqlsrv_close($conn);
 }
 
 //-----------------------------------------------
