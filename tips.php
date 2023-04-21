@@ -73,61 +73,70 @@ while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {   // While loop f
   }                                                      
 }
 
+function generateAddToPlanButton($tipId) {
+  $result = '<a href="#" onclick="return false;" class="btn btn-atp atpBtn" id="atpBtn-' . $tipId . '">Add to Plan</a>';
+  $result .= '<div class="tipsCart" id="atpDiv-' . $tipId . '">';
+  $result .= '</div></div></div><br><br>';
+
+  return $result;
+}
+
+function generateLikeDislikeButton($tipId) {
+  // id="likeBtn-' . $tipId . '" sets the id attribute of the button to a unique string that includes the tips's ID, T_ID
+  // i.e. likeBtn-12 corresponds to the like button for tip 12
+  $result = '<button id="likeBtn-' . $tipId . '" class="btn btn-success likeBtn" style="margin-left: 1em;">';
+  $result .= '<span class="material-symbols-rounded">thumb_up</span></button>';
+  $result .= '<button id="dislikeBtn-' . $tipId . '" class="btn btn-danger dislikeBtn">';
+  $result .= '<span class="material-symbols-rounded">thumb_down</span></button>';
+  
+  return $result;
+}
+
 // Checks whether the '$rows' array has any elements then the 'foreach' loop will execute
 // 'foreach' loop iterates over each element of the '$rows' array, assigning each element to the variable '$row'
 // Allows to access the values of the current row's columns (in the current iteration of the loop) using the keys of the '$row'(C_NAME, SUB_NAME, T_DESC_ENGLISH) array
 if (count($rows) > 0) {
-    echo '<link rel="stylesheet" href="style.css?v=1.1">';    // Version control parameter that can be used to force the browser to load the latest version of the stylesheet file
-    echo '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />';   // Enables use of thumbs up/down icons from Google
+  echo '<link rel="stylesheet" href="style.css?v=1.1">';    // Version control parameter that can be used to force the browser to load the latest version of the stylesheet file
+  echo '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />';   // Enables use of thumbs up/down icons from Google
 
-    foreach ($rows as $row) {
-        $categoryName = $row["C_NAME"];
-        $subcategoryName = $row["SUB_NAME"];
-        $tipDescription = $row["T_DESC_ENGLISH"];
-        $tipId = $row["T_ID"];
-        
-        $result = '<div class="row"> <div class="col-md-6"> <img src="img/Appliance.jpg" 
-        alt="Appliance" width="90%" height="auto"></div>';
-        // The '.=' operator concatenates strings in PHP
-        $result .= '<div class="col-md-6">';
-        //$result .= '<h2>' . $categoryName . ', ' . $subcategoryName . '</h2>';      // Generates HTML markup that displays
-        $result .= '<p>' . $tipDescription . '</p>';                                // the categoryName, subcategoryName, and the tipDescription     
-        //$result .= '</div>';
-        
-        echo $result;
+  foreach ($rows as $row) {
+    $categoryName = $row["C_NAME"];
+    $subcategoryName = $row["SUB_NAME"];
+    $tipDescription = $row["T_DESC_ENGLISH"];
+    $tipId = $row["T_ID"];
+    
+    $result = '<div class="row"> <div class="col-md-6"> <img src="img/Appliance.jpg" 
+    alt="Appliance" width="90%" height="auto"></div>';
+    // The '.=' operator concatenates strings in PHP
+    $result .= '<div class="col-md-6">';
+    //$result .= '<h2>' . $categoryName . ', ' . $subcategoryName . '</h2>';      // Generates HTML markup that displays
+    $result .= '<p>' . $tipDescription . '</p>';                                // the categoryName, subcategoryName, and the tipDescription     
+    //$result .= '</div>';
+    echo $result;
 
-        $result2 = '<div class="btnfeedback">';
-        $result2 .= '<p class="d-inline-flex align-items-center mb-0">Was this information helpful?';
+    // Like and dislike button
+    $buttonFeedback = '<div class="btnfeedback">';
+    $buttonFeedback .= '<p class="d-inline-flex align-items-center mb-0">Was this information helpful?';
+    $buttonFeedback .= generateLikeDislikeButton($tipId);
+    echo $buttonFeedback;
 
-        // id="likeBtn-' . $tipId . '" sets the id attribute of the button to a unique string that includes the tips's ID, T_ID
-        // i.e. likeBtn-12 corresponds to the like button for tip 12
-        $result2 .= '<button id="likeBtn-' . $tipId . '" class="btn btn-success likeBtn" style="margin-left: 1em;">
-        <span class="material-symbols-rounded">thumb_up</span></button>';
-        $result2 .= '<button id="dislikeBtn-' . $tipId . '" class="btn btn-danger dislikeBtn">
-        <span class="material-symbols-rounded">thumb_down</span></button>';
-        echo $result2;
+    // Creates a modal that allows for user comments
+    include 'comment_modal.html';
+    echo '</p></div>';
 
-        // Creates a modal that acts as a hyperlink
-        // Includes the code for the modal element
-        include 'comment_modal.html';
-        echo '</p></div>';
+    // if statement for each tip to display correct Primary link as a clickable button if any 
+    // placement here also assures that a button will not appear for every single tip in the while loop 
+    // despite not having a link
+    if (!empty($row['PRIMARY_LINK'])) {
+      echo '<form action="' . $row['PRIMARY_LINK'] . '"target="_blank">
+            <button type="submit" id="link" class="btn btn-default">Instant rebates</button>
+            </form> <br>';
+    }
 
-        // if statement for each tip to display correct Primary link as a clickable button if any 
-        // placement here also assures that a button will not appear for every single tip in the while loop 
-        // despite not having a link
-        if (!empty($row['PRIMARY_LINK'])) {
-                echo '<form action="' . $row['PRIMARY_LINK'] . '"target="_blank">
-                      <button type="submit" id="link" class="btn btn-default">Instant rebates</button>
-                      </form> <br>';
-        }
-
-        // Add button to add tip to plan
-        $result3 = '<a href="#" onclick="return false;" class="btn btn-atp atpBtn" id="atpBtn-' . $tipId . '">Add to Plan</a>';
-        $result3 .= '<div class="tipsCart" id="atpDiv-' . $tipId . '">';
-        $result3 .= '</div></div></div><br><br>';
-
-        echo $result3;
-        }   
+    // Add to plan button
+    $buttonAddToPlan = generateAddToPlanButton($tipId);
+    echo $buttonAddToPlan;
+  }   
 }
 
 // Free statement and connection resources
