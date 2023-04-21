@@ -4,9 +4,6 @@
   box-sizing: border-box;
 }
 
-
-
-
 /* For desktop devices */
 
 body {
@@ -52,7 +49,7 @@ body {
 
 
 .container.form{
-  width: 75%;
+  width: 70%;
   height: auto; /* or height: 100%; */
   background-color: #ffffff;
   border: 0.5px solid rgb(166, 164, 164);
@@ -67,6 +64,39 @@ body {
   margin-top: 20px;
   border: none;
 }
+
+/********** Menu styling - Dashboard and Tips Plan **********/
+
+.navbar .nav-link.dropdown-toggle {
+  background-color: #F15C22;
+  color: white;
+  font-size: large;
+  border-radius: 2px;
+  padding: 2px;
+}
+
+.navbar .nav-link.dropdown-toggle::after {
+  content: "\2630";
+  margin-left: 10px;
+  font-size: 15px;
+}
+
+.navbar .nav-link.dropdown-toggle:hover{
+  background-color: #090909;
+}
+
+.navbar-nav .nav-item .dropdown-menu li a.dropdown-item:first-child:hover {
+  background-color: #F15C22;
+  color: white;
+  
+}
+
+.dropdown-menu #planBtn:hover {
+  background-color: #F15C22;
+  color: white;
+}
+
+/**********************************************************/
 
 .banner {
   width: 100%;
@@ -87,6 +117,7 @@ input[type="submit"] {
   display: inline-block; /* display the button as an inline-block element */
   font-size: 16px; /* set the font size */
   margin: 4px 2px; /* add some margin */
+  border-radius: 5px;
 }
 
 input[type=submit]:hover {
@@ -303,7 +334,7 @@ input[type=submit]:active{
 
 .trashBtn {
   background-color: #E6E1DA;
-  color: #fff;
+  color: #464545;
   border-radius: 1px;
   border: 1px solid transparent;
   cursor: pointer;
@@ -313,7 +344,7 @@ input[type=submit]:active{
 
 .trashBtn:hover {
   background-color: #C54A1A;
-  color: #C54A1A;
+  color: #090909;
   border-color: transparent;
 }
 
@@ -339,21 +370,6 @@ input[type=submit]:active{
     margin-right: 0;
   }
 
-  .container {
-    margin-left: 0;
-    margin-right: 0;
-    max-width: 100%;
-  }
-
-  .container.form{
-    width: 100%;
-    height: auto; /* or height: 100%; */
-    background-color: #ffffff;
-    border: 0.5px solid rgb(166, 164, 164);
-    padding-left: 5%;
-    box-shadow: 0 0 1px #fff, 0 0 15px #fff, 0 0 7px #b6b4b4, 0 0 5px #8b878a, 0 0 5px #eae5e9, 0 0 8px #eee7ed, 0 0 10px #dfd7d7;
-    column-gap: 10px;
-  }
   /* hide original arrow icon */
   .dropdown-toggle::after {
     display: none;
@@ -393,15 +409,5 @@ input[type=submit]:active{
     border: none;
     cursor: pointer;
    }
-   input[type="submit"] {
-    background-color: #F15c22; /* set the background color */
-    border: none; /* remove the border */
-    color: white; /* set the text color */
-    padding: 10px 20px; /* add some padding to the button */
-    text-align: center; /* center the text */
-    text-decoration: none; /* remove the underline */
-    display: inline-block; /* display the button as an inline-block element */
-    font-size: 16px; /* set the font size */
-    margin: 4px 2px; /* add some margin */
-  }
+
 }
