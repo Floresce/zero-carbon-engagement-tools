@@ -74,11 +74,11 @@ while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {   // While loop f
 }
 
 function generateAddToPlanButton($tipId) {
-	$result = '<a href="#" onclick="return false;" class="btn btn-atp atpBtn" id="atpBtn-' . $tipId . '">Add to Plan</a>';
-	$result .= '<div class="tipsCart" id="atpDiv-' . $tipId . '">';
-	$result .= '</div></div></div><br><br>';
+  $result = '<a href="#" onclick="return false;" class="btn btn-atp atpBtn" id="atpBtn-' . $tipId . '">Add to Plan</a>';
+  $result .= '<div class="tipsCart" id="atpDiv-' . $tipId . '">';
+  $result .= '</div></div></div><br><br>';
 
-	return $result;
+  return $result;
 }
 
 function generateLikeDislikeButton($tipId) {
