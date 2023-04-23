@@ -10,11 +10,13 @@
     <table id="myTable2" class="table">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Liked Tips</th>
-                <th>Disliked Tips</th>
-                <th>Comments</th>
-                <th>User Agent</th>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Subcategory</th>
+                <th>Likes</th>
+                <th>Dislikes</th>
+                <th>Added to Plan</th>
             </tr>
         </thead>
         <tbody>
@@ -24,11 +26,12 @@
 </div>
 
 <script>
+    /*
     setInterval(function() {
     $('#myTable2').DataTable().ajax.reload();
     }, 1000);
-
     //Using DataTables to sort tables
+
     $(document).ready( function () {
         $('#myTable2').DataTable({
             "ajax": "php/user_behavior_fetch.php",
@@ -46,6 +49,28 @@
             ]
         });
     });
+    */
+    $(document).ready( function () {
+        $('#myTable2').DataTable({
+            "ajax": "php/user_behavior_fetch.php",
+            "columns": [
+                { "data": "T_ID" },
+                { "data": "T_DESC_ENGLISH"},
+                { "data": "C_ID" },
+                { "data": "SUB_ID"},
+                { "data": "LIKES"},
+                { "data": "DISLIKES"},
+                { "data": "ADDPLANCLICKS"}
+            ]
+        });
+        $.ajax({
+            url: 'php/user_behavior_fetch.php',
+            method: 'POST',
+            success: function (response) {
+                console.log(response);
+            }
+        });
+    });
 
     document.getElementById("add-data-button").addEventListener("click", function() {
         var xhttp = new XMLHttpRequest();
@@ -54,7 +79,7 @@
                 //alert("Data added successfully!");
             }
         };
-        xhttp.open("GET", "php/add_data.php", true);
+        xhttp.open("GET", "php/data_add.php", true);
         xhttp.send();
     });
 </script>
