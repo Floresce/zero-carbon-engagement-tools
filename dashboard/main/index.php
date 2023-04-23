@@ -19,7 +19,7 @@
                         <h1>Dashboard</h1>
                     </div>
                     <div class="col-3 d-flex flex-row-reverse ">
-                        <button class="btn btn-danger" id="fadebutton">
+                        <button class="btn btn-danger" id="button">
                             <span class="glyphicon glyphicon-open" aria-hidden="true"></span> Export data
                         </button>
                     </div>
@@ -44,11 +44,20 @@
                 </div>
 
                 <div class="row border my-4 shadow">
-                    <!--Tips Report Telementry table (start)-->
-                    <?php include 'php/tips_telemetry.php';?>
-                    <!--Tips Report Telementry table (end)-->
-                    <div class="col p-4">
-                        <canvas id="myChart"></canvas>
+                    <div class="btn-group my-3" role="group">
+                        <div class="btn-group dropdown-center w-100" id="tuning-options" role="group">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown button
+                            </button>
+                            <ul id="tipsList" class="dropdown-menu">
+                            </ul>
+                        </div>
+
+                        <button id="refreshbtn"class="btn btn-secondary" type="button" aria-expanded="false">
+                            <i class="bi bi-arrow-clockwise"></i>
+                        </button>
+                    </div>
+                    <div id="selected-content">
                     </div>
                 </div>
 
@@ -61,25 +70,25 @@
                 </div>
 
                 <div class="row my-4">
-                    <div class="col p-3 border shadow">
+                    <div class="col p-3 me-2 border shadow">
                         <h2>Reset data</h2>
                         <p>Click button to reset shit</p>
                         <button class="btn btn-danger" id="resetdelete">
                             Reset
                         </button>
                     </div>
-                    <div class="col p-3 mx-4 border shadow">
+                    <div class="col p-3 ms-2 mx-2 border shadow">
                         <h2>Delete data</h2>
                         <p>Click button to delete shit</p>
                         <button class="btn btn-warning" id="deletedelete">
                             Delete
                         </button>
                     </div>
-                    <div class="col p-3 mx-4 border shadow">
+                    <div class="col p-3 mx-2 me-2 border shadow">
                         <h2>Test</h2>
                         <p>Test</p>
                     </div>
-                    <div class="col p-3 border shadow">
+                    <div class="col p-3 ms-2 border shadow">
                         <h2>Test</h2>
                         <p>Test</p>
                     </div>
@@ -88,6 +97,16 @@
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
                 <script>
+                    $(document).ready(function(){
+                        $.ajax({
+                            url: 'php/fetch_tips_table.php',
+                            method: 'POST',
+                            success: function (response) {
+                                $("#tipsList").html(response);
+                            }
+                        });
+                    });
+                    
                     //Fade buttons
                     $('#fadebutton').on('click', function () {
                         document.getElementById("fademe").className = "d-flex alert alert-dismissible alert-success show";
@@ -95,19 +114,43 @@
                     })
                     $('#resetdelete').on('click', function () {
                         $.ajax({
-                            url: 'php/reset_data.php',
+                            url: 'php/data_reset.php',
                             method: 'POST'
                         });
                     })
                     $('#deletedelete').on('click', function () {
                         $.ajax({
-                            url: 'php/delete_data.php',
+                            url: 'php/data_delete.php',
                             method: 'POST'
                         });
                     })
+                    $('#refreshbtn').on('click', function () {
+                        $.ajax({
+                            url: 'php/fetch_tips_table.php',
+                            method: 'POST',
+                            success: function (response) {
+                                $("#tipsList").html(response);
+                            }
+                        })
+                    })
+                    
+                    $('#tuning-options').on('hide.bs.dropdown', ({ clickEvent }) => {
+                        if (clickEvent?.target) {
+                            var id = $(clickEvent.target).data('value');
+                            if (id != undefined) {
+                                $.ajax({
+                                    url: 'php/fetch_tips_list.php?id=' + id,
+                                    method: 'GET',
+                                    success: function (response) {
+                                        $('#selected-content').html(response);
+                                    }
+                                })
+                            }
+                        }
+                    })
+
 
                     const ctx = document.getElementById('myChart');
-
                     new Chart(ctx, {
                         type: 'bar',
                         data: {
