@@ -5,11 +5,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Listen for Xdebug",
-            "type": "php",
+            "type": "chrome",
             "request": "launch",
-            "port": 9003
-        },
+            "name": "Launch Tips Page",
+            "url": "http://localhost/SeniorPrj/zero-carbon-engagement-tools/index.html"
+          },
         {
             "name": "Launch currently open script",
             "type": "php",

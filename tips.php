@@ -236,36 +236,89 @@ if (isset($_POST['tipId']) && isset($_POST['comment']) && isset($_POST['date']))
 //-----------------------------------------------
 //-----------------------------------------------
 //-----------------------------------------------
+//Function that adds a like or dislike to the database
+//Parameters are the tip ID and a boolean, $feedback where True is a like
+//and False is a dislike
+function addFeeback($tID, $feedback){
+        //check if like or dislike and create sql statement
+        if($feedback == TRUE){
+                $sql = "UPDATE TIP_FEEDBACK SET TIP_LIKES = TIP_LIKES+1 WHERE T_ID = ?;";
+                 
+        } else{
+                $sql = "UPDATE TIP_FEEDBACK SET TIP_DISLIKES = TIP_DISLIKES+1 WHERE T_ID = ?;";
+        }
 
-if (isset($_POST['function_name']) && isset($_POST['tipId'])){
-        $funcName = $_POST['function_name'];
-        $tID = $_POST['tipId'];
+        //prepare and execute statement
+        $stmt = sqlsrv_prepare($conn, $sql, $tID); 
+        if ($stmt === false) {
+                echo "Error (sqlsrv_prepare): " . print_r(sqlsrv_errors(), true);
+                exit;
+              }
         
+              if (sqlsrv_execute($stmt) === false) {
+                echo "Error (sqlsrv_execute): " . print_r(sqlsrv_errors(), true);
+                exit;
+              }
+            sqlsrv_free_stmt($stmt);
+            sqlsrv_close($conn);
+}
+
+function getLikes($tID){
+        $sql = "SELECT TIP_LIKES FROM TIP_FEEDBACK WHERE T_ID = ?;";
+        //prepare and execute statement
+        $stmt = sqlsrv_prepare($conn, $sql, $tID); 
+        if ($stmt === false) {
+                echo "Error (sqlsrv_prepare): " . print_r(sqlsrv_errors(), true);
+                exit;
+              }
+        
+              if (sqlsrv_execute($stmt) === false) {
+                echo "Error (sqlsrv_execute): " . print_r(sqlsrv_errors(), true);
+                exit;
+              }
+              //TODO: add return statement with value
+            sqlsrv_free_stmt($stmt);
+            sqlsrv_close($conn);
+}
+
+function getDislikes($tID){
+        $sql = "SELECT TIP_DISLIKES FROM TIP_FEEDBACK WHERE T_ID = ?;";
+        //prepare and execute statement
+        $stmt = sqlsrv_prepare($conn, $sql, $tID); 
+        if ($stmt === false) {
+                echo "Error (sqlsrv_prepare): " . print_r(sqlsrv_errors(), true);
+                exit;
+              }
+        
+              if (sqlsrv_execute($stmt) === false) {
+                echo "Error (sqlsrv_execute): " . print_r(sqlsrv_errors(), true);
+                exit;
+              }
+              //TODO: add return statement with value
+            sqlsrv_free_stmt($stmt);
+            sqlsrv_close($conn);
+}
+
+if (isset($_POST['function_name']) && isset($_POST['args'])){
+        $funcName = $_POST['function_name'];
+        $tID = $_POST['args'];
+
        switch($funcName){
-          case 'addLike':
-                $sql = "UPDATE TIP_FEEDBACK SET TIP_LIKES = TIP_LIKES+1 WHERE T_ID = $tID;";
-                $result = sqlsrv_query($conn,$sql);
+          case 'addLike': 
+                addFeeback($tID, TRUE);
                 break;
           case 'addDislike':
-                $sql = "UPDATE TIP_FEEDBACK SET TIP_DISLIKES = TIP_DISLIKES+1 WHERE T_ID = $tID;";
-                $result = sqlsrv_query($conn,$sql);
+                addFeeback($tID, FALSE);
                 break;
           case 'getLikes':
-                $sql = "SELECT TIP_LIKES FROM TIP_FEEDBACK WHERE T_ID = $tID;";
-                $result = sqlsrv_query($conn,$sql);
+                getLikes($tID);
                 break;
           case 'getDislikes':
-                $sql = "SELECT TIP_DISLIKES FROM TIP_FEEDBACK WHERE T_ID = $tID;";
-                $result = sqlsrv_query($conn,$sql);
+                getDislikes($tID);
+                break;
            default:
                 //do nothing
        }
-       if ($result === false) {                                           // Checks if SQL query was successful or not                      
-        echo "Error (sqlsrv_query): " . print_r(sqlsrv_errors(), true);
-        exit;
-    }
-    sqlsrv_free_stmt($stmt);
-    sqlsrv_close($conn);
 }
 
 ?>

@@ -1,12 +1,12 @@
 <?php 
 use PHPUnit\Framework\TestCase;
 
-class TipsTest extends TestCase
+class FeedbackTest extends TestCase
 {
     
     public function testGetLikes()
     {
-        //using tip 1 for testing purposes, fake tip needs to be created later
+        //using tip 1 for testing purposes
         $tid = 1;
         $likes = 1;
 
@@ -16,7 +16,7 @@ class TipsTest extends TestCase
 
     public function testGetDislikes()
     {
-         //using tip 1 for testing purposes, fake tip needs to be created later
+         //using tip 1 for testing purposes
         $tid = 1;
         $dislikes = 1;
 
@@ -27,7 +27,7 @@ class TipsTest extends TestCase
 
     public function testLikeIncrement()
     {
-         //using tip 2 for testing purposes, fake tip needs to be created later
+         //using tip 2 for testing purposes
          $tid = 2;
          $likecount = tips::getLikes($tid);
          tips::addLike($tid);
@@ -39,7 +39,7 @@ class TipsTest extends TestCase
 
     public function testDislikeIncrement()
     {
-        //using tip 2 for testing purposes, fake tip needs to be created later
+        //using tip 2 for testing purposes
         $tid = 2;
         $dislikecount = tips::getLikes($tid);
         tips::addLike($tid);

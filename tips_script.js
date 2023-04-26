@@ -38,7 +38,7 @@ $(document).ready(function() {
                   // creating an array with two elements: 'dislikeBtn' and the tip id
                   // The [1] index is used to select the second element of the array
                   var tipId = this.id.split("-")[1];                                              // Get the tip id from the button id
-
+                  callDislikeFunction(tipId);
                   //console.log("User clicked 'Dislike' for Tip " + tipId);                       // Check if event listener is working, prints in web browser console log
                   
                   // Disable the 'dislike' button for this tip
@@ -49,7 +49,6 @@ $(document).ready(function() {
                   
                   // Store the state of this tip in sessionStorage
                   sessionStorage.setItem("tip-" + tipId, "dislike");
-                  callDislikeFunction(tipId);
               });
 
                 // add to plan button functionality under each tip
@@ -139,29 +138,21 @@ $(document).ready(function() {
         type: "POST",
         data: {
             function_name: 'addDislike',
-            arguments: [id]
-        }, 
-        success: function(id){
-            console.log("JS working for id " + id);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            // Error code
-            console.log(textStatus + ": " + errorThrown);
+            args: [id]
         }
     });   
 }
 
 //calls addLike() in tips.php which increments like count in DB
 function callLikeFunction(id) {
-    console.log("calling like function for tip" + id);
-	$.ajax({
-		url: "tips.php",
-		type: "POST",
-		data: {
-			function_name: ['addLike'],
-			tId: [id]
-		},
-	});   
+    $.ajax({
+        url: "tips.php",
+        type: "POST",
+        data: {
+            function_name: 'addLike',
+            args: [id]
+        }
+    });    
   }
 
 function showCart(tipsPlan, makeVisible)
@@ -252,47 +243,4 @@ function isEmptyCart()
         $('#tipsPlanStart').append(planRow);
         $('#printBtn').prop('disabled', true);
 }
-
-  //calls getLikes() in tips.php which gets the current like count from the DB
-//   function callGetLikesFunction(id) {
-// 	  var count = 0;
-// 	  $.ajax({
-// 		  url: "tips_feedback.php",
-// 		  type: "POST",
-// 		  data: {
-// 			  function_name: "getLikes",
-// 			  arguments: id
-// 		  },
-// 		  success: function(data) {
-// 			  count = data;
-// 		  },
-//           error: function(jqXHR, textStatus, errorThrown) {
-//             // Error code
-//             console.log(textStatus + ": " + errorThrown);
-//         }
-// 	  });   
-// 	  return count;
-// 	}
-	
-// 	//calls getDislikes() in tips.php which gets the current dislike count from the DB
-// 	function callGetDislikesFunction(id) {
-// 	  var count = 0;
-// 	  $.ajax({
-// 		  url: "tips_feedback.php",
-// 		  type: "POST",
-// 		  data: {
-// 			  function_name: "getDislikes",
-// 			  arguments: [id]
-// 		  },
-// 		  success: function(data) {
-// 			  count = data;
-// 		  },
-//           error: function(jqXHR, textStatus, errorThrown) {
-//             // Error code
-//             console.log(textStatus + ": " + errorThrown);
-//         }
-// 	  });
-// 	  return count;  
-	  
-// 	}
 
