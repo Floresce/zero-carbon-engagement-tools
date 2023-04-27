@@ -1,49 +1,36 @@
 $(document).ready(function() {
 
-const searchBox = document.getElementById("search-box");
-const min_length = 3;
+  // Bind a submit event handler to the form
+  $('#search_form').on('submit', function(event) {
+    // Prevent the default form submission behavior
+    event.preventDefault();
 
-function submitSearch(event) {
-  event.preventDefault(); //Prevents form submission and will give an alert 
-  const query = searchBox.value.trim();
-    if (query.length < min_length) {
-      alert("Search keyword must be at least " + min_length + " characters long.");
-      return;
-  }
-  //if the minimum keyword length meets the requirments, then the form will be set to search.php and submitted
-    else{
-      const form = document.getElementById("search_form");
-      form.action = "search.php"; 
-      form.submit(); 
-  }
-}
+    // Get the form data
+    var formData = $(this).serialize();
 
-//Add event listener to the form element
-const searchForm = document.getElementById("search_form");
-searchForm.addEventListener("submit", submitSearch);
+    // Store the reference to the form
+    var form = this;
 
+    // Make an AJAX request to the PHP file
+    $.ajax({
+      type: 'POST',
+      url: 'search.php',
+      data: formData,
+      dataType: 'html',
+      success: function(response) {
+        // Handle the response
+        $("#search-results").html(response);
 
-  //will allow the search results to pass in the URL
-  /*Have to check if search-results exsists before setting the innerHTML
-  If it doesn't then the code will not execute, preventing a 
-  "Cannot set properties of null (setting 'innerHTML')" error in the index.html 
-  The innerHTML exsists in the results.html file and will execute the code*/
-const searchResultsElement = document.getElementById("search-results");
-  if (searchResultsElement !== null) {
-    let searchResults = new URLSearchParams(window.location.search).get('search_results');
-    searchResultsElement.innerHTML = searchResults;
-
-
-  //If there are 0 results for a search, then a message will be displayed
-  if (searchResults == 0) {
-    const searchResultsElement = document.getElementById("search-results");
-    searchResultsElement.innerHTML = "No results found for your search, please try again.";
-    searchResultsElement.style.fontSize = "24px"; 
-  }
-
-  const titleElement = document.getElementById("title");
-    let title = new URLSearchParams(window.location.search).get('title');
-    titleElement.innerHTML = title;
-  }
-  
+        // Update the URL query parameter with the current search query
+        const searchQuery = $(form).find('[name=query]').val();
+        const url = new URL(window.location.href);
+        url.searchParams.set('query', searchQuery);
+        window.history.pushState({}, '', url.toString());
+      },
+      error: function(xhr, status, error) {
+        // Handle errors
+        console.error(xhr.responseText);
+      }
+    });
+  });
 }); // End of $(document).ready(function() {

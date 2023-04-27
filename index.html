@@ -51,7 +51,7 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="dashboard/">Dashboard</a></li>
                                 <li><button class="dropdown-item" id="planBtn" data-bs-toggle="offcanvas"
-                                    data-bs-target="#tipsCanvasRight" aria-controls="tipsCanvasRight">Tips Plan</button></li>
+                                    data-bs-target="#tipsCanvasRight" aria-controls="tipsCanvasRight">Tips Plan</button></li> 
                             </ul>
                         </li>
                     </ul>
@@ -88,10 +88,18 @@
                 <!-- Search bar -->
                 <div class="col">
                     <div class="search">
-                        <form action="#" method="POST" id="search_form" target="_blank">
-                            <input type=" text" placeholder=" Keyword Tip Search" name="query" id="search-box"/>
-                            <button type="submit"><i class="fa fa-search"></i></button>
+                        <form action="results.html" method="GET" id="search_form" target="_self">
+                            <input type=" text" placeholder=" Search For Tips" name="query" id="search-box"/>
+                            <button type="submit" onclick="submitForm();"><i class="fa fa-search"></i></button>
                         </form>
+                        <script>
+                            function submitForm() {
+                            //Get the value of the search input field
+                            var query = $("#search-box").val();  
+                            //Redirect to results page with query as URL parameter
+                            window.location.href = "results.html?query=" + query;  
+                        }
+                     </script>
                     </div>
                 </div>
                 <form id="tips_form">
