@@ -87,8 +87,7 @@ if (count($rows) > 0) {
 }
   
 else {
-    echo 'No results found for "' . $query . '".';
-   // echo "No results. Please try again";
+    echo '<div id style="text-align: center;"> No results found for "' . $query . '".</div><br>'; 
     die(print_r(sqlsrv_errors(), true));
 }
 
@@ -101,7 +100,7 @@ sqlsrv_close($conn);
 
 }
 else {
-    echo "Please enter at least 3 characters to perform a search.";
+    echo '<div id style="text-align: center;"> Please enter at least 3 characters to perform a search.</div><br>'; 
 }
 
 ?>
