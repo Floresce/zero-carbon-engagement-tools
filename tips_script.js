@@ -74,6 +74,11 @@ $(document).ready(function() {
                     atpDiv.innerText = sessionStorage.getItem("atpDiv-" + tipId);
     
                     showCart(tipsPlan, true);
+
+                    $.ajax({
+                        url: '/dashboard/main/php/addtoplanclick.php?id=' + tipId,
+                        method: 'POST'
+                    })
     
                 });
 
@@ -133,26 +138,34 @@ $(document).ready(function() {
       //ToDo: add error handling to below functions
   //calls addDislike() in tips.php which increments dislike count in DB
   function callDislikeFunction(id) {
+    // $.ajax({
+    //     url: "tips.php",
+    //     type: "POST",
+    //     data: {
+    //         function_name: 'addDislike',
+    //         args: [id]
+    //     }
+    // });   
     $.ajax({
-        url: "tips.php",
-        type: "POST",
-        data: {
-            function_name: 'addDislike',
-            args: [id]
-        }
-    });   
+        url: '/dashboard/main/php/dislike.php?id=' + id,
+        method: 'POST'
+    })
 }
 
 //calls addLike() in tips.php which increments like count in DB
 function callLikeFunction(id) {
+    // $.ajax({
+    //     url: "tips.php",
+    //     type: "POST",
+    //     data: {
+    //         function_name: 'addLike',
+    //         args: [id]
+    //     }
+    // });    
     $.ajax({
-        url: "tips.php",
-        type: "POST",
-        data: {
-            function_name: 'addLike',
-            args: [id]
-        }
-    });    
+        url: '/dashboard/main/php/like.php?id=' + id,
+        method: 'POST'
+    })
   }
 
 function showCart(tipsPlan, makeVisible)
