@@ -18,13 +18,16 @@
                     <div class="col-9 d-flex flex-row ">
                         <h1>Dashboard</h1>
                     </div>
+                    <!--
                     <div class="col-3 d-flex flex-row-reverse ">
                         <button class="btn btn-danger" id="button">
                             <span class="glyphicon glyphicon-open" aria-hidden="true"></span> Export data
                         </button>
                     </div>
+-->
                 </div>
 
+                <!--
                 <div class="row my-4">
                     <div class="col p-5 border shadow" style="background-color: #EDEAE8">
                         <h2 class="text-center">Popular Tip</h2>
@@ -42,12 +45,13 @@
                         <p class="text-center">(As of 03/16/2023 00:00:00)</p>
                     </div>
                 </div>
+-->
 
                 <div class="row border my-4 shadow">
                     <div class="btn-group my-3" role="group">
                         <div class="btn-group dropdown-center w-100" id="tuning-options" role="group">
                             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown button
+                                Tip Details
                             </button>
                             <ul id="tipsList" class="dropdown-menu">
                             </ul>
@@ -70,20 +74,21 @@
                 </div>
 
                 <div class="row my-4">
-                    <div class="col p-3 me-2 border shadow">
+                    <div class="col p-3 me-2 border shadow" style="background-color: #EDEAE8">
                         <h2>Reset data</h2>
-                        <p>Click button to reset shit</p>
+                        <!--<p>Click button to reset shit</p>-->
                         <button class="btn btn-danger" id="resetdelete">
                             Reset
                         </button>
                     </div>
-                    <div class="col p-3 ms-2 mx-2 border shadow">
+                    <div class="col p-3 ms-2 mx-2 border shadow" style="background-color: #EDEAE8">
                         <h2>Delete data</h2>
-                        <p>Click button to delete shit</p>
+                        <!--<p>Click button to delete shit</p>-->
                         <button class="btn btn-warning" id="deletedelete">
                             Delete
                         </button>
                     </div>
+                    <!--
                     <div class="col p-3 mx-2 me-2 border shadow">
                         <h2>Test</h2>
                         <p>Test</p>
@@ -92,6 +97,7 @@
                         <h2>Test</h2>
                         <p>Test</p>
                     </div>
+                    -->
                 </div>
 
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
