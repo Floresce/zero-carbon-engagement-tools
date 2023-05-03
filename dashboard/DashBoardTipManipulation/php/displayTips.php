@@ -1,7 +1,23 @@
 <?php
 
 
-require_once('database.php');
+$servername = "BOOKPRO";        // Subject to change depending on server name (Anne: DESKTOP-UK8K0FD, Leo: MineHarth)
+$database = "master";                     // Subject to change depending on database name
+$username = "admin";
+$password = "admin";
+
+$connectionInfo = array(
+    "Database" => $database,
+    "UID" => $username,
+    "PWD" => $password
+);
+ // sqlsrv_connect function is called to establish connection to Microsoft SQL Server database
+$conn = sqlsrv_connect($servername, $connectionInfo);
+    
+    if( $conn === false ) {
+        echo "Connection could not be established.\n";
+        die( print_r( sqlsrv_errors(), true));
+    }  
 
     $sql = "SELECT * FROM TIPS";
     $stmt = sqlsrv_query($conn, $sql);
@@ -55,10 +71,13 @@ if (count($rows) > 0) {
         $table .= '<td>' . $RATE . '</td>';
         $table .= '<td>' . $C_NAME . '</td>';
         $table .= '<td>' . $SUB_NAME . '</td>';
-        $table .= '</tr>';
-    }
+        $table .= '<td><button onclick="openEditModal(' . $TID . ', \'' . $T_DES_ENG . '\', \'' . $T_DES_SPA . '\', \'' . $RATE . '\', \'' . $C_NAME . '\', \'' . $SUB_NAME . '\')">Edit</button></td>';
+                $table .= '</tr>';
+        }
 
     $table .= '</table>';
+
+    
 
     // Output the table as the response
     echo $table;
@@ -66,3 +85,36 @@ if (count($rows) > 0) {
     // No data was returned
     echo 'No results found.';
 }
+
+
+?>
+<script>
+function openEditModal(TID, T_DES_ENG, T_DES_SPA, RATE, C_NAME, SUB_NAME) {
+  // Add a console log to test the TID value
+  console.log("Edit button clicked for TID:", TID);
+
+  // Get the modal element
+  var modal = document.getElementById("edit-modal");
+
+  // Set the value of the input fields in the modal
+  var tidInput = modal.querySelector('input[name="tid"]');
+  tidInput.value = TID;
+
+  var tDesEngInput = modal.querySelector('input[name="tip-desc"]');
+  tDesEngInput.value = T_DES_ENG;
+
+  var tDesSpaInput = modal.querySelector('input[name="spanish-desc"]');
+  tDesSpaInput.value = T_DES_SPA;
+
+  var rateInput = modal.querySelector('input[name="rate"]');
+  rateInput.value = RATE;
+
+  var cNameInput = modal.querySelector('input[name="category"]');
+  cNameInput.value = C_NAME;
+
+  var subNameInput = modal.querySelector('input[name="sub-category"]');
+  subNameInput.value = SUB_NAME;
+
+  // Show the modal
+  modal.style.display = "block";
+}</script>
