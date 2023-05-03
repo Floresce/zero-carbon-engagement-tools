@@ -1,9 +1,9 @@
 <?php
 
-$servername = "BOOKPRO";        // Subject to change depending on server name (Anne: DESKTOP-UK8K0FD, Leo: MineHarth)
-$database = "master";                     // Subject to change depending on database name
-$username = "admin";
-$password = "admin";
+$servername = "programmedelic.database.windows.net";        // Subject to change depending on server name (Anne: DESKTOP-UK8K0FD, Leo: MineHarth)
+$database = "tips";                     // Subject to change depending on database name
+$username = "sa_user";
+$password = "Programmadelic_123!";
 
 $connectionInfo = array(
     "Database" => $database,
