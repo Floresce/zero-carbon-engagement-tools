@@ -4,8 +4,10 @@ include 'config.php';
 
 $tipId = 0;
 
+//NEW (05/01/23)- updated the query to now get the cat name and sub cat name
 // Prepare and execute SQL statement with variable
-$sql = "SELECT T.T_ID, T_DESC_ENGLISH FROM TIPS T WHERE T.T_ID = ?";
+$sql = "SELECT *  
+FROM dbo.TIPS, dbo.CATEGORY, dbo.SUBCATEGORY  WHERE T_ID = ?";
 $stmt = sqlsrv_prepare($conn, $sql, array(&$tipId));
 
 if( !$stmt ) {
@@ -13,6 +15,7 @@ if( !$stmt ) {
 }
 
 $tipId = $_GET['tipId'];
+
 
 sqlsrv_execute($stmt);
 
@@ -37,4 +40,3 @@ sqlsrv_close($conn);
 header('Content-Type: application/json');
 echo json_encode($rows);
 ?>
-

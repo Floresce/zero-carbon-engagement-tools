@@ -226,9 +226,6 @@ function showCart(tipsPlan, makeVisible)
             });
         }
     }
-    else {
-
-    }
 }
 
 function isEmptyCart()
@@ -243,4 +240,3 @@ function isEmptyCart()
         $('#tipsPlanStart').append(planRow);
         $('#printBtn').prop('disabled', true);
 }
-
