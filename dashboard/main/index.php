@@ -73,32 +73,20 @@
                     <!--User Behavior table (end)-->
                 </div>
 
-                <div class="row my-4">
+                <!-- <div class="row my-4">
                     <div class="col p-3 me-2 border shadow" style="background-color: #EDEAE8">
                         <h2>Reset data</h2>
-                        <!--<p>Click button to reset shit</p>-->
                         <button class="btn btn-danger" id="resetdelete">
                             Reset
                         </button>
                     </div>
                     <div class="col p-3 ms-2 mx-2 border shadow" style="background-color: #EDEAE8">
                         <h2>Delete data</h2>
-                        <!--<p>Click button to delete shit</p>-->
                         <button class="btn btn-warning" id="deletedelete">
                             Delete
                         </button>
                     </div>
-                    <!--
-                    <div class="col p-3 mx-2 me-2 border shadow">
-                        <h2>Test</h2>
-                        <p>Test</p>
-                    </div>
-                    <div class="col p-3 ms-2 border shadow">
-                        <h2>Test</h2>
-                        <p>Test</p>
-                    </div>
-                    -->
-                </div>
+                </div> -->
 
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 

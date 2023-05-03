@@ -6,7 +6,7 @@
 
 
 <div class="table-responsive p-4">
-    <h3>User Behavior</h3>
+    <h3>Tips Telemetry</h3>
     <table id="myTable2" class="table">
         <thead>
             <tr>
@@ -22,7 +22,7 @@
         <tbody>
         </tbody>
     </table>
-    <button id="add-data-button">Add Data</button>
+    <!-- <button id="add-data-button">Add Data</button> -->
 </div>
 
 <script>

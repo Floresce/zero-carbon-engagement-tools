@@ -23,5 +23,8 @@ require_once('database.php');
         echo "Error (sqlsrv_query): " . print_r(sqlsrv_errors(), true);
         exit;
     }
+    else{
+        echo" Your Sub-Category Has Been Added";
+    }
     
 ?>
