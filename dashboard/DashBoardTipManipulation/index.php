@@ -22,6 +22,32 @@
     </div>
     -->
 
+    <div id="edit-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <h2>Edit Tip</h2>
+    <form>
+      <input type="hidden" name="tid" id="tid-input">
+      <label for="tip-desc-input">English Description:</label>
+      <input type="text" name="tip-desc" id="tip-desc-input">
+      <label for="spanish-desc-input">Spanish Description:</label>
+      <input type="text" name="spanish-desc" id="spanish-desc-input">
+      <label for="rate-input">Rate:</label>
+      <input type="text" name="rate" id="rate-input">
+      <label for="category-input">Category:</label>
+      <input type="text" name="category" id="category-input">
+      <label for="sub-category-input">Subcategory:</label>
+      <input type="text" name="sub-category" id="sub-category-input">
+      <br>        <br>       <br>       <br>  
+      <div class="button-wrapper">
+  <button type="button" id="deleteButtn">Delete</button>
+  <button type="button" id="modal-Save">Save</button>
+</div>
+    </form>
+  </div>
+</div>
+
+
     <div id="Tips" class="tabcontent">
         <div id="tableDiv"></div>
         <div id="resultsTableTIPS" class="results-container"></div>
@@ -43,12 +69,8 @@
         <input type="text" id="PLinks" name="category"><br>
         <label for="category-input">Secondary links related to the tip: a</label>
         <input type="text" id="SLinks" name="category"><br>
-        <button type="submit" id="TIPADD">SAVE</button>
+        <button type="addTip" id="TIPADD">SAVE</button>
         <br> <br>
-        <label for="category-input">Enter ID of TIP to remove:</label>
-        <input type="text" id="DELTIPname" name="removeTIP" required>
-        <br>
-        <button type="submit" id="TIPDEL">DELETE</button>
     </div>
 
     <div id="Categorie" class="tabcontent">
@@ -84,10 +106,66 @@
 
     </div>
 
+
+
     </main>
 
 
     <script>
+$("#modal-Save").on("click", function() {
+  // get values from input fields in modal
+  var Tid = $("#tid-input").val();
+  var ENdescription = $("#tip-desc-input").val();
+  var ESdescription = $("#spanish-desc-input").val();
+  var Category = $("#category-input").val();
+  var Subcategory = $("#sub-category-input").val();
+  var Rate = $("#rate-input").val();
+  var PLinks = $("#PLinks").val();
+  var SLinks = $("#SLinks").val();
+
+                  // check if required fields are empty
+                  if (ENdescription.trim() === "" || Category.trim() === "" || Subcategory.trim() === "") {
+                    alert("Please fill all required fields");
+                    return;
+                }
+
+                // set empty string for fields that are not filled
+                if (ESdescription.trim() === "") {
+                    ESdescription = "";
+                }
+                if (Rate.trim() === "") {
+                    Rate = "";
+                }
+                if (PLinks.trim() === "") {
+                    PLinks = "";
+                }
+                if (SLinks.trim() === "") {
+                    SLinks = "";
+                }
+
+  
+  // send AJAX request with data
+  $.ajax({
+    url: 'php/updateTip.php',
+    method: 'POST',
+    data: {
+      Tid: Tid,
+      ENdescription: ENdescription,
+      ESdescription: ESdescription,
+      Category: Category,
+      Subcategory: Subcategory,
+      Rate: Rate,
+      PLinks: PLinks,
+      SLinks: SLinks,
+    },
+ success: function (data) {
+    // Close the modal
+  document.getElementById('edit-modal').style.display = 'none';
+}  
+
+  });
+});
+
         $(document).ready(function () {
             //AJAX for adding TIP
             $("#TIPADD").click(function () {
@@ -156,6 +234,7 @@
                     success: function (data) {
                         alert(data);
                     }
+                    
                 });
             });
 
@@ -178,28 +257,24 @@
                 });
             });
 
-            //AJAX for deleting TIP
-            $("#TIPDEL").click(function () {
-                var ID = $("#DELTIPname").val();
-                if (ID.trim() === "") {
-                    alert("Please enter a value");
-                    return;
-                }
-                if (!$.isNumeric(ID)) {
-                    alert("Please enter a valid integer");
-                    return;
-                }
-                $.ajax({
-                    url: 'php/TIPDEL.php',
-                    method: 'POST',
-                    data: {
-                        ID: ID,
-                    },
-                    success: function (data) {
-                        alert(data);
-                    }
-                });
-            });
+              // AJAX for deleting TIP button
+$("#deleteButtn").click(function () {
+    var Tid = $("#tid-input").val();
+
+    $.ajax({
+        url: 'php/TIPDEL.php',
+        method: 'POST',
+        data: {
+            Tid: Tid,
+        },
+        success: function (data) {
+            alert(data);
+            document.getElementById('edit-modal').style.display = 'none';
+        }
+    });
+});
+
+
 
             //AJAX for deleting CATEGORY
             $("#CATDEL").click(function () {
@@ -291,7 +366,23 @@
             $("#refreshButton").click(function () {
                 displayTIPS();
             });
-        });
+
+const closeBtn = document.querySelector('.close-btn');
+closeBtn.addEventListener('click', () => {
+  // code to close the modal
+  document.getElementById('edit-modal').style.display = 'none';
+});
+
+
+
+
+
+
+});
+
+
+
+        
 
 
     </script>
