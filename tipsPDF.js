@@ -64,7 +64,7 @@ function print()
     var element = document.getElementById('WholePlan');
     var opt = {
         margin: 8,
-        filename: 'test_file.pdf',
+        filename: 'tips_plan.pdf',
         image: { type: 'jpeg', quality: 1.00 },
         html2canvas: { scale: 2 },
         jsPDF: { unit: 'mm', format: 'letter', orientation: 'portrait' },
