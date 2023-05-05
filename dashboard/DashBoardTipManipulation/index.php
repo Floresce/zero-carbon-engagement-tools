@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-    <?php include '../index.php';?>
+<?php include '../index.php'; ?>
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
@@ -13,8 +14,8 @@
 
 <body>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-    
-    <!--
+
+        <!-- Old tabs inside tip modification
     <div class="tab">
         <button class="tablinks" onclick="openTab(event, 'Tips')">Tips</button>
         <button class="tablinks" onclick="openTab(event, 'Categorie')">Category</button>
@@ -22,149 +23,145 @@
     </div>
     -->
 
-    <div id="edit-modal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn">&times;</span>
-    <h2>Edit Tip</h2>
-    <form>
-      <input type="hidden" name="tid" id="tid-input">
-      <label for="tip-desc-input">English Description:</label>
-      <input type="text" name="tip-desc" id="tip-desc-input">
-      <label for="spanish-desc-input">Spanish Description:</label>
-      <input type="text" name="spanish-desc" id="spanish-desc-input">
-      <label for="rate-input">Rate:</label>
-      <input type="text" name="rate" id="rate-input">
-      <label for="category-input">Category:</label>
-      <input type="text" name="category" id="category-input">
-      <label for="sub-category-input">Subcategory:</label>
-      <input type="text" name="sub-category" id="sub-category-input">
-      <br>        <br>       <br>       <br>  
-      <div class="button-wrapper">
-  <button type="button" id="deleteButtn">Delete</button>
-  <button type="button" id="modal-Save">Save</button>
-</div>
-    </form>
-  </div>
-</div>
+        <!-- Pop up modal normally hidden, shown when edit button is clicked -->
+        <div id="edit-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h2>Edit Tip</h2>
+                <form>
+                    <input type="hidden" name="tid" id="tid-input">
+                    <label for="tip-desc-input">English Description:</label>
+                    <input type="text" name="tip-desc" id="tip-desc-input">
+                    <label for="spanish-desc-input">Spanish Description:</label>
+                    <input type="text" name="spanish-desc" id="spanish-desc-input">
+                    <label for="rate-input">Rate:</label>
+                    <input type="text" name="rate" id="rate-input">
+                    <label for="category-input">Category:</label>
+                    <input type="text" name="category" id="category-input">
+                    <label for="sub-category-input">Subcategory:</label>
+                    <input type="text" name="sub-category" id="sub-category-input">
+                    <br> <br> <br> <br>
+                    <div class="button-wrapper">
+                        <button type="button" id="deleteButtn">Delete</button>
+                        <button type="button" id="modal-Save">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
+        <!-- Tips tab all corresponding fields -->
+        <div id="Tips" class="tabcontent">
+            <div id="tableDiv"></div>
+            <div id="resultsTableTIPS" class="results-container"></div>
+            <button id="refreshButton">Refresh</button>
+            <br> <br>
+            <label for="text"><span class="required">(* is required)</span></label>
+            <br>
+            <label for="category-input">English description of tip:<span class="required">(*)</span></label>
+            <input type="text" id="ENdescription" name="category" required><br>
+            <label for="category-input">Spanish description of tip:</label>
+            <input type="text" id="ESdescription" name="category"><br>
+            <label for="category-input">Category of tip:<span class="required">(*)</span></label>
+            <input type="text" id="Category" name="category" required><br>
+            <label for="category-input">Sub-Category of tip:<span class="required">(*)</span></label>
+            <input type="text" id="Subcategory" name="category" required><br>
+            <label for="category-input">Rate of tip:</label>
+            <input type="text" id="Rate" name="category"><br>
+            <label for="category-input">Primary links related to the tip:</label>
+            <input type="text" id="PLinks" name="category"><br>
+            <label for="category-input">Secondary links related to the tip:</label>
+            <input type="text" id="SLinks" name="category"><br>
+            <button type="addTip" id="TIPADD">SAVE</button>
+            <br> <br>
+        </div>
 
-    <div id="Tips" class="tabcontent">
-        <div id="tableDiv"></div>
-        <div id="resultsTableTIPS" class="results-container"></div>
-        <button id="refreshButton">Refresh</button>
-        <br> <br>
-        <label for="text"><span class="required">(* is required)</span></label>
-        <br>
-        <label for="category-input">English description of tip:<span class="required">(*)</span></label>
-        <input type="text" id="ENdescription" name="category" required><br>
-        <label for="category-input">Spanish description of tip:</label>
-        <input type="text" id="ESdescription" name="category"><br>
-        <label for="category-input">Category of tip:<span class="required">(*)</span></label>
-        <input type="text" id="Category" name="category" required><br>
-        <label for="category-input">Sub-Category of tip:<span class="required">(*)</span></label>
-        <input type="text" id="Subcategory" name="category" required><br>
-        <label for="category-input">Rate of tip:</label>
-        <input type="text" id="Rate" name="category"><br>
-        <label for="category-input">Primary links related to the tip: a</label>
-        <input type="text" id="PLinks" name="category"><br>
-        <label for="category-input">Secondary links related to the tip: a</label>
-        <input type="text" id="SLinks" name="category"><br>
-        <button type="addTip" id="TIPADD">SAVE</button>
-        <br> <br>
-    </div>
+        <!-- Categorie tab and corresponding fields-->
+        <div id="Categorie" class="tabcontent">
+            <div id="tableDiv"></div>
+            <div id="resultsTableCAT" class="results-container"></div>
+            <button id="refreshButtonCAT">Refresh</button>
+            <br>
+            <label for="category-input">Enter a Category to add:</label>
+            <input type="text" id="CATname" name="submitCAT" required>
+            <button type="submit" id="CATADD">SAVE</button>
+            <br>
+            <label for="category-input">Enter a Category to remove:</label>
+            <input type="text" id="DELCATname" name="submitCAT" required>
+            <button type="submit" id="CATDEL">SAVE</button>
+        </div>
 
-    <div id="Categorie" class="tabcontent">
-
-        <div id="tableDiv"></div>
-        <div id="resultsTableCAT" class="results-container"></div>
-        <button id="refreshButtonCAT">Refresh</button>
-        <br>
-        <label for="category-input">Enter a Category to add:</label>
-        <input type="text" id="CATname" name="submitCAT" required>
-        <button type="submit" id="CATADD">SAVE</button>
-        <br>
-        <label for="category-input">Enter a Category to remove:</label>
-        <input type="text" id="DELCATname" name="submitCAT" required>
-        <button type="submit" id="CATDEL">SAVE</button>
-
-    </div>
-
-    <div id="Sub-Category" class="tabcontent">
-
-        <div id="tableDiv"></div>
-        <div id="resultsTableSUB" class="results-container"></div>
-        <button id="refreshButtonSUB">Refresh</button>
-        <br>
-
-        <label for="category-input">Enter a Sub-category to add:</label>
-        <input type="text" id="SUBname" name="submitSUB" required>
-        <button type="submit" id="SUBADD">SAVE</button>
-        <br>
-        <label for="category-input">Enter a Sub-category to remove:</label>
-        <input type="text" id="DELSUBname" name="submitSUB" required>
-        <button type="submit" id="SUBDEL">SAVE</button>
-
-    </div>
-
-
-
+        <!-- Sub-Category tab and corresponding fields -->
+        <div id="Sub-Category" class="tabcontent">
+            <div id="tableDiv"></div>
+            <div id="resultsTableSUB" class="results-container"></div>
+            <button id="refreshButtonSUB">Refresh</button>
+            <br>
+            <label for="category-input">Enter a Sub-category to add:</label>
+            <input type="text" id="SUBname" name="submitSUB" required>
+            <button type="submit" id="SUBADD">SAVE</button>
+            <br>
+            <label for="category-input">Enter a Sub-category to remove:</label>
+            <input type="text" id="DELSUBname" name="submitSUB" required>
+            <button type="submit" id="SUBDEL">SAVE</button>
+        </div>
     </main>
 
-
+    <!-- Beginning of scripts: ajax calls and lisenters-->
     <script>
-$("#modal-Save").on("click", function() {
-  // get values from input fields in modal
-  var Tid = $("#tid-input").val();
-  var ENdescription = $("#tip-desc-input").val();
-  var ESdescription = $("#spanish-desc-input").val();
-  var Category = $("#category-input").val();
-  var Subcategory = $("#sub-category-input").val();
-  var Rate = $("#rate-input").val();
-  var PLinks = $("#PLinks").val();
-  var SLinks = $("#SLinks").val();
+        // Scipt to save input fields on modal when called
+        $("#modal-Save").on("click", function () {
+            // get values from input fields in modal
+            var Tid = $("#tid-input").val();
+            var ENdescription = $("#tip-desc-input").val();
+            var ESdescription = $("#spanish-desc-input").val();
+            var Category = $("#category-input").val();
+            var Subcategory = $("#sub-category-input").val();
+            var Rate = $("#rate-input").val();
+            var PLinks = $("#PLinks").val();
+            var SLinks = $("#SLinks").val();
 
-                  // check if required fields are empty
-                  if (ENdescription.trim() === "" || Category.trim() === "" || Subcategory.trim() === "") {
-                    alert("Please fill all required fields");
-                    return;
+            // check if required fields are empty
+            if (ENdescription.trim() === "" || Category.trim() === "" || Subcategory.trim() === "") {
+                alert("Please fill all required fields");
+                return;
+            }
+
+            // set empty string for fields that are not filled
+            if (ESdescription.trim() === "") {
+                ESdescription = "";
+            }
+            if (Rate.trim() === "") {
+                Rate = "";
+            }
+            if (PLinks.trim() === "") {
+                PLinks = "";
+            }
+            if (SLinks.trim() === "") {
+                SLinks = "";
+            }
+
+
+            // send AJAX request with data
+            $.ajax({
+                url: 'php/updateTip.php',
+                method: 'POST',
+                data: {
+                    Tid: Tid,
+                    ENdescription: ENdescription,
+                    ESdescription: ESdescription,
+                    Category: Category,
+                    Subcategory: Subcategory,
+                    Rate: Rate,
+                    PLinks: PLinks,
+                    SLinks: SLinks,
+                },
+                success: function (data) {
+                    // Close the modal
+                    document.getElementById('edit-modal').style.display = 'none';
                 }
 
-                // set empty string for fields that are not filled
-                if (ESdescription.trim() === "") {
-                    ESdescription = "";
-                }
-                if (Rate.trim() === "") {
-                    Rate = "";
-                }
-                if (PLinks.trim() === "") {
-                    PLinks = "";
-                }
-                if (SLinks.trim() === "") {
-                    SLinks = "";
-                }
-
-  
-  // send AJAX request with data
-  $.ajax({
-    url: 'php/updateTip.php',
-    method: 'POST',
-    data: {
-      Tid: Tid,
-      ENdescription: ENdescription,
-      ESdescription: ESdescription,
-      Category: Category,
-      Subcategory: Subcategory,
-      Rate: Rate,
-      PLinks: PLinks,
-      SLinks: SLinks,
-    },
- success: function (data) {
-    // Close the modal
-  document.getElementById('edit-modal').style.display = 'none';
-}  
-
-  });
-});
+            });
+        });
 
         $(document).ready(function () {
             //AJAX for adding TIP
@@ -234,7 +231,7 @@ $("#modal-Save").on("click", function() {
                     success: function (data) {
                         alert(data);
                     }
-                    
+
                 });
             });
 
@@ -257,22 +254,22 @@ $("#modal-Save").on("click", function() {
                 });
             });
 
-              // AJAX for deleting TIP button
-$("#deleteButtn").click(function () {
-    var Tid = $("#tid-input").val();
+            // AJAX for deleting TIP button
+            $("#deleteButtn").click(function () {
+                var Tid = $("#tid-input").val();
 
-    $.ajax({
-        url: 'php/TIPDEL.php',
-        method: 'POST',
-        data: {
-            Tid: Tid,
-        },
-        success: function (data) {
-            alert(data);
-            document.getElementById('edit-modal').style.display = 'none';
-        }
-    });
-});
+                $.ajax({
+                    url: 'php/DELTIP.php',
+                    method: 'POST',
+                    data: {
+                        Tid: Tid,
+                    },
+                    success: function (data) {
+                        alert(data);
+                        document.getElementById('edit-modal').style.display = 'none';// hide modal after deleting
+                    }
+                });
+            });
 
 
 
@@ -284,7 +281,7 @@ $("#deleteButtn").click(function () {
                     return;
                 }
                 $.ajax({
-                    url: 'php/CATDEL.php',
+                    url: 'php/DELCAT.php',
                     method: 'POST',
                     data: {
                         name: name,
@@ -303,19 +300,19 @@ $("#deleteButtn").click(function () {
                     return;
                 }
                 $.ajax({
-                    url: 'php/SUBDEL.php',
+                    url: 'php/DELSUB.php',
                     method: 'POST',
                     data: {
                         name: name,
                     },
                     success: function (data) {
-                        alert(data); // lets you know if worked
+                        alert(data);
 
                     }
                 });
             });
 
-
+            // displays CATEGORIES 
             function displaySUB() {
                 $.ajax({
                     url: 'php/displaySUB.php',
@@ -367,26 +364,15 @@ $("#deleteButtn").click(function () {
                 displayTIPS();
             });
 
-const closeBtn = document.querySelector('.close-btn');
-closeBtn.addEventListener('click', () => {
-  // code to close the modal
-  document.getElementById('edit-modal').style.display = 'none';
-});
+            const closeBtn = document.querySelector('.close-btn');
+            closeBtn.addEventListener('click', () => {
+                // code to close the modal
+                document.getElementById('edit-modal').style.display = 'none';
+            });
 
-
-
-
-
-
-});
-
-
-
-        
-
-
+        });
     </script>
-    
+
     <script src="js\DashBoardTab.js"></script>
 
 </body>
