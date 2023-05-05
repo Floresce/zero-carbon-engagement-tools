@@ -15,9 +15,9 @@
 * [Tools and Techonologies](#tools-and-technologies)
 * [Deployment](#deployment)
 * [Testing](#testing)
+* [Documentation](#documentation)
 * [Timeline](#timeline)
 * [Database Diagram](#database-diagram)
-* [Documentation](#documentation)
 * [Preview](#preview)
 
 
