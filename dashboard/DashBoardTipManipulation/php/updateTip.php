@@ -1,6 +1,23 @@
 <?php
 
-require_once('database.php');
+$servername = "BOOKPRO"; // Subject to change depending on server name (Anne: DESKTOP-UK8K0FD, Leo: MineHarth)
+$database = "master"; // Subject to change depending on database name
+$username = "admin";
+$password = "admin";
+
+$connectionInfo = array(
+    "Database" => $database,
+    "UID" => $username,
+    "PWD" => $password
+);
+
+// sqlsrv_connect function is called to establish connection to Microsoft SQL Server database
+$conn = sqlsrv_connect($servername, $connectionInfo);
+
+if ($conn === false) {
+    echo "Connection could not be established.\n";
+    die(print_r(sqlsrv_errors(), true));
+}
 
 // Get T_ID to edit from POST data
 $T_ID = $_POST['Tid'];
@@ -39,13 +56,14 @@ if (!$row) {
 }
 $SUB_ID = $row['SUB_ID'];
 
-// Update TIP with matching T_ID
+// remaining unique data
 $T_DESC_ENGLISH = $_POST['ENdescription'];
 $T_DESC_SPANISH = $_POST['ESdescription'];
 $RATE = $_POST['Rate'];
 $PRIMARY_LINK = $_POST['PLinks'];
 $SECONDARY_LINK = $_POST['SLinks'];
 
+// make the call to the database with all dat that will be changed
 $sql = "UPDATE TIPS SET T_DESC_ENGLISH = ?, T_DESC_SPANISH = ?, RATE = ?, PRIMARY_LINK = ?, SECONDARY_LINK = ?, C_ID = ?, SUB_ID = ? WHERE T_ID = ?";
 $params = array($T_DESC_ENGLISH, $T_DESC_SPANISH, $RATE, $PRIMARY_LINK, $SECONDARY_LINK, $C_ID, $SUB_ID, $T_ID);
 $stmt = sqlsrv_query($conn, $sql, $params);
@@ -55,4 +73,4 @@ if ($stmt === false) {
 } else {
     echo "Your Tip Has Been Edited";
 }
-?> 
+?>
