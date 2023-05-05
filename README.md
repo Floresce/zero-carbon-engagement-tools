@@ -103,7 +103,7 @@ $ http-server
 
 ## Preview
 <p align="center">
-    When users visit <a href="https://www.smud.org/en/Rebates-and-Savings-Tips/Energy-Savings-Tips">SMUD's Energy Savings Tips</a> webpage, this will be the the updated landing page users see when they visit the website.
+    When users visit SMUD's <a href="https://www.smud.org/en/Rebates-and-Savings-Tips/Energy-Savings-Tips">Energy Savings Tips</a> webpage, this will be the the updated landing page users see when they visit the website.
 </p>
 
 ![Landing Page](img/SMUD_landing_page.png)
