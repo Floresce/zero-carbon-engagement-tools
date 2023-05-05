@@ -9,17 +9,35 @@
 </p>
 
 # Table of Contents
-
+* [Team](#team)
 * [Synopsis](#synopsis)
 * [Features](#features)
-* [Installation](#installation)
-* [Deployment & Test](#deployment--testing)
+* [Tools and Techonologies](#tools-and-technologies)
+* [Deployment](#deployment)
+* [Testing](#testing)
 * [Timeline](#timeline)
 * [Database Diagram](#database-diagram)
 * [Preview](#preview)
 
-## Synopsis
+## Team
+Programmadelic
 
+### Team Members
+* Mary Mendoza  
+* Anne Liu  
+* Anthony Muoa  
+* Brian Giang  
+* Dymone Hunt-Chambers  
+* Edgar Moreno Gonzalez  
+* Girard Lin  
+* Leo Puso  
+* Trevor Davis
+
+### Advising Professors
+* Haiquan (Victor) Chen
+* Gary Kane
+
+## Synopsis
 In 2021, SMUD announced it’s 2030 Zero Carbon Plan to eliminate the use of greenhouse gas emissions and instead use clean energy. As part of this plan, SMUD would like to increase awareness and customer engagement. To increase customer engagement, the current energy savings tips page on the SMUD website will be redesigned to be more interactive. Customers reducing energy consumption will assist SMUD in reaching their zero-carbon goal as well as save customers money on their electricity bill. 
 
 The energy savings tips webpage will allow for customers to view personalized tips based on filters such as potential savings, location, etc. Visitors of the webpage can also select tips to add to a personalized plan that can be converted to a downloadable PDF. In addition to designing the web pages and personalized user plan, if time and resources permit, the client has more ideas and tasks to impart to the development team in relation to the overarching theme of the task at hand, which is helping SMUD increase visibility and awareness of their 2030 Zero Carbon Plan.
@@ -28,8 +46,11 @@ The energy savings tips webpage will allow for customers to view personalized ti
 * Pre-built pages
 * Pre-styled components
 * Custom PDF Generation
-* Energy saving tips selection
-* Filtered tips
+* Browse selection of curated tips
+* Filtering options to find tips
+* Search option to locate tips
+
+## Tools and Technologies
 * IDE
     * Microsoft Visual Studio Code (https://code.visualstudio.com/)
 * Front-end
@@ -38,8 +59,7 @@ The energy savings tips webpage will allow for customers to view personalized ti
     * Microsoft SQL Server (https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
 * [SMUD's Style Guide](https://smud.invisionapp.com/console/share/GQFWV69JMDX/358962325/play)
 
-
-## Deployment & Testing
+## Deployment
 ### Requirements
 * Git
 * Node.js
@@ -47,6 +67,7 @@ The energy savings tips webpage will allow for customers to view personalized ti
     * Use `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted` to allow Windows to run scripts in system
     * Allow Node.js through Firewall
 
+## Testing
 ### Steps
 1. Clone this repo: `git clone https://github.com/cyber-mary/zero-carbon-engagement-tools.git`
 2. Navigate into local repo: `cd zero-carbon-engagement-tools`
@@ -61,7 +82,6 @@ $ http-server
 ```
 
 ## Timeline
-
 ## Database Diagram
 <img src="img/ER.D.png">
 <img src="img/ER_Mapping.png">
