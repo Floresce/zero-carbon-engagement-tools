@@ -16,7 +16,7 @@
 * [Deployment](#deployment)
 * [Testing](#testing)
 * [Documentation](#documentation)
-* [Timeline](#timeline)
+* [Milestones](#Milestones)
 * [Database Diagram](#database-diagram)
 * [Preview](#preview)
 
@@ -82,6 +82,14 @@ $ npm install --global http-server
 $ http-server
 ```
 
+## Milestones
+* Dropdown menu
+* User feedback
+* User comment
+* Add tips to plan and download PDF
+* Search bar
+* Dashboard
+
 ## Testing
 System Test Report
 
@@ -89,7 +97,6 @@ System Test Report
 * Maintenence Manuel
 * User Manuel
 
-## Timeline
 ## Database Diagram
 <img src="img/ER.D.png">
 <img src="img/ER_Mapping.png">
