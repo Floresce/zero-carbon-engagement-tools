@@ -1,3 +1,4 @@
+## Dropdown menu
 The dropdown menu allows users to filter tips based on two menu options. This feature provides a more streamlined user experience by reducing clutter on the webpage and enabling users to easily access the relevant information they need.
 ![Dropdown menu](../img/dropdown/dropdown_01.png)
 
