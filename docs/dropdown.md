@@ -7,4 +7,3 @@ The dropdown menu feature consists of two menu options, each containing multiple
 
 When a user selects a category from the dropdown menu, the search results are dynamically populated from the application's database. The dynamic population of search results ensures that the user is presented with accurate and relevant information, reducing the likelihood of the user encountering outdated or irrelevant content. Additionally, the dynamic population of search results can save the user time by quickly providing them with the most up-to-date information, eliminating the need for the user to manually search for information across multiple web pages.
 ![Menu results](../img/dropdown/dropdown_04.png)
-
