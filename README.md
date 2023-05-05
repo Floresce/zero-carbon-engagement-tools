@@ -83,12 +83,12 @@ $ http-server
 ```
 
 ## Milestones
-* Dropdown menu
-* User feedback
-* User comment
-* Add tips to plan and download PDF
-* Search bar
-* Dashboard
+* [Dropdown menu](/docs/dropdown.md)
+* [User feedback](/docs/userfeedback.md)
+* [User comment](/docs/usercomment.md)
+* [Add tips to plan and download PDF](/docs/addtoplan.md)
+* [Search bar](/docs/searchbar.md)
+* [Dashboard](/docs/dashboard.md)
 
 ## Testing
 * System Test Report
