@@ -94,8 +94,8 @@ $ http-server
 * System Test Report
 
 ## Documentation
-* Maintenence Manuel
-* User Manuel
+* Maintenence Manual
+* User Manual
 
 ## Database Diagram
 <img src="img/ER_DIAGRAM_updated.png">
@@ -103,14 +103,13 @@ $ http-server
 
 ## Preview
 <p align="center">
-    When visiting  <a href="https://www.smud.org/en/Rebates-and-Savings-Tips/Energy-Savings-Tips">SMUD's Energy Savings Tips</a> webpage, this will be the future redesign.
+    When users visit <a href="https://www.smud.org/en/Rebates-and-Savings-Tips/Energy-Savings-Tips">SMUD's Energy Savings Tips</a> webpage, this will be the the updated landing page users see when they visit the website.
 </p>
 
-![Search Preview](img/search_preview.png)
-
+![Landing Page](img/SMUD_landing_page.png)
 
 <p align="center">
-    Format and layout of what the tips will look like when results are shown.
+    The new landing page of the website offers users different ways to browse and select tips that meet their needs. Users can browse tips using a dropdown menu with two categories, allowing them to quickly and easily filter tips based on their interests.
 </p>
 
-![Tip Layout](img/tips_layout.png)
+![Tips Layout](img/SMUD_tips_layout.png)
