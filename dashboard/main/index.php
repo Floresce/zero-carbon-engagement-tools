@@ -3,8 +3,6 @@
     <head>
         <!--jQuery 3.6.0-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <!--Main CSS-->
-        <!--<link rel="stylesheet" type="text/css" href="css/main.css">-->
         <!--DataTables 1.13.2-->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
@@ -18,16 +16,14 @@
                     <div class="col-9 d-flex flex-row ">
                         <h1>Dashboard</h1>
                     </div>
-                    <!--
-                    <div class="col-3 d-flex flex-row-reverse ">
+                    <!-- <div class="col-3 d-flex flex-row-reverse ">
                         <button class="btn btn-danger" id="button">
                             <span class="glyphicon glyphicon-open" aria-hidden="true"></span> Export data
                         </button>
-                    </div>
--->
+                    </div> -->
                 </div>
 
-                <!--
+                <!-- PLACEHOLDER
                 <div class="row my-4">
                     <div class="col p-5 border shadow" style="background-color: #EDEAE8">
                         <h2 class="text-center">Popular Tip</h2>
@@ -65,15 +61,13 @@
                     </div>
                 </div>
 
-                
-
+                <!-- User Behavior table -->
                 <div class="row border my-4 shadow">
-                    <!--User Behavior table (start)-->
                     <?php include 'php/user_behavior.php';?>
-                    <!--User Behavior table (end)-->
                 </div>
 
-                <!-- <div class="row my-4">
+                <!-- TEST BUTTONS
+                    <div class="row my-4">
                     <div class="col p-3 me-2 border shadow" style="background-color: #EDEAE8">
                         <h2>Reset data</h2>
                         <button class="btn btn-danger" id="resetdelete">
@@ -87,8 +81,6 @@
                         </button>
                     </div>
                 </div> -->
-
-                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
                 <script>
                     $(document).ready(function(){
@@ -143,26 +135,6 @@
                         }
                     })
 
-
-                    const ctx = document.getElementById('myChart');
-                    new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                        datasets: [{
-                            label: '# of Votes',
-                            data: [12, 19, 3, 5, 2, 3],
-                            borderWidth: 1
-                        }]
-                        },
-                        options: {
-                        scales: {
-                            y: {
-                            beginAtZero: true
-                            }
-                        }
-                        }
-                    });
                 </script>
             </div>
         </main>

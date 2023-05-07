@@ -26,31 +26,11 @@
 </div>
 
 <script>
-    /*
-    setInterval(function() {
-    $('#myTable2').DataTable().ajax.reload();
-    }, 1000);
-    //Using DataTables to sort tables
+    $(document).ready( function () {
+        setInterval(function() {
+            $('#myTable2').DataTable().ajax.reload();
+        }, 1000);
 
-    $(document).ready( function () {
-        $('#myTable2').DataTable({
-            "ajax": "php/user_behavior_fetch.php",
-            "columns": [
-                {   "data": "timestamp_date",
-                    "render": function(data) {
-                        var date = new Date(data * 1000);
-                        return date.toLocaleString();
-                    }
-                },
-                { "data": "liked_tips" },
-                { "data": "disliked_tips" },
-                { "data": "comments" },
-                { "data": "user_agent" }
-            ]
-        });
-    });
-    */
-    $(document).ready( function () {
         $('#myTable2').DataTable({
             "ajax": "php/user_behavior_fetch.php",
             "columns": [
@@ -58,28 +38,21 @@
                 { "data": "T_DESC_ENGLISH"},
                 { "data": "C_ID" },
                 { "data": "SUB_ID"},
-                { "data": "LIKES"},
-                { "data": "DISLIKES"},
-                { "data": "ADDPLANCLICKS"}
+                { "data": "TIP_LIKES"},
+                { "data": "TIP_DISLIKES"},
+                { "data": "TIP_ADDTOPLAN"}
             ]
-        });
-        $.ajax({
-            url: 'php/user_behavior_fetch.php',
-            method: 'POST',
-            success: function (response) {
-                console.log(response);
-            }
         });
     });
 
-    document.getElementById("add-data-button").addEventListener("click", function() {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                //alert("Data added successfully!");
-            }
-        };
-        xhttp.open("GET", "php/data_add.php", true);
-        xhttp.send();
-    });
+    // document.getElementById("add-data-button").addEventListener("click", function() {
+    //     var xhttp = new XMLHttpRequest();
+    //     xhttp.onreadystatechange = function() {
+    //         if (this.readyState == 4 && this.status == 200) {
+    //             //alert("Data added successfully!");
+    //         }
+    //     };
+    //     xhttp.open("GET", "php/data_add.php", true);
+    //     xhttp.send();
+    // });
 </script>

@@ -4,7 +4,7 @@ require_once('../../../config.php');
 $id = $_GET["id"];
 
 // Update the TIPS table with the corresponding T_ID value
-$sql = "UPDATE TIPS SET ADDPLANCLICKS = ADDPLANCLICKS + 1 WHERE T_ID = " . $id . ";";
+$sql = "UPDATE TIP_FEEDBACK SET TIP_ADDTOPLAN = TIP_ADDTOPLAN + 1 WHERE T_ID = " . $id . ";";
 $stmt = sqlsrv_query($conn, $sql);
 if ($stmt === false) {                                           // Checks if SQL query was successful or not                      
     die(print_r(sqlsrv_errors(), true));                         // Prints out detailed error message

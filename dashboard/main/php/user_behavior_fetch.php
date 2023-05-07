@@ -1,25 +1,25 @@
 <?php
 require_once('../../../config.php');
 
-// Load SQL query from file
-$sql = "SELECT * FROM TIPS";
-
-// Execute query
-$stmt = sqlsrv_query($conn, $sql);
-
-if ($stmt === false) {
+// Execute query to retrieve data from TIPS and TIPS_FEEDBACK table
+$tips_query = "
+SELECT T.T_ID, T.T_DESC_ENGLISH, T.C_ID, T.SUB_ID, TF.TIP_LIKES, TF.TIP_DISLIKES, TF.TIP_ADDTOPLAN
+FROM TIPS T
+JOIN TIP_FEEDBACK TF
+ON T.T_ID = TF.T_ID;
+";
+$tips_stmt = sqlsrv_query($conn, $tips_query);
+if ($tips_stmt === false) {
     die(print_r(sqlsrv_errors(), true));
+}
+$tips_data = array();
+while ($row = sqlsrv_fetch_array($tips_stmt, SQLSRV_FETCH_ASSOC)) {
+    $tips_data[] = $row;
 }
 
 $data = array();
-
-while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-    $data[] = $row;
-}
-
-$data2 = array();
-
-foreach ($data as $row) {
+foreach ($tips_data as $row) {
+    $T_ID = $row["T_ID"];
 
     $T_DES_ENG = $row["T_DESC_ENGLISH"];
     $T_DES_ENG_WORDS = explode(" ", $T_DES_ENG);
@@ -42,10 +42,16 @@ foreach ($data as $row) {
     $SUB_NAME = $subcategory_row["SUB_NAME"];
     $row["SUB_ID"] = $SUB_NAME;
 
-    $data2[] = $row;
+    $TIP_LIKES = $row["TIP_LIKES"];
+
+    $TIP_DISLIKES = $row["TIP_DISLIKES"];
+
+    $TIP_ADDTOPLAN = $row["TIP_ADDTOPLAN"];
+
+    $data[] = $row;
 }
 
-echo json_encode(array("data" => $data2));
+echo json_encode(array("data" => $data));
 
 sqlsrv_close($conn);
 ?>
