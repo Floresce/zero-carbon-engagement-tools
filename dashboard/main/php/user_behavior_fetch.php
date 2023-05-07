@@ -1,5 +1,5 @@
 <?php
-require_once('config.php');
+require_once('../../../config.php');
 
 // Load SQL query from file
 $sql = "SELECT * FROM TIPS";

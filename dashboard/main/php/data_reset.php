@@ -1,5 +1,5 @@
 <?php
-require_once('config.php');
+require_once('../../../config.php');
 
 // Check for errors
 if (!$conn) {

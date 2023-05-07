@@ -1,5 +1,5 @@
 <?php
-require_once('config.php');
+require_once('../../../config.php');
 
 // Fetch initial data
 $sql = "SELECT * FROM user_behavior";
