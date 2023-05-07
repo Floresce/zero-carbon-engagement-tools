@@ -76,7 +76,7 @@ $(document).ready(function() {
                     showCart(tipsPlan, true);
 
                     $.ajax({
-                        url: '/dashboard/main/php/addtoplanclick.php?id=' + tipId,
+                        url: '/dashboard/main/php/increment_addtoplan.php?id=' + tipId,
                         method: 'POST'
                     })
     
@@ -147,7 +147,7 @@ $(document).ready(function() {
     //     }
     // });   
     $.ajax({
-        url: '/dashboard/main/php/dislike.php?id=' + id,
+        url: '/dashboard/main/php/increment_dislike.php?id=' + id,
         method: 'POST'
     })
 }
@@ -163,7 +163,7 @@ function callLikeFunction(id) {
     //     }
     // });    
     $.ajax({
-        url: '/dashboard/main/php/like.php?id=' + id,
+        url: '/dashboard/main/php/increment_like.php?id=' + id,
         method: 'POST'
     })
   }
