@@ -44,6 +44,9 @@
                     <?php include 'php/tips_telemetry.php';?>
                 </div>
 
+                <div id="comment-content">
+                </div>
+
                 <script>
                     $(document).ready(function(){
                         // Always refresh data for dropdown
@@ -72,7 +75,7 @@
                         }
                     })
 
-                    // Refresh Button Listener
+                    // Refresh Button Listener for Dropdown
                     $('#refreshbtn').on('click', function () {
                         $.ajax({
                             url: 'php/tips_details_dropdown.php',

@@ -7,7 +7,7 @@
 
 <div class="table-responsive p-4">
     <h3>Tips Telemetry</h3>
-    <table id="myTable2" class="table">
+    <table id="myTable" class="table">
         <thead>
             <tr>
                 <th>ID</th>
@@ -17,6 +17,7 @@
                 <th>Likes</th>
                 <th>Dislikes</th>
                 <th>Added to Plan</th>
+                <th>Comments</th>
             </tr>
         </thead>
         <tbody>
@@ -28,10 +29,10 @@
 <script>
     $(document).ready( function () {
         setInterval(function() {
-            $('#myTable2').DataTable().ajax.reload();
+            $('#myTable').DataTable().ajax.reload();
         }, 1000);
 
-        $('#myTable2').DataTable({
+        $('#myTable').DataTable({
             "ajax": "php/tips_telemetry_fetch.php",
             "columns": [
                 { "data": "T_ID" },
@@ -40,7 +41,8 @@
                 { "data": "SUB_ID"},
                 { "data": "TIP_LIKES"},
                 { "data": "TIP_DISLIKES"},
-                { "data": "TIP_ADDTOPLAN"}
+                { "data": "TIP_ADDTOPLAN"},
+                { "data": "COMMENT_COUNT"}
             ]
         });
     });

@@ -42,11 +42,24 @@ foreach ($tips_data as $row) {
     $SUB_NAME = $subcategory_row["SUB_NAME"];
     $row["SUB_ID"] = $SUB_NAME;
 
-    $TIP_LIKES = $row["TIP_LIKES"];
-
-    $TIP_DISLIKES = $row["TIP_DISLIKES"];
-
-    $TIP_ADDTOPLAN = $row["TIP_ADDTOPLAN"];
+    $comment_query = "SELECT T_ID, COUNT(*) AS count FROM TIP_COMMENT WHERE T_ID = $T_ID GROUP BY T_ID;";
+    $comment_result = sqlsrv_query($conn, $comment_query);
+    $comment_row = sqlsrv_fetch_array($comment_result);
+    $COMMENT_COUNTS = $comment_row["count"];
+    $row["COMMENT_COUNT"] = "<a href='#' id='myLink". $T_ID ."'>" . $COMMENT_COUNTS . "</a>
+    <script>
+        $('#myLink" . $T_ID ."').on('click', function(event) {
+            var url = 'php/tips_comments.php?id=' + " . $T_ID .";
+            $.ajax({
+                url: url,
+                method: 'POST',
+                success: function (response) {
+                    $('#comment-content').html(response);
+                }
+            });
+        });
+    </script>
+    ";
 
     $data[] = $row;
 }
