@@ -15,7 +15,7 @@
         }
     }
 
-    $data = '<div class="row border p-4 my-4 shadow"><b>Tip ID: ' . $id . '</b>';
+    $data = '<b>Tip ID: ' . $id . '</b><br/><br/>';
 
     foreach ($rows as $row) {
         $DATE = $row["TIP_DATE"];
@@ -23,7 +23,7 @@
         $data .= '<b>' . $DATED . '</b><p>' . $row["COMMENT"] . '</p>';
     }
 
-    $data .= '</div>';
+    $data .= '';
 
     echo $data;
 ?>

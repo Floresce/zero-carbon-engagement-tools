@@ -44,8 +44,21 @@
                     <?php include 'php/tips_telemetry.php';?>
                 </div>
 
-                <div id="comment-content">
+                <!-- Comment Modal -->
+                <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="commentModalLabel">Comments</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="comment-content">
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+
 
                 <script>
                     $(document).ready(function(){
