@@ -1,25 +1,27 @@
 <?php
+require_once('../../../config.php');
 
-$servername = "BOOKPRO"; // Subject to change depending on server name (Anne: DESKTOP-UK8K0FD, Leo: MineHarth)
-$database = "master"; // Subject to change depending on database name
-$username = "admin";
-$password = "admin";
-
-$connectionInfo = array(
-    "Database" => $database,
-    "UID" => $username,
-    "PWD" => $password
-);
-// sqlsrv_connect function is called to establish connection to Microsoft SQL Server database
-$conn = sqlsrv_connect($servername, $connectionInfo);
-if ($conn === false) {
-    echo "Connection could not be established.\n";
-    die(print_r(sqlsrv_errors(), true));
-}
 
 $T_ID = $_POST['Tid'];
 
+// delete feedback 
+$sql = "DELETE FROM TIP_FEEDBACK WHERE T_ID = ?";
+$params = array($T_ID);
+$stmt = sqlsrv_query($conn, $sql, $params);
 
+if ($stmt === false) {
+    echo "Error (sqlsrv_query): " . print_r(sqlsrv_errors(), true);
+    exit;
+}
+// delete comments, necessary for sql logic
+$sql = "DELETE FROM TIP_COMMENT WHERE T_ID = ?";
+$params = array($T_ID);
+$stmt = sqlsrv_query($conn, $sql, $params);
+
+if ($stmt === false) {
+    echo "Error (sqlsrv_query): " . print_r(sqlsrv_errors(), true);
+    exit;
+}
 
 // Delete the tip from the database
 $sql = "DELETE FROM TIPS WHERE T_ID = ?";
@@ -30,5 +32,5 @@ if ($stmt === false) {
     echo "Error (sqlsrv_query): " . print_r(sqlsrv_errors(), true);
     exit;
 } else {
-    echo "Tip with ID $T_ID has been deleted";
+    echo "Tip with ID $T_ID has been deleted along with feedback and comments ";
 }

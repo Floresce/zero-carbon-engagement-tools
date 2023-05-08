@@ -1,23 +1,5 @@
 <?php
-
-$servername = "BOOKPRO"; // Subject to change depending on server name (Anne: DESKTOP-UK8K0FD, Leo: MineHarth)
-$database = "master"; // Subject to change depending on database name
-$username = "admin";
-$password = "admin";
-
-$connectionInfo = array(
-    "Database" => $database,
-    "UID" => $username,
-    "PWD" => $password
-);
-
-// sqlsrv_connect function is called to establish connection to Microsoft SQL Server database
-$conn = sqlsrv_connect($servername, $connectionInfo);
-
-if ($conn === false) {
-    echo "Connection could not be established.\n";
-    die(print_r(sqlsrv_errors(), true));
-}
+require_once('../../../config.php');
 
 
 // Get Category ID from C_NAME
@@ -72,6 +54,7 @@ if ($stmt === false) {
 $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
 $maxSeq = $row['max_seq'];
 $newSeq = $maxSeq + 1;
+$newSeqF = $maxSeq + 1;
 $T_DESC_ENGLISH = $_POST['ENdescription'];
 $T_DESC_SPANISH = $_POST['ESdescription'];
 $RATE = $_POST['Rate'];
@@ -83,8 +66,19 @@ $params = array($newSeq, $T_DESC_ENGLISH, $T_DESC_SPANISH, $RATE, $PRIMARY_LINK,
 $stmt = sqlsrv_query($conn, $sql, $params);
 if ($stmt === false) {
     echo "Error (sqlsrv_query): " . print_r(sqlsrv_errors(), true);
-    exit;
 } else {
     echo " Your Tip Has Been Added";
 }
+
+
+$sql_feedback = "INSERT INTO TIP_FEEDBACK(T_ID, TIP_LIKES, TIP_DISLIKES) VALUES (?,?,?)";
+$params_feedback = array($newSeqF, 0, 0);
+$stmt_feedback = sqlsrv_query($conn, $sql_feedback, $params_feedback);
+
+// Check if the SQL statement for TIP_FEEDBACK executed successfully
+if ($stmt_feedback === false) {
+    echo "Error (sqlsrv_query): " . print_r(sqlsrv_errors(), true);
+    exit;
+}
+
 ?>
