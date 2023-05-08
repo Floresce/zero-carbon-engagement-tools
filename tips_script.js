@@ -1,4 +1,22 @@
 $(document).ready(function() {
+    // Get all tips and populate them on the page
+    $.ajax({
+      type: 'POST',
+      url: 'tips.php', // Replace with the actual URL to fetch data from the database
+      data: {
+        category: 'All Categories',
+        subcategory: 'All Subcategories'
+      },
+      success: function(response) {
+        // Populate the retrieved HTML response to the element with id 'result'
+        $('#result').html(response);
+      },
+      error: function(xhr, status, error) {
+        // Handle errors
+        console.error(error);
+      }
+    });
+      
   // Submit form
   $('#tips_form').submit(function(e) {
       e.preventDefault();
