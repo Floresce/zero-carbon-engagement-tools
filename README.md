@@ -111,8 +111,8 @@ The energy savings tips webpage will allow for customers to view personalized ti
 * User Manual
 
 ## Database Diagram
-<img src="img/ER_DIAGRAM_updated.png">
-<img src="img/ER_MAPPING_updated.png">
+<img src="img/ER_DIAGRAM.png">
+<img src="img/ER_MAPPING.png">
 
 ## Preview
 <p align="center">
