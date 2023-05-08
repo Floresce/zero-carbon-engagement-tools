@@ -71,8 +71,8 @@ if ($stmt === false) {
 }
 
 
-$sql_feedback = "INSERT INTO TIP_FEEDBACK(T_ID, TIP_LIKES, TIP_DISLIKES) VALUES (?,?,?)";
-$params_feedback = array($newSeqF, 0, 0);
+$sql_feedback = "INSERT INTO TIP_FEEDBACK(T_ID, TIP_LIKES, TIP_DISLIKES, TIP_ADDTOPLAN) VALUES (?,?,?,?)";
+$params_feedback = array($newSeqF, 0, 0, 0);
 $stmt_feedback = sqlsrv_query($conn, $sql_feedback, $params_feedback);
 
 // Check if the SQL statement for TIP_FEEDBACK executed successfully
