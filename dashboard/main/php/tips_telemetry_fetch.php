@@ -46,20 +46,7 @@ foreach ($tips_data as $row) {
     $comment_result = sqlsrv_query($conn, $comment_query);
     $comment_row = sqlsrv_fetch_array($comment_result);
     $COMMENT_COUNTS = $comment_row["count"];
-    $row["COMMENT_COUNT"] = "<a href='#' id='myLink". $T_ID ."'>" . $COMMENT_COUNTS . "</a>
-    <script>
-        $('#myLink" . $T_ID ."').on('click', function(event) {
-            var url = 'php/tips_comments.php?id=' + " . $T_ID .";
-            $.ajax({
-                url: url,
-                method: 'POST',
-                success: function (response) {
-                    $('#comment-content').html(response);
-                }
-            });
-        });
-    </script>
-    ";
+    $row["COMMENT_COUNT"] = $COMMENT_COUNTS;
 
     $data[] = $row;
 }
