@@ -27,9 +27,9 @@
         <div id="edit-modal" class="modal">
             <div class="modal-content">
                 <span class="close-btn">&times;</span>
-                <h2>Edit Tip</h2>
                 <form>
-                    <input type="hidden" name="tid" id="tid-input">
+                    <label for="tid-input">TID:</label>
+                    <input type="text" name="tid" id="tid-input" value="#TID" readonly>
                     <label for="tip-desc-input">English Description:</label>
                     <input type="text" name="tip-desc" id="tip-desc-input">
                     <label for="spanish-desc-input">Spanish Description:</label>
@@ -40,7 +40,10 @@
                     <input type="text" name="category" id="category-input">
                     <label for="sub-category-input">Subcategory:</label>
                     <input type="text" name="sub-category" id="sub-category-input">
-                    <br> <br> <br> <br>
+                    <label for="category-input">Primary links related to the tip:</label>
+                    <input type="text" id="PLinks" name="category"><br>
+                    <label for="category-input">Secondary links related to the tip:</label>
+                    <input type="text" id="SLinks" name="category"><br>
                     <div class="button-wrapper">
                         <button type="button" id="deleteButtn">Delete</button>
                         <button type="button" id="modal-Save">Save</button>
@@ -54,28 +57,34 @@
             <div id="tableDiv"></div>
             <div id="resultsTableTIPS" class="results-container"></div>
             <button id="refreshButton">Refresh</button>
-            <br> <br>
-            <label for="text"><span class="required">(* is required)</span></label>
-            <br>
-            <label for="category-input">English description of tip:<span class="required">(*)</span></label>
-            <input type="text" id="ENdescription" name="category" required><br>
-            <label for="category-input">Spanish description of tip:</label>
-            <input type="text" id="ESdescription" name="category"><br>
-            <label for="category-input">Category of tip:<span class="required">(*)</span></label>
-            <input type="text" id="Category" name="category" required><br>
-            <label for="category-input">Sub-Category of tip:<span class="required">(*)</span></label>
-            <input type="text" id="Subcategory" name="category" required><br>
-            <label for="category-input">Rate of tip:</label>
-            <input type="text" id="Rate" name="category"><br>
-            <label for="category-input">Primary links related to the tip:</label>
-            <input type="text" id="PLinks" name="category"><br>
-            <label for="category-input">Secondary links related to the tip:</label>
-            <input type="text" id="SLinks" name="category"><br>
-            <button type="addTip" id="TIPADD">SAVE</button>
-            <br> <br>
+
+            <!-- Adding new tips -->
+            <button id="addTipButton">Add Tip</button>
+            <div class="addTIPmodal" id="addTipModal">
+                <div class="modal-content">
+                    <label for="text"><span class="required">(* is required)</span></label>
+                    <br>
+                    <label for="category-input">English description of tip:<span class="required">(*)</span></label>
+                    <input type="text" id="ENdescription" name="category" required><br>
+                    <label for="category-input">Spanish description of tip:</label>
+                    <input type="text" id="ESdescription" name="category"><br>
+                    <label for="category-input">Category of tip:<span class="required">(*)</span></label>
+                    <input type="text" id="Category" name="category" required><br>
+                    <label for="category-input">Sub-Category of tip:<span class="required">(*)</span></label>
+                    <input type="text" id="Subcategory" name="category" required><br>
+                    <label for="category-input">Rate of tip:</label>
+                    <input type="text" id="Rate" name="category"><br>
+                    <label for="category-input">Primary links related to the tip:</label>
+                    <input type="text" id="PLinks" name="category"><br>
+                    <label for="category-input">Secondary links related to the tip:</label>
+                    <input type="text" id="SLinks" name="category"><br>
+                    <button type="addTip" id="TIPADD">SAVE</button>
+                    <br> <br>
+                </div>
+            </div>
         </div>
 
-        <!-- Categorie tab and corresponding fields-->
+        <!-- Category tab and corresponding fields-->
         <div id="Categorie" class="tabcontent">
             <div id="tableDiv"></div>
             <div id="resultsTableCAT" class="results-container"></div>
@@ -153,12 +162,19 @@
                     Subcategory: Subcategory,
                     Rate: Rate,
                     PLinks: PLinks,
-                    SLinks: SLinks,
+                    SLinks: SLinks,                    
+
                 },
                 success: function (data) {
-                    // Close the modal
-                    document.getElementById('edit-modal').style.display = 'none';
-                }
+    if (data === "Your Tip Has Been Edited") {
+        // Tip was successfully added, close the modal
+        document.getElementById('edit-modal').style.display = 'none';
+    } else {
+        // Display an error message to the user
+        
+        alert(data);
+    }
+}
 
             });
         });
@@ -208,9 +224,17 @@
                         SLinks: SLinks,
                     },
                     success: function (data) {
-                        alert(data);
-                    }
-                });
+                        if (data === "Your Tip Has Been Added") {
+        // Tip was successfully added, close the modal
+        document.getElementById('modal').style.display = 'none';
+     
+    } else {
+        // Display an error message to the user
+        alert(data);
+    }                    }
+
+                });         clearModal();
+
             });
 
             //AJAX for adding CATEGORY
@@ -230,6 +254,7 @@
                     },
                     success: function (data) {
                         alert(data);
+                        
                     }
 
                 });
@@ -369,8 +394,37 @@
                 // code to close the modal
                 document.getElementById('edit-modal').style.display = 'none';
             });
+            const addTipButton = document.getElementById("addTipButton");
+            const addTipModal = document.getElementById("addTipModal");
 
-        });
+            addTipButton.addEventListener("click", function () {
+                addTipModal.style.display = "block";
+            });
+
+            window.addEventListener("click", function (event) {
+                if (event.target == addTipModal) {
+                    addTipModal.style.display = "none";
+                }
+            });
+
+            // Function to close the modal and reset the input fields
+            function clearModal() {
+                // Reset the input values
+                document.getElementById("ENdescription").value = "";
+                document.getElementById("ESdescription").value = "";
+                document.getElementById("Category").value = "";
+                document.getElementById("Subcategory").value = "";
+                document.getElementById("Rate").value = "";
+                document.getElementById("PLinks").value = "";
+                document.getElementById("SLinks").value = "";
+
+                // Hide the modal
+                addTipModal.style.display = "none";
+            }
+
+            document.getElementById("defaultTab").click();
+        })
+        
     </script>
 
     <script src="js\DashBoardTab.js"></script>
