@@ -1,3 +1,28 @@
+/* Style for the modal background overlay */
+.addTIPmodal {
+  display: none; /* Hide the modal by default */
+  position: fixed; /* Stay in place */
+  z-index: 100; /* Sit on top of everything */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scrolling if needed */
+  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+}
+
+/* Style for the modal content */
+.addTIPmodal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered horizontally */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* 80% of modal container width */
+  max-width: 600px; /* Set maximum width of the modal */
+}
+
+
+
 .modal {
   display: none;
   position: fixed;
@@ -53,18 +78,8 @@ form {
   margin: 10px 0;
 }
 
-label {
-  margin-right: 10px;
-}
-
-input[type="text"], button[type="submit"] {
-  padding: 10px;
-  flex: 1;
-  border-radius: 5px;
-  border: none;
-}
-
 .button-wrapper {
+  top: 25%;
   display: flex;
   justify-content: space-between;
   align-items: center;
