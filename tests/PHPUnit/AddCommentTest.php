@@ -1,8 +1,5 @@
-<!-- This is a PHPUnit test script centered on testAddComment,
-     checks if comments are inserted correctly with no errors during the insertion process. -->
-<!-- Tested using: PHPUnit 10.0.19, PHP 8.1.10 -->
 <?php
-require_once 'tips.php';
+require_once __DIR__ . '/../../tips.php';
 
 use PHPUnit\Framework\TestCase;
 
@@ -11,8 +8,8 @@ class AddCommentTest extends TestCase {
 
   protected function setUp(): void
   {
-    $servername = "DESKTOP-UK8K0FD";       
-    $database = "Tips";							      // DO NOT use original database when running tests                      
+    $servername = "";   			     // servername intentionally left blank
+    $database = "";					// database intentionally left blank                      
     $username = "";
     $password = "";
 
