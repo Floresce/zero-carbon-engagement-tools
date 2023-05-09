@@ -27,8 +27,8 @@ class FeedbackTest extends TestCase
     {
          //using tip 2 for testing purposes
          $tid = 2;
-         $likecount = tips::getLikes($tid);
-         tips::addLike($tid);
+         $likecount = getLikes($tid);
+         addFeeback($tid, TRUE);
          $updatedcount = tips::getLikes($tid);
          $this -> assertTrue($updatedcount == $likecount + 1);
 
@@ -39,9 +39,9 @@ class FeedbackTest extends TestCase
     {
         //using tip 2 for testing purposes
         $tid = 2;
-        $dislikecount = tips::getDislikes($tid);
-        tips::addLike($tid);
-        $updatedcount = tips::getDislikes($tid);
+        $dislikecount = getDislikes($tid);
+        addFeeback($tid, FALSE);
+        $updatedcount = getDislikes($tid);
         $this -> assertTrue($updatedcount == $dislikecount + 1);
 
     }
