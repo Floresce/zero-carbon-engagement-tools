@@ -1,8 +1,5 @@
-<!-- This is a PHPUnit test script centered on testAddCommentWithSQLInjection,
-     checks for SQL injection attempts by sanitizing and validating user input before inserting it into a database. -->
-<!-- Tested using: PHPUnit 10.0.19, PHP 8.1.10 -->
 <?php
-require_once 'tips.php';
+require_once __DIR__ . '/../../tips.php';
 
 use PHPUnit\Framework\TestCase;
 
@@ -11,9 +8,8 @@ class SQLInjectionTest extends TestCase {
 
   protected function setUp(): void
   {
-    // establish database connection
-    $servername = "DESKTOP-UK8K0FD";       
-    $database = "Tips";							      // DO NOT use original database when running tests                      
+    $servername = "";   			     // servername intentionally left blank
+    $database = "";					// database intentionally left blank
     $username = "";
     $password = "";
 
