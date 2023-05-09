@@ -13,7 +13,7 @@ driver = webdriver.Chrome(service=driver_service)
 driver.set_window_size(1280, 900)
 
 # Open the webpage
-driver.get('http://localhost/zero-carbon-engagement-tools/index.html')
+driver.get('https://programmedelic.azurewebsites.net/')
 
 # Input text into the search box
 time.sleep(2)

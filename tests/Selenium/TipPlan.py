@@ -14,7 +14,7 @@ driver = webdriver.Chrome(service=driver_service)
 driver.maximize_window()
 
 # Open the webpage
-driver.get('http://localhost/zero-carbon-engagement-tools/index.html')
+driver.get('https://programmedelic.azurewebsites.net/')
 
 # Find the category dropdown element
 time.sleep(1)
