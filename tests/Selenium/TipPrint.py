@@ -65,6 +65,7 @@ addtoplan_button_4 = driver.find_element(By.ID, "atpBtn-4")
 addtoplan_button_4.click()
 
 # Click on the print button to download a PDF showing tips saved in the plan
+time.sleep(2)
 print_button = driver.find_element(By.ID, "printBtn")
 print_button.click()
 time.sleep(2)
