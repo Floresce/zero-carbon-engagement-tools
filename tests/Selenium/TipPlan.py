@@ -1,4 +1,4 @@
-# Test 05: Interact with the add tip to plan feature
+# Test 05: Interact with the add tip to plan button
 
 # Import modules for web scripting using Selenium
 from selenium import webdriver
