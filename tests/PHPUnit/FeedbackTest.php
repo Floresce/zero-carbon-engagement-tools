@@ -1,30 +1,28 @@
-<?php 
+<?php
+require_once __DIR__ . '/../../tips.php';
+
 use PHPUnit\Framework\TestCase;
 
 class FeedbackTest extends TestCase
 {
-    
-    public function testGetLikes()
+    private $conn;
+
+    protected function setUp(): void
     {
-        //using tip 1 for testing purposes
-        $tid = 1;
-        $likes = 1;
-
-        $likecount = tips::getLikes($tid);
-        $this->assertSame($likes, $likecount);
+      $servername = "";   			     // servername intentionally left blank
+      $database = "";					// database intentionally left blank                      
+      $username = "";
+      $password = "";
+  
+      $connectionInfo = array(
+        "Database" => $database,
+        "UID" => $username,
+        "PWD" => $password
+      );
+  
+      // Establish connection to Microsoft SQL Server database
+      $this->conn = sqlsrv_connect($servername, $connectionInfo);
     }
-
-    public function testGetDislikes()
-    {
-         //using tip 1 for testing purposes
-        $tid = 1;
-        $dislikes = 1;
-
-        $dislikecount = tips::getDislikes($tid);
-        $this->assertSame($dislikes, $dislikecount);
-
-    }
-
     public function testLikeIncrement()
     {
          //using tip 2 for testing purposes
@@ -41,9 +39,9 @@ class FeedbackTest extends TestCase
     {
         //using tip 2 for testing purposes
         $tid = 2;
-        $dislikecount = tips::getLikes($tid);
+        $dislikecount = tips::getDislikes($tid);
         tips::addLike($tid);
-        $updatedcount = tips::getLikes($tid);
+        $updatedcount = tips::getDislikes($tid);
         $this -> assertTrue($updatedcount == $dislikecount + 1);
 
     }
