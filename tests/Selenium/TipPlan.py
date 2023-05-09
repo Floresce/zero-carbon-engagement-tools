@@ -46,33 +46,10 @@ time.sleep(2)
 addtoplan_button = driver.find_element(By.ID, "atpBtn-1")
 addtoplan_button.click()
 
-# Scroll to the next tip containing an add to plan button
-time.sleep(1)
-driver.execute_script("window.scrollBy(0, 1200)")
-
-# Click on the add to plan button for the second tip
-time.sleep(2)
-addtoplan_button_2 = driver.find_element(By.ID, "atpBtn-3")
-addtoplan_button_2.click()
-
-# Scroll to the next tip containing an add to plan button
-time.sleep(1)
-driver.execute_script("window.scrollBy(0, 500)")
-
-# Click on the add to plan button for the second tip
-time.sleep(2)
-addtoplan_button_4 = driver.find_element(By.ID, "atpBtn-4")
-addtoplan_button_4.click()
-
 # Delete the first tip from the tip plan
 time.sleep(2)
 delete_button = driver.find_element(By.ID, "trashBtn-1")
 delete_button.click()
-
-# Click on the print button to download a PDF showing tips saved in the plan
-print_button = driver.find_element(By.ID, "printBtn")
-print_button.click()
-time.sleep(2)
 
 # Close the webdriver
 time.sleep(2)
