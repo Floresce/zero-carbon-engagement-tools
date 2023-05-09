@@ -23,14 +23,14 @@
         <tbody>
         </tbody>
     </table>
-    <!-- <button id="add-data-button">Add Data</button> -->
+    <button id="refresh-button">Refresh Data</button>
 </div>
 
 <script>
     $(document).ready( function () {
-        setInterval(function() {
-            $('#myTable').DataTable().ajax.reload();
-        }, 1000);
+        // setInterval(function() {
+        //     $('#myTable').DataTable().ajax.reload();
+        // }, 1000);
 
         $('#myTable').DataTable({
             "ajax": "php/tips_telemetry_fetch.php",
@@ -47,14 +47,7 @@
         });
     });
 
-    // document.getElementById("add-data-button").addEventListener("click", function() {
-    //     var xhttp = new XMLHttpRequest();
-    //     xhttp.onreadystatechange = function() {
-    //         if (this.readyState == 4 && this.status == 200) {
-    //             //alert("Data added successfully!");
-    //         }
-    //     };
-    //     xhttp.open("GET", "php/data_add.php", true);
-    //     xhttp.send();
-    // });
+    document.getElementById("refresh-button").addEventListener("click", function() {
+        $('#myTable').DataTable().ajax.reload();
+    });
 </script>
