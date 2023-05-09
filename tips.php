@@ -275,10 +275,16 @@ function getLikes($tID){
               if (sqlsrv_execute($stmt) === false) {
                 echo "Error (sqlsrv_execute): " . print_r(sqlsrv_errors(), true);
                 exit;
+              }else{
+                if (sqlsrv_fetch($stmt)) {
+                  $count = sqlsrv_get_field($stmt, 0);
+                  return $count;
+                }
               }
-              //TODO: add return statement with value
+              
             sqlsrv_free_stmt($stmt);
             sqlsrv_close($conn);
+            return -1;
 }
 
 function getDislikes($tID){
@@ -293,10 +299,15 @@ function getDislikes($tID){
               if (sqlsrv_execute($stmt) === false) {
                 echo "Error (sqlsrv_execute): " . print_r(sqlsrv_errors(), true);
                 exit;
+              } else{
+                if (sqlsrv_fetch($stmt)) {
+                  $count = sqlsrv_get_field($stmt, 0);
+                  return $count;
+                }
               }
-              //TODO: add return statement with value
             sqlsrv_free_stmt($stmt);
             sqlsrv_close($conn);
+            return -1;
 }
 
 if (isset($_POST['function_name']) && isset($_POST['args'])){
