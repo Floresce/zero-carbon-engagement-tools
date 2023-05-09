@@ -25,7 +25,6 @@ class FeedbackTest extends TestCase
     }
     public function testLikeIncrement()
     {
-         //using tip 2 for testing purposes
          $tid = 2;
          $likecount = getLikes($tid);
          addFeeback($tid, TRUE);
@@ -37,7 +36,6 @@ class FeedbackTest extends TestCase
 
     public function testDislikeIncrement()
     {
-        //using tip 2 for testing purposes
         $tid = 2;
         $dislikecount = getDislikes($tid);
         addFeeback($tid, FALSE);
