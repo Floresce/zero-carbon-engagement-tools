@@ -104,11 +104,11 @@ The energy savings tips webpage will allow for customers to view personalized ti
 * [Dashboard](/docs/dashboard.md)
 
 ## Testing
-* System Test Report
+* [System Test Report](/docs/System-Test-Report.pdf)
 
 ## Documentation
-* Maintenence Manual
-* User Manual
+* [Maintenence Manual](/docs/Maintenance-Manual.pdf)
+* [User Manual](/docs/User-Manual.pdf)
 
 ## Database Diagram
 <img src="img/ER_DIAGRAM.png">
