@@ -10,7 +10,7 @@ import time
 # Set up the webdriver using webdriver_manager
 driver_service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=driver_service)
-driver.set_window_size(1280, 720)
+driver.set_window_size(1280, 900)
 
 # Open the webpage
 driver.get('https://programmedelic.azurewebsites.net/')
@@ -24,29 +24,19 @@ link_element.click()
 time.sleep(2)
 driver.get('https://programmedelic.azurewebsites.net/')
 
-# Toggle the Menu option
+# Toggle the Dashboard button
 time.sleep(2)
-menu_toggle = driver.find_element(By.ID, 'navbarDropdown')
-menu_toggle.click()
-
-# Click on the 'Dashboard' link
-time.sleep(2)
-dashboard_link = driver.find_element(By.LINK_TEXT, 'Dashboard')
-dashboard_link.click()
+dashboard_btn = driver.find_element(By.XPATH, '//a[@href="dashboard/"]')
+dashboard_btn.click()
 
 # Return back to the webpage
 time.sleep(2)
-driver.get('hhttps://programmedelic.azurewebsites.net/')
+driver.get('https://programmedelic.azurewebsites.net/')
 
-# Toggle the Menu option
+# Toggle the Tips Plan button
 time.sleep(2)
-menu_toggle = driver.find_element(By.ID, 'navbarDropdown')
-menu_toggle.click()
-
-# Click on the 'Tips Plan' button
-time.sleep(2)
-tips_plan_btn = driver.find_element(By.ID, 'planBtn')
-tips_plan_btn.click()
+tipsplan_btn = driver.find_element(By.ID, 'planBtn')
+tipsplan_btn.click()
 
 # Close the webdriver
 time.sleep(2)
