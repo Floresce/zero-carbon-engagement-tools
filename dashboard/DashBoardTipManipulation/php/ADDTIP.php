@@ -1,9 +1,8 @@
 <?php
+require_once('../../../config.php');
 
-require_once('database.php');
 
-   
- // Get Category ID from C_NAME
+// Get Category ID from C_NAME
 $C_NAME = $_POST['Category'];
 $sql = "SELECT C_ID FROM CATEGORY WHERE C_NAME = ?";
 $params = array($C_NAME);
@@ -13,12 +12,12 @@ if ($stmt === false) {
     exit;
 }
 $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
-    if (!$row) {
-        // Alert if category name does not exist
-        echo "Category name does not match any category";
-        exit;
-    }
-    $C_ID = $row['C_ID'];
+if (!$row) {
+    // Alert if category name does not exist
+    echo "Category name does not match any category";
+    exit;
+}
+$C_ID = $row['C_ID'];
 
 // Get Subcategory ID from SUB_NAME
 $SUB_NAME = $_POST['Subcategory'];
@@ -49,12 +48,13 @@ if ($stmt === false) {
 $sql = "SELECT MAX(T_ID) AS max_seq FROM TIPS";
 $stmt = sqlsrv_query($conn, $sql);
 if ($stmt === false) {
-        echo "Error (sqlsrv_query): " . print_r(sqlsrv_errors(), true);
-        exit;
-    }
-    $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
-    $maxSeq = $row['max_seq'];
-    $newSeq = $maxSeq + 1;
+    echo "Error (sqlsrv_query): " . print_r(sqlsrv_errors(), true);
+    exit;
+}
+$row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+$maxSeq = $row['max_seq'];
+$newSeq = $maxSeq + 1;
+$newSeqF = $maxSeq + 1;
 $T_DESC_ENGLISH = $_POST['ENdescription'];
 $T_DESC_SPANISH = $_POST['ESdescription'];
 $RATE = $_POST['Rate'];
@@ -66,9 +66,19 @@ $params = array($newSeq, $T_DESC_ENGLISH, $T_DESC_SPANISH, $RATE, $PRIMARY_LINK,
 $stmt = sqlsrv_query($conn, $sql, $params);
 if ($stmt === false) {
     echo "Error (sqlsrv_query): " . print_r(sqlsrv_errors(), true);
+} else {
+    echo " Your Tip Has Been Added";
+}
+
+
+$sql_feedback = "INSERT INTO TIP_FEEDBACK(T_ID, TIP_LIKES, TIP_DISLIKES, TIP_ADDTOPLAN) VALUES (?,?,?,?)";
+$params_feedback = array($newSeqF, 0, 0, 0);
+$stmt_feedback = sqlsrv_query($conn, $sql_feedback, $params_feedback);
+
+// Check if the SQL statement for TIP_FEEDBACK executed successfully
+if ($stmt_feedback === false) {
+    echo "Error (sqlsrv_query): " . print_r(sqlsrv_errors(), true);
     exit;
 }
-else{
-    echo" Your Tip Has Been Added";
-}
+
 ?>

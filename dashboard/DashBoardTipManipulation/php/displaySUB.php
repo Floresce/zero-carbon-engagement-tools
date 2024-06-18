@@ -1,21 +1,26 @@
 <?php
+require_once('../../../config.php');
 
-require_once('database.php');
 
-    $sql = "SELECT * FROM SUBCATEGORY";
-    $stmt = sqlsrv_query($conn, $sql);
+if ($conn === false) {
+    echo "Connection could not be established.\n";
+    die(print_r(sqlsrv_errors(), true));
+}
 
-    if ($stmt === false) {                                           // Checks if SQL query was successful or not                      
-        die(print_r(sqlsrv_errors(), true));                         // Prints out detailed error message
+$sql = "SELECT * FROM SUBCATEGORY";
+$stmt = sqlsrv_query($conn, $sql);
+
+if ($stmt === false) {                      
+    die(print_r(sqlsrv_errors(), true)); 
+}
+
+// Retrieve database information
+$rows = array();
+while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) { // While loop fetches current row as '$row', the loop stops when there are no more rows to fetch
+    if ($row !== null) {
+        $rows[] = $row; 
     }
-    
-    // Retrieve database information
-    $rows = array();                                                 // Creates empty array called '$rows'
-    while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {   // While loop fetches current row as '$row', the loop stops when there are no more rows to fetch
-        if ($row !== null) {                                         // Makes sure only non-null rows are added to the array
-            $rows[] = $row;                                          // '$row' array is appended to '$rows'
-      }                                                      
-    }
+}
 
 // Check if any data was returned
 if (count($rows) > 0) {

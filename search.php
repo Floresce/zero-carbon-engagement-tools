@@ -2,7 +2,9 @@
 // Database connection
 include 'config.php';
 
-$query = $_POST['query'];
+//request both GET and POST requests
+$query = isset($_REQUEST['query']) ? $_REQUEST['query'] : '';
+
 //keyword must be at least 3 characters long
 $min_length = 3;
 
@@ -34,14 +36,15 @@ if (sqlsrv_execute($stmt)) {
             if ($row !== null) {                                         // Makes sure only non-null rows are added to the array
                 $rows[] = $row;                                          // '$row' array is appended to '$rows'
 }                                                      
-}
+        }
 
 
 if (count($rows) > 0) {
-    $search_results = "";
     $count = count($rows);
-    $title .=  $count . ' Search Results for "' . $query . '"';
-
+    $title = "";
+    $title .= 'Search results for "<span style="background-color: #fcf8e3">' . $query . '</span>" returned the following '. $count . ' results';
+    echo '<div id="title" style="text-align: center;"><p>' . $title . '</p></div><br>'; 
+    
     foreach ($rows as $row) {
         $tipDescription = $row["T_DESC_ENGLISH"];
         //highlight feature that will highlight the keyword regardless of case sensitivity
@@ -58,31 +61,46 @@ if (count($rows) > 0) {
         $categoryName = $row["C_NAME"];
         $subcategoryName = $row["SUB_NAME"];
         $tipId = $row["T_ID"];
-   
-        $result = '<h2>' . $categoryName . ', ' . $subcategoryName . '</h2>';
-        $result .= '<br><p>' . $tipDescription . '</p>'; 
         
+        
+        $result = '<div class="row" style="margin-bottom: 40px;">
+        <div class="col-md-6">
+            <img src="img/Appliance.jpg" alt="Appliance" width="90%" height="auto">
+        </div>
+        <div class="col-md-6">
+            <h2>' . $categoryName . ', ' . $subcategoryName . '</h2>
+            <br><p>' . $tipDescription . '</p>';
+
+
         //if statement for each tip to display correct Primary link as a clickable button if any
         if (!empty($row['PRIMARY_LINK'])) {
-            $result .= '<br><form action="' . $row['PRIMARY_LINK'] . '" target="_blank">';
-            $result .= '<button type="submit" id="link" class="btn btn-default">Instant Rebate</button>';
-            $result .= '</form><br>';
-        }
+            $result .= '<form action="' . $row['PRIMARY_LINK'] . '"target="_blank">
+            <button type="submit" id="link" class="btn btn-default">Instant rebates</button>
+            </form> <br>';
+        } 
         
-        //search_results will be used to send results to result.html
-        $search_results .= $result;
-
+        $result .= '</div></div>';
+        echo $result;
+        $json_result = json_encode($rows);
+     
     }
 }
+  
+else {
+    echo '<div id style="text-align: center;"> No results found for "' . $query . '".</div><br>'; 
+    die(print_r(sqlsrv_errors(), true));
+}
 
+}
+
+ 
 //Free statement and connection resources
 sqlsrv_free_stmt($stmt);
 sqlsrv_close($conn);
 
 }
-
-    //search results and search title will be passed as a query parameter in the URL
-    header("Location: results.html?search_results=" . urlencode($search_results). "&title=$title");
-    exit(); // Stop the script execution after sending the header
+else {
+    echo '<div id style="text-align: center;"> Please enter at least 3 characters to perform a search.</div><br>'; 
 }
+
 ?>

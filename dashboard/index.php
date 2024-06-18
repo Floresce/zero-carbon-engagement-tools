@@ -34,7 +34,7 @@
                     <div class=" flex-nowrap">
                         <ul class="nav">
                             <li class="tab nav-item active py-1">
-                                <a class="custom-topbar nav-link px-3" href="#" onclick="openTab(event, \'Tips\')">Tips</a>
+                                <a class="custom-topbar nav-link px-3" href="#" onclick="openTab(event, \'Tips\')" id="defaultTab">Tips</a>
                             </li>
                             <li class="tab nav-item py-1">
                                 <a class="custom-topbar nav-link px-3" href="#" onclick="openTab(event, \'Categorie\')">Category</a>
